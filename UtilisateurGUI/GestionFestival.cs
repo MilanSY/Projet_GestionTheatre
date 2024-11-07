@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UtilisateurGUI
 {
-    public partial class Form1 : Form
+    public partial class GestionFestival : Form
     {
-        public Form1()
+        public GestionFestival()
         {
             InitializeComponent();
         }

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UtilisateurGUI
 {
-    public partial class Form1 : Form
+    public partial class GestionRepresentation : Form
     {
-        public Form1()
+        public GestionRepresentation()
         {
             InitializeComponent();
         }

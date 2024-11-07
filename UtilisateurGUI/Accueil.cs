@@ -16,5 +16,10 @@ namespace UtilisateurGUI
         {
             InitializeComponent();
         }
+
+        private void Accueil_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

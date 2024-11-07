@@ -46,36 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestionReservation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GestionReservation.Designer.cs">
-      <DependentUpon>GestionReservation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GestionRepresentation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GestionRepresentation.Designer.cs">
-      <DependentUpon>GestionRepresentation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GestoinTheatre.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GestoinTheatre.Designer.cs">
-      <DependentUpon>GestoinTheatre.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GestionFestival.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GestionFestival.Designer.cs">
-      <DependentUpon>GestionFestival.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Menu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Menu.Designer.cs">
-      <DependentUpon>Menu.cs</DependentUpon>
-    </Compile>
     <Compile Include="Connexion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,8 +58,38 @@
     <Compile Include="Accueil.Designer.cs">
       <DependentUpon>Accueil.cs</DependentUpon>
     </Compile>
+    <Compile Include="GestionFestival.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionFestival.Designer.cs">
+      <DependentUpon>GestionFestival.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionRepresentation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionRepresentation.Designer.cs">
+      <DependentUpon>GestionRepresentation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionReservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionReservation.Designer.cs">
+      <DependentUpon>GestionReservation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GestionTheatre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GestionTheatre.Designer.cs">
+      <DependentUpon>GestionTheatre.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Accueil.resx">
+      <DependentUpon>Accueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Connexion.resx">
+      <DependentUpon>Connexion.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
