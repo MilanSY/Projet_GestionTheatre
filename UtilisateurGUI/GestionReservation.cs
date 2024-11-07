@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UtilisateurGUI
+namespace TheatreGUI
 {
     public partial class GestionReservation : Form
     {
         public GestionReservation()
         {
             InitializeComponent();
+        }
+
+        private void GestionReservation_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace UtilisateurGUI
+﻿namespace TheatreGUI
 {
     partial class Accueil
     {

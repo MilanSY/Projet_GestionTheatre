@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -89,6 +90,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Connexion.resx">
       <DependentUpon>Connexion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionFestival.resx">
+      <DependentUpon>GestionFestival.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionRepresentation.resx">
+      <DependentUpon>GestionRepresentation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionReservation.resx">
+      <DependentUpon>GestionReservation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GestionTheatre.resx">
+      <DependentUpon>GestionTheatre.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -1,4 +1,4 @@
-﻿namespace UtilisateurGUI
+﻿namespace TheatreGUI
 {
     partial class GestionRepresentation
     {
@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // GestionRepresentation
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Name = "GestionRepresentation";
             this.Text = "GestionRepresentation";
+            this.Load += new System.EventHandler(this.GestionRepresentation_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
