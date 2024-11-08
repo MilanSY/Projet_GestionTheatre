@@ -29,7 +29,8 @@ namespace TheatreGUI
 
         private void btnConnexion_Click(object sender, EventArgs e)
         {
-
+            LblMessageNom.Visible = false;
+            LblMotDePasse.Visible = false;
             List<Utilisateur> list = GestionUtilisateur.GetUtilisateurs();
             foreach(Utilisateur utilisateur in list)
             {
@@ -43,12 +44,13 @@ namespace TheatreGUI
                     }
                     else
                     {
-                        //message d'erreur sur le mot de passe
+                        LblMotDePasse.Visible = true;
+
                     }
                 }
                 else
                 {
-                    //message d'erreur sur le login
+                    LblMessageNom.Visible = true;
                 }
             }
 

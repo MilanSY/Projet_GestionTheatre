@@ -34,6 +34,8 @@
             this.txtLogin = new System.Windows.Forms.TextBox();
             this.txtMDP = new System.Windows.Forms.TextBox();
             this.btnConnexion = new System.Windows.Forms.Button();
+            this.LblMessageNom = new System.Windows.Forms.Label();
+            this.LblMotDePasse = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblTitre
@@ -66,19 +68,19 @@
             // 
             // txtLogin
             // 
+            this.txtLogin.BackColor = System.Drawing.SystemColors.Info;
             this.txtLogin.Location = new System.Drawing.Point(353, 284);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(244, 38);
             this.txtLogin.TabIndex = 3;
-            this.txtLogin.Text = "NomUtilisateur";
             // 
             // txtMDP
             // 
+            this.txtMDP.BackColor = System.Drawing.SystemColors.Info;
             this.txtMDP.Location = new System.Drawing.Point(353, 384);
             this.txtMDP.Name = "txtMDP";
             this.txtMDP.Size = new System.Drawing.Size(244, 38);
             this.txtMDP.TabIndex = 4;
-            this.txtMDP.Text = "MotDePasse";
             // 
             // btnConnexion
             // 
@@ -90,11 +92,37 @@
             this.btnConnexion.UseVisualStyleBackColor = true;
             this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
             // 
+            // LblMessageNom
+            // 
+            this.LblMessageNom.AutoSize = true;
+            this.LblMessageNom.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblMessageNom.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.LblMessageNom.Location = new System.Drawing.Point(350, 338);
+            this.LblMessageNom.Name = "LblMessageNom";
+            this.LblMessageNom.Size = new System.Drawing.Size(155, 16);
+            this.LblMessageNom.TabIndex = 6;
+            this.LblMessageNom.Text = "Nom Utilisateur Incorecct";
+            this.LblMessageNom.Visible = false;
+            // 
+            // LblMotDePasse
+            // 
+            this.LblMotDePasse.AutoSize = true;
+            this.LblMotDePasse.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LblMotDePasse.ForeColor = System.Drawing.SystemColors.Desktop;
+            this.LblMotDePasse.Location = new System.Drawing.Point(350, 438);
+            this.LblMotDePasse.Name = "LblMotDePasse";
+            this.LblMotDePasse.Size = new System.Drawing.Size(146, 16);
+            this.LblMotDePasse.TabIndex = 7;
+            this.LblMotDePasse.Text = "Mot De Passe Incorrect";
+            this.LblMotDePasse.Visible = false;
+            // 
             // Connexion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1924, 1061);
+            this.Controls.Add(this.LblMotDePasse);
+            this.Controls.Add(this.LblMessageNom);
             this.Controls.Add(this.btnConnexion);
             this.Controls.Add(this.txtMDP);
             this.Controls.Add(this.txtLogin);
@@ -119,5 +147,7 @@
         private System.Windows.Forms.TextBox txtLogin;
         private System.Windows.Forms.TextBox txtMDP;
         private System.Windows.Forms.Button btnConnexion;
+        private System.Windows.Forms.Label LblMessageNom;
+        private System.Windows.Forms.Label LblMotDePasse;
     }
 }
