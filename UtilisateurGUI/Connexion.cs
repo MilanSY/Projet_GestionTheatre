@@ -7,14 +7,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheatreBO;
+using TheatreBLL;
+using System.Configuration;
+using static System.Collections.Specialized.BitVector32;
 
-namespace UtilisateurGUI
+namespace TheatreGUI
 {
-    public partial class Form1 : Form
+    public partial class Connexion : Form
     {
-        public Form1()
+        public Connexion()
         {
             InitializeComponent();
+            GestionUtilisateur.SetchaineConnexion(ConfigurationManager.ConnectionStrings["Utilisateur"]);
         }
+
+        private void Connexion_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnConnexion_Click(object sender, EventArgs e)
+        {
+            LblMessageNom.Visible = false;
+            LblMotDePasse.Visible = false;
+            List<Utilisateur> list = GestionUtilisateur.GetUtilisateurs();
+            foreach(Utilisateur utilisateur in list)
+            {
+                if (utilisateur.getLoginUtilisateur() == txtLogin.Text.Trim())
+                {
+                    if (utilisateur.getMotDePasse() == txtMDP.Text.Trim())
+                    {
+                        Accueil accueil = new Accueil();
+                        this.Hide();
+                        accueil.Show();
+                    }
+                    else
+                    {
+                        LblMotDePasse.Visible = true;
+
+                    }
+                }
+                else
+                {
+                    LblMessageNom.Visible = true;
+                }
+            }
+
+        }
+
+
     }
 }

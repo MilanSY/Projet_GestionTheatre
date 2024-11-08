@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UtilisateurGUI
+namespace TheatreGUI
 {
     public partial class Accueil : Form
     {
         public Accueil()
         {
             InitializeComponent();
+        }
+
+        private void Accueil_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
