@@ -39,7 +39,6 @@ namespace TheatreDAL
                     command.Parameters.Add(new SqlParameter("@courriel", System.Data.SqlDbType.NVarChar) { Value = courriel });
                     command.Parameters.Add(new SqlParameter("@siteWeb", System.Data.SqlDbType.NVarChar) { Value = siteWeb });
                     command.Parameters.Add(new SqlParameter("@description", System.Data.SqlDbType.NVarChar) { Value = description });
-  
                 }
                 connection.Close();
             }

@@ -56,6 +56,14 @@ namespace TheatreGUI
 
         }
 
+        private void LblMessageNom_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void LblMotDePasse_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

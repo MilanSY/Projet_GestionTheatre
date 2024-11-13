@@ -36,6 +36,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1122, 640);
             this.Name = "GestionTheatre";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GestionTheatre";
             this.Load += new System.EventHandler(this.GestionTheatre_Load);
             this.ResumeLayout(false);
