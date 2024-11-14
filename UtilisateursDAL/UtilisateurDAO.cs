@@ -38,29 +38,29 @@ namespace TheatreDAL
 
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = maConnexion;
-            cmd.CommandText = " SELECT * FROM Utilisateurs";
+            cmd.CommandText = " SELECT * FROM Utilisateur";
 
             SqlDataReader monReader = cmd.ExecuteReader();
 
             // Remplissage de la liste
             while (monReader.Read())
             {
-                if (monReader["loginutilisateur"] == DBNull.Value)
+                if (monReader["uti_login"] == DBNull.Value)
                 {
                     nom = default(string);
                 }
                 else
                 {
-                    nom = monReader["loginutilisateur"].ToString();
+                    nom = monReader["uti_login"].ToString();
                 }
 
-                if (monReader["MotDePasse"] == DBNull.Value)
+                if (monReader["uti_mdp"] == DBNull.Value)
                 {
                     mdp = default(string);
                 }
                 else
                 {
-                    mdp = monReader["MotDePasse"].ToString();
+                    mdp = monReader["uti_mdp"].ToString();
                 }
 
                 unUtilisateur = new Utilisateur(nom, mdp);
