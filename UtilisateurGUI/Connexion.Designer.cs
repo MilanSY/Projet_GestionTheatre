@@ -79,6 +79,7 @@
             this.txtMDP.BackColor = System.Drawing.SystemColors.Info;
             this.txtMDP.Location = new System.Drawing.Point(284, 234);
             this.txtMDP.Name = "txtMDP";
+            this.txtMDP.PasswordChar = '*';
             this.txtMDP.Size = new System.Drawing.Size(244, 38);
             this.txtMDP.TabIndex = 4;
             // 
