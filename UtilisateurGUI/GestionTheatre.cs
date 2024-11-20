@@ -80,15 +80,6 @@ namespace TheatreGUI
             dgv.Columns.Add(the_colum);
             dgv.Columns.Add(aut_colum);
 
-
-
-
-
-
-
-
-
-
             // Définition du style apporté au datagridview
             dgv.ColumnHeadersVisible = true;
             DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
@@ -108,6 +99,8 @@ namespace TheatreGUI
 
             // Définit un style pour la bordure du formulaire
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
+
+            dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void btnRetour_Click(object sender, EventArgs e)
