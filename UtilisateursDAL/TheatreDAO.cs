@@ -56,6 +56,49 @@ namespace TheatreDAL
 
         public static List<Theatre> GetTheatres()
         {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            connection.Open();
+            string query =  @"
+                UPDATE Pieces
+                SET pie_nom = @nom,
+                    pie_prix = @prix,
+                    pie_descrip = @description,
+                    pie_duree = @duree,
+                    pie_comp = @compagnieId,
+                    pie_pub = @publicId,
+                    pie_the = @themeId,
+                    pie_aut = @auteurId
+                WHERE pie_id = @id";
+            SqlCommand command = new SqlCommand(query, connection);
+
+            //using (SqlCommand command = new SqlCommand(query, connection)) -- >  pas de ça (chat gpt...)
+            
+            // Ajout des paramètres
+            command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
+            command.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = nom });
+            command.Parameters.Add(new SqlParameter("@prix", System.Data.SqlDbType.Float) { Value = prix });
+            command.Parameters.Add(new SqlParameter("@description", System.Data.SqlDbType.NVarChar) { Value = description ?? (object)DBNull.Value });
+            command.Parameters.Add(new SqlParameter("@duree", System.Data.SqlDbType.Int) { Value = duree ?? (object)DBNull.Value });
+            //faire une fonction GestionCompanie.getCompanyIdByName(nom)
+            command.Parameters.Add(new SqlParameter("@compagnieId", System.Data.SqlDbType.Int) { Value = compagnie });
+            //faire une fonction GestionPublic.getPublicIdByName(type)
+            command.Parameters.Add(new SqlParameter("@publicId", System.Data.SqlDbType.Int) { Value = publicCateg });
+            //faire une fonction GestionTheme.getThemeIdByName(nom)
+            command.Parameters.Add(new SqlParameter("@themeId", System.Data.SqlDbType.Int) { Value = theme });
+            //faire une fonction GestionAueur.getAuteurIdByNames(prenom, nom)
+            command.Parameters.Add(new SqlParameter("@auteurId", System.Data.SqlDbType.Int) { Value = (auteurPrenom,auteurNom) });
+
+            // Exécution de la commande
+            command.ExecuteNonQuery();
+            
+            // Connection.Close();
+
+        }
+
+        public static List<Theatre> GetTheatres()
+        {
             int id;
             string nom, description, compagnie, publicCateg, theme, auteur;
             float prix;
