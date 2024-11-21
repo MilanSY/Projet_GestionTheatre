@@ -24,31 +24,16 @@ namespace TheatreGUI
             this.Close();
             gestiontheatre.Show();
         }
-
-        private void btngestionfesti_Click(object sender, EventArgs e)
+        
+        private void button5_Click(object sender, EventArgs e)
         {
-            GestionFestival gestionFestival = new GestionFestival();
-            this.Close();
-            gestionFestival.Show();
-        }
+            DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment quitter ?", "Quitter", MessageBoxButtons.YesNo);
 
-        private void btngestionresa_Click(object sender, EventArgs e)
-        {
-            GestionReservation reservation = new GestionReservation();
-            this.Close();
-            reservation.Show();
-        }
+            if (dialogResult == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
 
-        private void btngestionrepre_Click(object sender, EventArgs e)
-        {
-            GestionRepresentation representation = new GestionRepresentation(); 
-            this.Close();
-            representation.Show();
-        }
-
-        private void btndeconnection_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

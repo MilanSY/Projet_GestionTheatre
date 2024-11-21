@@ -64,7 +64,7 @@
             this.btngestionpie.Location = new System.Drawing.Point(491, 154);
             this.btngestionpie.Name = "btngestionpie";
             this.btngestionpie.Size = new System.Drawing.Size(187, 60);
-            this.btngestionpie.TabIndex = 1;
+            this.btngestionpie.TabIndex = 2;
             this.btngestionpie.Text = "Gestion des pièces de théâtre";
             this.btngestionpie.UseVisualStyleBackColor = true;
             this.btngestionpie.Click += new System.EventHandler(this.btngestionpie_Click);
@@ -75,7 +75,7 @@
             this.btngestionresa.Location = new System.Drawing.Point(102, 282);
             this.btngestionresa.Name = "btngestionresa";
             this.btngestionresa.Size = new System.Drawing.Size(187, 60);
-            this.btngestionresa.TabIndex = 1;
+            this.btngestionresa.TabIndex = 3;
             this.btngestionresa.Text = "Gestion des réservations";
             this.btngestionresa.UseVisualStyleBackColor = true;
             this.btngestionresa.Click += new System.EventHandler(this.btngestionresa_Click);
@@ -86,20 +86,20 @@
             this.btngestionfesti.Location = new System.Drawing.Point(491, 282);
             this.btngestionfesti.Name = "btngestionfesti";
             this.btngestionfesti.Size = new System.Drawing.Size(187, 60);
-            this.btngestionfesti.TabIndex = 1;
+            this.btngestionfesti.TabIndex = 4;
             this.btngestionfesti.Text = "Gestions des festivals";
             this.btngestionfesti.UseVisualStyleBackColor = true;
             this.btngestionfesti.Click += new System.EventHandler(this.btngestionfesti_Click);
             // 
             // btndeconnection
             // 
-            this.btndeconnection.Location = new System.Drawing.Point(12, 401);
-            this.btndeconnection.Name = "btndeconnection";
-            this.btndeconnection.Size = new System.Drawing.Size(139, 30);
-            this.btndeconnection.TabIndex = 2;
-            this.btndeconnection.Text = "Quitter";
-            this.btndeconnection.UseVisualStyleBackColor = true;
-            this.btndeconnection.Click += new System.EventHandler(this.btndeconnection_Click);
+            this.button5.Location = new System.Drawing.Point(12, 401);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(139, 30);
+            this.button5.TabIndex = 5;
+            this.button5.Text = "Quitter";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label2
             // 
