@@ -24,7 +24,7 @@ namespace TheatreGUI
         private void btnRetour_Click(object sender, EventArgs e)
         {
             GestionTheatre menu = new GestionTheatre();
-            Utils.DisplayFormAtLoc(this, menu, Location);
+            Utils.DisplayFormAtLoc(this, menu);
         }
     }
 }
