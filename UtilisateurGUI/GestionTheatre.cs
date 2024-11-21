@@ -144,5 +144,37 @@ namespace TheatreGUI
             // Rattachement de la List à la source de données du datagridview
             dgv.DataSource = liste;
         }
+
+
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgv.Columns[e.ColumnIndex].Name == "Modifier")
+            {
+                int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
+                Console.WriteLine(id);
+                ModifierTheatre saisieForm = new ModifierTheatre(id);
+                Utils.DisplayFormAtLoc(this, saisieForm, Location);
+                return;
+            }
+            else if (dgv.Columns[e.ColumnIndex].Name == "Suprimer")
+            {
+                int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
+                string nom = (string)dgv.Rows[e.RowIndex].Cells[1].Value;
+                Console.WriteLine(id);
+                if (GestionTheatres.SupprimerTheatre(id))
+                {
+                    lblResultat.Text = "la piece N°" + id + " " + nom + " a été suprimmer avec succès !";
+                } 
+                else 
+                {
+                    lblResultat.Text = "Erreur, impossile de suprimé l'utilisateur";
+                }
+                return;
+            }
+            return;
+
+
+        }
     }
+
 }

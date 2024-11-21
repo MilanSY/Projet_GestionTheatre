@@ -69,7 +69,20 @@ namespace TheatreDAL
             List<Theatre> listTheatres = new List<Theatre>();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
-            cmd.CommandText = "SELECT p.pie_id, p.pie_nom, p.pie_prix, p.pie_descrip, p.pie_duree, c.comp_nom AS compagnie, pu.pub_categ AS publicCateg, t.the_nom AS theme, CONCAT(a.aut_prenom, ' ', a.aut_nom) AS auteur FROM Pieces p LEFT JOIN Compagnies c ON p.pie_comp = c.comp_id LEFT JOIN Publics pu ON p.pie_pub = pu.pub_id LEFT JOIN Theme t ON p.pie_the = t.the_id LEFT JOIN Auteur a ON p.pie_aut = a.aut_id;";
+            cmd.CommandText = @"
+                SELECT p.pie_id, p.pie_nom,
+                    p.pie_prix,
+                    p.pie_descrip,
+                    p.pie_duree,
+                    c.comp_nom AS compagnie,
+                    pu.pub_categ AS publicCateg, 
+                    t.the_nom AS theme, 
+                    CONCAT(a.aut_prenom, ' ', a.aut_nom) AS auteur 
+                FROM Pieces p 
+                LEFT JOIN Compagnies c ON p.pie_comp = c.comp_id 
+                LEFT JOIN Publics pu ON p.pie_pub = pu.pub_id 
+                LEFT JOIN Theme t ON p.pie_the = t.the_id 
+                LEFT JOIN Auteur a ON p.pie_aut = a.aut_id;";
             connection.Open();
 
             SqlDataReader monReader = cmd.ExecuteReader();
@@ -109,38 +122,77 @@ namespace TheatreDAL
             int? duree;
 
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            string query = @"
+                SELECT p.pie_id, p.pie_nom,
+                    p.pie_prix,
+                    p.pie_descrip,
+                    p.pie_duree,
+                    c.comp_nom AS compagnie,
+                    pu.pub_categ AS publicCateg, 
+                    t.the_nom AS theme, 
+                    CONCAT(a.aut_prenom, ' ', a.aut_nom) AS auteur 
+                FROM Pieces p 
+                LEFT JOIN Compagnies c ON p.pie_comp = c.comp_id 
+                LEFT JOIN Publics pu ON p.pie_pub = pu.pub_id 
+                LEFT JOIN Theme t ON p.pie_the = t.the_id 
+                LEFT JOIN Auteur a ON p.pie_aut = a.aut_id
+                WHERE p.pie_id = @id;"; ;
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+            if (monReader.Read())
             {
-                connection.Open();
-                string query = "SELECT * FROM Theatre WHERE Id = @id";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
-                    using (SqlDataReader monReader = command.ExecuteReader())
-                    {
-                        if (monReader.Read())
-                        {
-                            nom = monReader["pie_nom"].ToString();
-                            prix = float.Parse(monReader["pie_prix"].ToString());
-                            description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
-                            duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
-                            compagnie = monReader["Compagnie"] == DBNull.Value ? default(string) : monReader["Compagnie"].ToString();
-                            publicCateg = monReader["Public"] == DBNull.Value ? default(string) : monReader["Public"].ToString();
-                            theme = monReader["Theme"] == DBNull.Value ? default(string) : monReader["Theme"].ToString();
-                            auteur = monReader["Auteur"] == DBNull.Value ? default(string) : monReader["Auteur"].ToString();
-                            // Création d'un objet Theatre (basé sur les informations de la pièce)
-                            Theatre unTheatre = new Theatre(id, nom, prix, description, duree, compagnie, publicCateg, theme, auteur);
-                            return unTheatre;
-                        }
-                    }
-                }
+                nom = monReader["pie_nom"].ToString();
+                prix = float.Parse(monReader["pie_prix"].ToString());
+                description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
+                duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
+                compagnie = monReader["compagnie"] == DBNull.Value ? default(string) : monReader["compagnie"].ToString();
+                publicCateg = monReader["publicCateg"] == DBNull.Value ? default(string) : monReader["publicCateg"].ToString();
+                theme = monReader["theme"] == DBNull.Value ? default(string) : monReader["theme"].ToString();
+                auteur = monReader["auteur"] == DBNull.Value ? default(string) : monReader["auteur"].ToString();
+
+                // Création d'un objet Theatre
+                Theatre unTheatre = new Theatre(id, nom, prix, description, duree, compagnie, publicCateg, theme, auteur);
+
                 connection.Close();
+
+                return unTheatre;
             }
+                    
+            connection.Close();
+            
             return null;
         }
 
-        //////////////////////////////
-        
-        /////////////////////
+        public static bool SupprimerTheatre(int id)
+        {
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            connection.Open();
+            string query = "DELETE FROM Pieces WHERE pie_id = @id;";
+
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+            if (monReader.Read())
+            { 
+                monReader.Close();
+                return true;
+            }
+            else 
+            { 
+                return false; 
+            }
+        }
     }
 }
