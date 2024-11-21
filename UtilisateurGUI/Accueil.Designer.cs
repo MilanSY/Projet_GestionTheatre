@@ -33,7 +33,7 @@
             this.btngestionpie = new System.Windows.Forms.Button();
             this.btngestionresa = new System.Windows.Forms.Button();
             this.btngestionfesti = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btndeconnection = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -56,6 +56,7 @@
             this.btngestionrepre.TabIndex = 1;
             this.btngestionrepre.Text = "Gestion des représentations";
             this.btngestionrepre.UseVisualStyleBackColor = true;
+            this.btngestionrepre.Click += new System.EventHandler(this.btngestionrepre_Click);
             // 
             // btngestionpie
             // 
@@ -77,6 +78,7 @@
             this.btngestionresa.TabIndex = 1;
             this.btngestionresa.Text = "Gestion des réservations";
             this.btngestionresa.UseVisualStyleBackColor = true;
+            this.btngestionresa.Click += new System.EventHandler(this.btngestionresa_Click);
             // 
             // btngestionfesti
             // 
@@ -87,15 +89,17 @@
             this.btngestionfesti.TabIndex = 1;
             this.btngestionfesti.Text = "Gestions des festivals";
             this.btngestionfesti.UseVisualStyleBackColor = true;
+            this.btngestionfesti.Click += new System.EventHandler(this.btngestionfesti_Click);
             // 
-            // button5
+            // btndeconnection
             // 
-            this.button5.Location = new System.Drawing.Point(12, 401);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(139, 30);
-            this.button5.TabIndex = 2;
-            this.button5.Text = "Quitter";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btndeconnection.Location = new System.Drawing.Point(12, 401);
+            this.btndeconnection.Name = "btndeconnection";
+            this.btndeconnection.Size = new System.Drawing.Size(139, 30);
+            this.btndeconnection.TabIndex = 2;
+            this.btndeconnection.Text = "Quitter";
+            this.btndeconnection.UseVisualStyleBackColor = true;
+            this.btndeconnection.Click += new System.EventHandler(this.btndeconnection_Click);
             // 
             // label2
             // 
@@ -113,7 +117,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.button5);
+            this.Controls.Add(this.btndeconnection);
             this.Controls.Add(this.btngestionfesti);
             this.Controls.Add(this.btngestionresa);
             this.Controls.Add(this.btngestionpie);
@@ -134,7 +138,7 @@
         private System.Windows.Forms.Button btngestionpie;
         private System.Windows.Forms.Button btngestionresa;
         private System.Windows.Forms.Button btngestionfesti;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btndeconnection;
         private System.Windows.Forms.Label label2;
     }
 }
