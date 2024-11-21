@@ -11,7 +11,7 @@ namespace TheatreDAL
 {
     public class TheatreDAO
     {
-        public static void UpdateTheatre(string nom, string adresse, string ville, string codePostal, string telephone, string courriel, string siteWeb, string description)
+        public static void UpdateTheatre(int id, string nom, float prix, string description, int? duree, string compagnie, string publicCateg, string theme, string auteurPrenom, string auteurNom)
         {
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
             SqlConnection connection = new SqlConnection(connectionString);
