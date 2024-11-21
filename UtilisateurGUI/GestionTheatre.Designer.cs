@@ -57,6 +57,7 @@
             this.dgv.RowHeadersVisible = false;
             this.dgv.Size = new System.Drawing.Size(1127, 552);
             this.dgv.TabIndex = 1;
+            this.dgv.CellClick += dgv_CellClick;
             // 
             // btnRetour
             // 
@@ -95,8 +96,9 @@
             this.lblResultat.AutoSize = true;
             this.lblResultat.Location = new System.Drawing.Point(590, 60);
             this.lblResultat.Name = "lblResultat";
-            this.lblResultat.Size = new System.Drawing.Size(0, 13);
+            this.lblResultat.Size = new System.Drawing.Size(24, 13);
             this.lblResultat.TabIndex = 5;
+            this.lblResultat.Text = "test";
             // 
             // GestionTheatre
             // 

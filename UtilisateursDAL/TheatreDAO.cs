@@ -114,6 +114,7 @@ namespace TheatreDAL
             return listTheatres;
         }
 
+
         //prend en paramètre un id et renvoie la piece de théâtre avec cet identifiant, et null si l'identifiant équivaut à rien
         public static Theatre GetTheatreById(int id)
         {
@@ -182,16 +183,20 @@ namespace TheatreDAL
             SqlCommand cmd = new SqlCommand(query, connection);
 
             cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
-            SqlDataReader monReader = cmd.ExecuteReader();
 
-            if (monReader.Read())
-            { 
-                monReader.Close();
-                return true;
+            try
+            {
+                SqlDataReader monReader = cmd.ExecuteReader();
+                return true; // Retourne true si une ligne a été supprimée
             }
-            else 
-            { 
-                return false; 
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erreur : {ex.Message}");
+                return false;
+            }
+            finally
+            {
+                connection.Close();
             }
         }
     }
