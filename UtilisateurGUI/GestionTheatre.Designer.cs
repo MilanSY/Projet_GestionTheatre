@@ -31,6 +31,8 @@
             this.lblliste = new System.Windows.Forms.Label();
             this.dgv = new System.Windows.Forms.DataGridView();
             this.btnRetour = new System.Windows.Forms.Button();
+            this.btnAjouter = new System.Windows.Forms.Button();
+            this.btnRafraichir = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -38,7 +40,7 @@
             // 
             this.lblliste.AutoSize = true;
             this.lblliste.Font = new System.Drawing.Font("Arial Narrow", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblliste.Location = new System.Drawing.Point(342, 9);
+            this.lblliste.Location = new System.Drawing.Point(419, 9);
             this.lblliste.Name = "lblliste";
             this.lblliste.Size = new System.Drawing.Size(382, 43);
             this.lblliste.TabIndex = 0;
@@ -49,10 +51,10 @@
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(47, 86);
+            this.dgv.Location = new System.Drawing.Point(12, 86);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
-            this.dgv.Size = new System.Drawing.Size(1015, 552);
+            this.dgv.Size = new System.Drawing.Size(1127, 552);
             this.dgv.TabIndex = 1;
             // 
             // btnRetour
@@ -66,11 +68,34 @@
             this.btnRetour.UseVisualStyleBackColor = true;
             this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
+            // btnAjouter
+            // 
+            this.btnAjouter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAjouter.Location = new System.Drawing.Point(1019, 48);
+            this.btnAjouter.Name = "btnAjouter";
+            this.btnAjouter.Size = new System.Drawing.Size(120, 32);
+            this.btnAjouter.TabIndex = 3;
+            this.btnAjouter.Text = "Ajouter";
+            this.btnAjouter.UseVisualStyleBackColor = true;
+            // 
+            // btnRafraichir
+            // 
+            this.btnRafraichir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRafraichir.Location = new System.Drawing.Point(893, 48);
+            this.btnRafraichir.Name = "btnRafraichir";
+            this.btnRafraichir.Size = new System.Drawing.Size(120, 32);
+            this.btnRafraichir.TabIndex = 4;
+            this.btnRafraichir.Text = "rafraîchir ⟳";
+            this.btnRafraichir.UseVisualStyleBackColor = true;
+            this.btnRafraichir.Click += new System.EventHandler(this.btnRafraichir_Click);
+            // 
             // GestionTheatre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1134, 1061);
+            this.ClientSize = new System.Drawing.Size(1151, 749);
+            this.Controls.Add(this.btnRafraichir);
+            this.Controls.Add(this.btnAjouter);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.lblliste);
@@ -88,5 +113,7 @@
         private System.Windows.Forms.Label lblliste;
         private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.Button btnRetour;
+        private System.Windows.Forms.Button btnAjouter;
+        private System.Windows.Forms.Button btnRafraichir;
     }
 }

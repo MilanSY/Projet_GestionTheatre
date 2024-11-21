@@ -10,78 +10,28 @@ namespace TheatreBO
     public class Theatre
     {
         // attributs de l'objet theatre
-        private string Nom_Theatre;
-        private string Adresse_Theatre;
-        private string Ville_Theatre;
-        private string CodePostal_Theatre;
-        private string Telephone_Theatre;
-        private string Courriel_Theatre;
-        private string SiteWeb_Theatre;
-        private string Description_Theatre;
+        public int Id { get; set; }
+        public string Nom { get; set; }
+        public float Prix { get; set; }
+        public string Description { get; set; }
+        public int? Duree { get; set; }
+        public string Compagnie { get; set; }
+        public string PublicCateg { get; set; }
+        public string Theme { get; set; }
+        public string Auteur { get; set; }
 
-        // Constructeur de l'objet Theatre
-        public Theatre(string nom, string adresse, string ville, string codePostal, string telephone, string courriel, string siteWeb, string description)
+        public Theatre(int id, string nom, float prix, string description, int? duree, string compagnie, string publicCateg, string theme, string auteur)
         {
-            this.nom = nom;
-            this.adresse = adresse;
-            this.ville = ville;
-            this.codePostal = codePostal;
-            this.telephone = telephone;
-            this.courriel = courriel;
-            this.siteWeb = siteWeb;
-            this.description = description;
+            Id = id;
+            Nom = nom;
+            Prix = prix;
+            Description = description;
+            Duree = duree;
+            Compagnie = compagnie;
+            PublicCateg = publicCateg;
+            Theme = theme;
+            Auteur = auteur;
         }
-
-        // Propriétés de l'objet Theatre getter / setter
-        public string nom
-        {
-            get { return nom; }
-            set { nom = value; }
-        }
-
-        public string adresse
-        {
-            get { return adresse; }
-            set { adresse = value; }
-        }
-
-        public string ville
-        {
-            get { return ville; }
-            set { ville = value; }
-        }
-
-        public string codePostal
-        {
-            get { return codePostal; }
-            set { codePostal = value; }
-        }
-
-        public string telephone
-        {
-            get { return telephone; }
-            set { telephone = value; }
-        }
-
-        public string courriel
-        {
-            get { return courriel; }
-            set { courriel = value; }
-        }
-
-        public string siteWeb
-        {
-            get { return siteWeb; }
-            set { siteWeb = value; }
-        }
-
-        public string description
-        {
-            get { return description; }
-            set { description = value; }
-        }
-
-
 
     }
 }
