@@ -20,5 +20,11 @@ namespace TheatreGUI
             InitializeComponent();
 
         }
+
+        private void btnRetour_Click(object sender, EventArgs e)
+        {
+            GestionTheatre menu = new GestionTheatre();
+            Utils.DisplayFormAtLoc(this, menu, Location);
+        }
     }
 }

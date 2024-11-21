@@ -43,8 +43,7 @@ namespace TheatreGUI
                     if (utilisateur.getMotDePasse() == txtMDP.Text.Trim())
                     {
                         Accueil accueil = new Accueil();
-                        this.Hide();
-                        accueil.Show();
+                        Utils.DisplayFormAtLoc(this, accueil, Location);
                     }
                     else
                     {

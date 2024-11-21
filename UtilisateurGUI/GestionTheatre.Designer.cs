@@ -43,9 +43,9 @@
             this.lblliste.Font = new System.Drawing.Font("Arial Narrow", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblliste.Location = new System.Drawing.Point(419, 9);
             this.lblliste.Name = "lblliste";
-            this.lblliste.Size = new System.Drawing.Size(382, 43);
+            this.lblliste.Size = new System.Drawing.Size(365, 43);
             this.lblliste.TabIndex = 0;
-            this.lblliste.Text = "Liste de pièces de théaatre";
+            this.lblliste.Text = "Liste de pièces de théatre";
             // 
             // dgv
             // 
@@ -58,6 +58,7 @@
             this.dgv.Size = new System.Drawing.Size(1127, 552);
             this.dgv.TabIndex = 1;
             this.dgv.CellClick += dgv_CellClick;
+
             // 
             // btnRetour
             // 
@@ -87,18 +88,18 @@
             this.btnRafraichir.Name = "btnRafraichir";
             this.btnRafraichir.Size = new System.Drawing.Size(120, 32);
             this.btnRafraichir.TabIndex = 4;
-            this.btnRafraichir.Text = "rafraîchir ⟳";
+            this.btnRafraichir.Text = "Rafraîchir ⟳";
             this.btnRafraichir.UseVisualStyleBackColor = true;
             this.btnRafraichir.Click += new System.EventHandler(this.btnRafraichir_Click);
             // 
             // lblResultat
             // 
             this.lblResultat.AutoSize = true;
-            this.lblResultat.Location = new System.Drawing.Point(590, 60);
+            this.lblResultat.Location = new System.Drawing.Point(461, 58);
             this.lblResultat.Name = "lblResultat";
-            this.lblResultat.Size = new System.Drawing.Size(24, 13);
+            this.lblResultat.Size = new System.Drawing.Size(0, 13);
             this.lblResultat.TabIndex = 5;
-            this.lblResultat.Text = "test";
+            this.lblResultat.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // GestionTheatre
             // 

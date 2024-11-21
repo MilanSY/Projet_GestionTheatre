@@ -48,6 +48,7 @@
             this.txtDescription = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnModifier = new System.Windows.Forms.Button();
+            this.btnRetour = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitreModifTheatre
@@ -97,7 +98,7 @@
             // 
             this.txtPrixPieceDeTheatre.Location = new System.Drawing.Point(871, 147);
             this.txtPrixPieceDeTheatre.Name = "txtPrixPieceDeTheatre";
-            this.txtPrixPieceDeTheatre.Size = new System.Drawing.Size(102, 20);
+            this.txtPrixPieceDeTheatre.Size = new System.Drawing.Size(159, 20);
             this.txtPrixPieceDeTheatre.TabIndex = 6;
             // 
             // label2
@@ -131,7 +132,7 @@
             // 
             this.txtPublic.Location = new System.Drawing.Point(686, 250);
             this.txtPublic.Name = "txtPublic";
-            this.txtPublic.Size = new System.Drawing.Size(181, 20);
+            this.txtPublic.Size = new System.Drawing.Size(344, 20);
             this.txtPublic.TabIndex = 12;
             // 
             // lblPublic
@@ -163,9 +164,9 @@
             // 
             // txtPrenomAuteur
             // 
-            this.txtPrenomAuteur.Location = new System.Drawing.Point(720, 294);
+            this.txtPrenomAuteur.Location = new System.Drawing.Point(732, 295);
             this.txtPrenomAuteur.Name = "txtPrenomAuteur";
-            this.txtPrenomAuteur.Size = new System.Drawing.Size(181, 20);
+            this.txtPrenomAuteur.Size = new System.Drawing.Size(298, 20);
             this.txtPrenomAuteur.TabIndex = 16;
             // 
             // lblPrenomAuteur
@@ -182,7 +183,7 @@
             // 
             this.txtNomAuteur.Location = new System.Drawing.Point(198, 289);
             this.txtNomAuteur.Name = "txtNomAuteur";
-            this.txtNomAuteur.Size = new System.Drawing.Size(209, 20);
+            this.txtNomAuteur.Size = new System.Drawing.Size(297, 20);
             this.txtNomAuteur.TabIndex = 14;
             // 
             // lblNomAuteur
@@ -197,9 +198,9 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(198, 343);
+            this.txtDescription.Location = new System.Drawing.Point(158, 338);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(370, 140);
+            this.txtDescription.Size = new System.Drawing.Size(337, 71);
             this.txtDescription.TabIndex = 17;
             this.txtDescription.Text = "";
             // 
@@ -207,7 +208,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.label1.Location = new System.Drawing.Point(47, 393);
+            this.label1.Location = new System.Drawing.Point(38, 338);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 24);
             this.label1.TabIndex = 18;
@@ -216,12 +217,22 @@
             // btnModifier
             // 
             this.btnModifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.btnModifier.Location = new System.Drawing.Point(763, 371);
+            this.btnModifier.Location = new System.Drawing.Point(825, 338);
             this.btnModifier.Name = "btnModifier";
-            this.btnModifier.Size = new System.Drawing.Size(179, 92);
+            this.btnModifier.Size = new System.Drawing.Size(205, 71);
             this.btnModifier.TabIndex = 19;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = true;
+            // 
+            // btnRetour
+            // 
+            this.btnRetour.Location = new System.Drawing.Point(42, 443);
+            this.btnRetour.Name = "btnRetour";
+            this.btnRetour.Size = new System.Drawing.Size(110, 44);
+            this.btnRetour.TabIndex = 20;
+            this.btnRetour.Text = "Retour";
+            this.btnRetour.UseVisualStyleBackColor = true;
+            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
             // ModifierTheatre
             // 
@@ -229,7 +240,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1064, 495);
+            this.ClientSize = new System.Drawing.Size(1075, 516);
+            this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnModifier);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDescription);
@@ -280,6 +292,6 @@
         private System.Windows.Forms.RichTextBox txtDescription;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnModifier;
-
+        private System.Windows.Forms.Button btnRetour;
     }
 }
