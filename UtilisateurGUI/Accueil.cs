@@ -24,7 +24,7 @@ namespace TheatreGUI
             this.Close();
             gestiontheatre.Show();
         }
-
+        
         private void button5_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Voulez-vous vraiment quitter ?", "Quitter", MessageBoxButtons.YesNo);

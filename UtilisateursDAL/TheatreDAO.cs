@@ -54,14 +54,10 @@ namespace TheatreDAL
 
         }
 
-        public static List<TheatreVue> GetTheatres()
+        public static List<Theatre> GetTheatres()
         {
             int id;
-            string nom, description;
-            Compagnie compagnie;
-            Publics publicCateg;
-            Theme theme;
-            Auteur auteur;
+            string nom, description, compagnie, publicCateg, theme, auteur;
             float prix;
             int? duree;
 
@@ -70,26 +66,18 @@ namespace TheatreDAL
 
 
             // Création d'une liste vide d'objets Theatre
-            List<TheatreVue> listTheatres = new List<TheatreVue>();
+            List<Theatre> listTheatres = new List<Theatre>();
             SqlCommand cmd = new SqlCommand();
             cmd.Connection = connection;
             cmd.CommandText = @"
-                SELECT p.pie_id,
-                    p.pie_nom,
+                SELECT p.pie_id, p.pie_nom,
                     p.pie_prix,
                     p.pie_descrip,
                     p.pie_duree,
-                    p.pie_comp,
-                    p.pie_pub,
-                    p.pie_the,
-                    p.pie_aut,
-                    c.comp_nom AS compagnieNom,
-                    c.comp_ville AS compagnieVille,
-                    c.comp_directeur AS compagnieDirecteur,
+                    c.comp_nom AS compagnie,
                     pu.pub_categ AS publicCateg, 
-                    t.the_nom AS theme,
-                    a.aut_prenom AS auteurPrenom,
-                    a.aut_nom AS auteurNom 
+                    t.the_nom AS theme, 
+                    CONCAT(a.aut_prenom, ' ', a.aut_nom) AS auteur 
                 FROM Pieces p 
                 LEFT JOIN Compagnies c ON p.pie_comp = c.comp_id 
                 LEFT JOIN Publics pu ON p.pie_pub = pu.pub_id 
@@ -108,16 +96,16 @@ namespace TheatreDAL
                 prix = float.Parse(monReader["pie_prix"].ToString());
                 description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
                 duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
-                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
-                publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
-                theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
-                auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
+                compagnie = monReader["compagnie"] == DBNull.Value ? default(string) : monReader["compagnie"].ToString();
+                publicCateg = monReader["publicCateg"] == DBNull.Value ? default(string) : monReader["publicCateg"].ToString();
+                theme = monReader["theme"] == DBNull.Value ? default(string) : monReader["theme"].ToString();
+                auteur = monReader["auteur"] == DBNull.Value ? default(string) : monReader["auteur"].ToString();
 
                 // Création d'un objet Theatre
                 Theatre unTheatre = new Theatre(id, nom, prix, description, duree, compagnie, publicCateg, theme, auteur);
-                TheatreVue vue = new TheatreBO.TheatreVue(unTheatre);
+
                 // Ajout à la liste
-                listTheatres.Add(vue);
+                listTheatres.Add(unTheatre);
             }
 
             // Fermeture de la connexion
@@ -131,11 +119,7 @@ namespace TheatreDAL
         //prend en paramètre un id et renvoie la piece de théâtre avec cet identifiant, et null si l'identifiant équivaut à rien
         public static Theatre GetTheatreById(int id)
         {
-            string nom, description;
-            Compagnie compagnie;
-            Publics publicCateg;
-            Theme theme;
-            Auteur auteur;
+            string nom, description, compagnie, publicCateg, theme, auteur;
             float prix;
             int? duree;
 
@@ -143,22 +127,14 @@ namespace TheatreDAL
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string query = @"
-                SELECT p.pie_id,
-                    p.pie_nom,
+                SELECT p.pie_id, p.pie_nom,
                     p.pie_prix,
                     p.pie_descrip,
                     p.pie_duree,
-                    p.pie_comp,
-                    p.pie_pub,
-                    p.pie_the,
-                    p.pie_aut,
-                    c.comp_nom AS compagnieNom,
-                    c.comp_ville AS compagnieVille,
-                    c.comp_directeur AS compagnieDirecteur,
+                    c.comp_nom AS compagnie,
                     pu.pub_categ AS publicCateg, 
-                    t.the_nom AS theme,
-                    a.aut_prenom AS auteurPrenom,
-                    a.aut_nom AS auteurNom 
+                    t.the_nom AS theme, 
+                    CONCAT(a.aut_prenom, ' ', a.aut_nom) AS auteur 
                 FROM Pieces p 
                 LEFT JOIN Compagnies c ON p.pie_comp = c.comp_id 
                 LEFT JOIN Publics pu ON p.pie_pub = pu.pub_id 
@@ -177,10 +153,10 @@ namespace TheatreDAL
                 prix = float.Parse(monReader["pie_prix"].ToString());
                 description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
                 duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
-                compagnie = monReader["compagnie"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
-                publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
-                theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
-                auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
+                compagnie = monReader["compagnie"] == DBNull.Value ? default(string) : monReader["compagnie"].ToString();
+                publicCateg = monReader["publicCateg"] == DBNull.Value ? default(string) : monReader["publicCateg"].ToString();
+                theme = monReader["theme"] == DBNull.Value ? default(string) : monReader["theme"].ToString();
+                auteur = monReader["auteur"] == DBNull.Value ? default(string) : monReader["auteur"].ToString();
 
                 // Création d'un objet Theatre
                 Theatre unTheatre = new Theatre(id, nom, prix, description, duree, compagnie, publicCateg, theme, auteur);
