@@ -29,7 +29,7 @@ namespace TheatreBLL
             return TheatreDAO.GetTheatreById(id);
         }
 
-        public static List<Theatre> GetTheatres()
+        public static List<TheatreVue> GetTheatres()
         {
             return TheatreDAO.GetTheatres();
         }
