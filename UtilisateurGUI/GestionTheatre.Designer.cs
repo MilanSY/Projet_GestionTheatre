@@ -33,6 +33,7 @@
             this.btnRetour = new System.Windows.Forms.Button();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.btnRafraichir = new System.Windows.Forms.Button();
+            this.lblResultat = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,11 +90,20 @@
             this.btnRafraichir.UseVisualStyleBackColor = true;
             this.btnRafraichir.Click += new System.EventHandler(this.btnRafraichir_Click);
             // 
+            // lblResultat
+            // 
+            this.lblResultat.AutoSize = true;
+            this.lblResultat.Location = new System.Drawing.Point(590, 60);
+            this.lblResultat.Name = "lblResultat";
+            this.lblResultat.Size = new System.Drawing.Size(0, 13);
+            this.lblResultat.TabIndex = 5;
+            // 
             // GestionTheatre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1151, 749);
+            this.Controls.Add(this.lblResultat);
             this.Controls.Add(this.btnRafraichir);
             this.Controls.Add(this.btnAjouter);
             this.Controls.Add(this.btnRetour);
@@ -115,5 +125,6 @@
         private System.Windows.Forms.Button btnRetour;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnRafraichir;
+        private System.Windows.Forms.Label lblResultat;
     }
 }
