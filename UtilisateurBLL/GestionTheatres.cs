@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -12,19 +13,30 @@ namespace TheatreBLL
 {
     public class GestionTheatres
     {
-        private static GestionTheatres uneGestionTheatres; // objet BLL
-        // add remove update getter setter des pièces de theatre
-        public static void UpdateTheatre(string nom, string adresse, string ville, string codePostal, string telephone, string courriel, string siteWeb, string description)
+        public static void SetchaineConnexion(ConnectionStringSettings chset)
         {
-            TheatreDAO.UpdateTheatre(nom, adresse, ville, codePostal, telephone, courriel, siteWeb, description);
+            string chaine = chset.ConnectionString;
+            ConnexionBD.GetConnexionBD().SetchaineConnexion(chaine);
+        }
+        public static void UpdateTheatre(int id, string nom, float prix, string description, int? duree, string compagnie, string publicCateg, string theme, string auteurPrenom, string auteurNom)
+        {
+            TheatreDAO.UpdateTheatre( id, nom, prix, description, duree, compagnie, publicCateg, theme, auteurPrenom, auteurNom);
         }
 
         // Méthode qui permet de récupérer les informations d'un théâtre par son ID
-        public Theatre GetTheatreByID(int id)
+        public static Theatre GetTheatreByID(int id)
         {
-            TheatreDAO theatreDAO = TheatreDAO.GetUnTheatre();
-            Theatre theatre = theatreDAO.GetTheatreById(id);
-            return theatre;
+            return TheatreDAO.GetTheatreById(id);
+        }
+
+        public static List<Theatre> GetTheatres()
+        {
+            return TheatreDAO.GetTheatres();
+        }
+
+        public static bool SupprimerTheatre(int id)
+        {
+            return TheatreDAO.SupprimerTheatre(id);
         }
     }
 }

@@ -17,39 +17,38 @@ namespace TheatreGUI
             InitializeComponent();
         }
 
-        private void Accueil_Load(object sender, EventArgs e)
+        private void btngestionpie_Click(object sender, EventArgs e)
         {
-
+            // Fermeture du formulaire actuel et retour à l'acceuil
+            GestionTheatre gestiontheatre = new GestionTheatre();
+            this.Close();
+            gestiontheatre.Show();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btngestionfesti_Click(object sender, EventArgs e)
         {
-
+            GestionFestival gestionFestival = new GestionFestival();
+            this.Close();
+            gestionFestival.Show();
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btngestionresa_Click(object sender, EventArgs e)
         {
-
+            GestionReservation reservation = new GestionReservation();
+            this.Close();
+            reservation.Show();
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void btngestionrepre_Click(object sender, EventArgs e)
         {
-
+            GestionRepresentation representation = new GestionRepresentation(); 
+            this.Close();
+            representation.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btndeconnection_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
+            this.Close();
         }
     }
 }

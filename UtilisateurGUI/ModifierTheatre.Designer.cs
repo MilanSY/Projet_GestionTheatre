@@ -280,5 +280,6 @@
         private System.Windows.Forms.RichTextBox txtDescription;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnModifier;
+
     }
 }
