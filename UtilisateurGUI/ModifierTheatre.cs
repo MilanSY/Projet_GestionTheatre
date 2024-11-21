@@ -26,5 +26,6 @@ namespace TheatreGUI
             GestionTheatre menu = new GestionTheatre();
             Utils.DisplayFormAtLoc(this, menu, Location);
         }
+
     }
 }
