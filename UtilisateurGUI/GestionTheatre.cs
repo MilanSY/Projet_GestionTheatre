@@ -23,47 +23,47 @@ namespace TheatreGUI
 
             // Création d'une en-tête de colonne pour la colonne 1
             DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
-            idColumn.DataPropertyName = "Id";
+            idColumn.DataPropertyName = "id";
             idColumn.HeaderText = "Identifiant";
 
             // Création d'une en-tête de colonne pour la colonne 2
             DataGridViewTextBoxColumn nomColumn = new DataGridViewTextBoxColumn();
-            nomColumn.DataPropertyName = "Nom";
+            nomColumn.DataPropertyName = "nom";
             nomColumn.HeaderText = "Nom";
 
             // Création d'une en-tête de colonne pour la colonne 3
             DataGridViewTextBoxColumn prixColum = new DataGridViewTextBoxColumn();
-            prixColum.DataPropertyName = "Prix";
+            prixColum.DataPropertyName = "prix";
             prixColum.HeaderText = "Prix";
 
             // Création d'une en-tête de colonne pour la colonne 4
             DataGridViewTextBoxColumn descriptColum = new DataGridViewTextBoxColumn();
-            descriptColum.DataPropertyName = "Description";
+            descriptColum.DataPropertyName = "description";
             descriptColum.HeaderText = "Description";
 
             // Création d'une en-tête de colonne pour la colonne 5
             DataGridViewTextBoxColumn dureeColum = new DataGridViewTextBoxColumn();
-            dureeColum.DataPropertyName = "Duree";
+            dureeColum.DataPropertyName = "duree";
             dureeColum.HeaderText = "Durée";
 
             // Création d'une en-tête de colonne pour la colonne 6
             DataGridViewTextBoxColumn compColum = new DataGridViewTextBoxColumn();
-            compColum.DataPropertyName = "CompagnieNom";
+            compColum.DataPropertyName = "compagnie";
             compColum.HeaderText = "Compagnie";
 
             // Création d'une en-tête de colonne pour la colonne 7
             DataGridViewTextBoxColumn pubColum = new DataGridViewTextBoxColumn();
-            pubColum.DataPropertyName = "PublicCategNom";
+            pubColum.DataPropertyName = "publicCateg";
             pubColum.HeaderText = "Type de publique";
 
             // Création d'une en-tête de colonne pour la colonne 8
             DataGridViewTextBoxColumn theColum = new DataGridViewTextBoxColumn();
-            theColum.DataPropertyName = "ThemeNom";
+            theColum.DataPropertyName = "theme";
             theColum.HeaderText = "Theme";
 
             // Création d'une en-tête de colonne pour la colonne 9
             DataGridViewTextBoxColumn autColum = new DataGridViewTextBoxColumn();
-            autColum.DataPropertyName = "AuteurNomPrenom";
+            autColum.DataPropertyName = "auteur";
             autColum.HeaderText = "Auteur";
 
             // Création d'une en-tête de colonne pour la colonne 10
@@ -105,9 +105,8 @@ namespace TheatreGUI
             GestionTheatres.SetchaineConnexion(ConfigurationManager.ConnectionStrings["Utilisateur"]);
 
             // Création d'un objet List d'Utilisateur à afficher dans le datagridview
-            List<TheatreVue> liste = new List<TheatreVue>();
+            List<Theatre> liste = new List<Theatre>();
             liste = GestionTheatres.GetTheatres();
-
 
             // Rattachement de la List à la source de données du datagridview
             dgv.DataSource = liste;
@@ -115,17 +114,7 @@ namespace TheatreGUI
             // Définit un style pour la bordure du formulaire
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
 
-            dgv.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgv.Columns[10].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
 
         private void btnRetour_Click(object sender, EventArgs e)
@@ -150,7 +139,7 @@ namespace TheatreGUI
         private void btnRafraichir_Click(object sender, EventArgs e)
         {
             // Création d'un objet List d'Utilisateur à afficher dans le datagridview
-            List<TheatreVue> liste = GestionTheatres.GetTheatres();
+            List<Theatre> liste = GestionTheatres.GetTheatres();
 
             // Rattachement de la List à la source de données du datagridview
             dgv.DataSource = liste;
@@ -167,8 +156,8 @@ namespace TheatreGUI
             {
                 int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
                 Console.WriteLine(id);
-                ModifierTheatre modifier= new ModifierTheatre(id);
-                Utils.DisplayFormAtLoc(this, modifier);
+                ModifierTheatre saisieForm = new ModifierTheatre(id);
+                Utils.DisplayFormAtLoc(this, saisieForm, Location);
                 return;
             }
             else if (dgv.Columns[e.ColumnIndex].Name == "Supprimer")
@@ -190,7 +179,7 @@ namespace TheatreGUI
                     {
                         lblResultat.Text = $"La pièce N°{id} ({nom}) a été supprimée avec succès !";
                         // Rafraîchissement du DataGridView
-                        List<TheatreVue> liste = GestionTheatres.GetTheatres();
+                        List<Theatre> liste = GestionTheatres.GetTheatres();
                         dgv.DataSource = liste;
                     }
                     else
