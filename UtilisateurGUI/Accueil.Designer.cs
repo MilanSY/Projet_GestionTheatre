@@ -33,8 +33,8 @@
             this.btngestionpie = new System.Windows.Forms.Button();
             this.btngestionresa = new System.Windows.Forms.Button();
             this.btngestionfesti = new System.Windows.Forms.Button();
-            this.btndeconnection = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.btnQuitter = new System.Windows.Forms.Button();
+            this.lblVeuillez = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -56,7 +56,6 @@
             this.btngestionrepre.TabIndex = 1;
             this.btngestionrepre.Text = "Gestion des représentations";
             this.btngestionrepre.UseVisualStyleBackColor = true;
-            this.btngestionrepre.Click += new System.EventHandler(this.btngestionrepre_Click);
             // 
             // btngestionpie
             // 
@@ -78,7 +77,6 @@
             this.btngestionresa.TabIndex = 3;
             this.btngestionresa.Text = "Gestion des réservations";
             this.btngestionresa.UseVisualStyleBackColor = true;
-            this.btngestionresa.Click += new System.EventHandler(this.btngestionresa_Click);
             // 
             // btngestionfesti
             // 
@@ -89,35 +87,33 @@
             this.btngestionfesti.TabIndex = 4;
             this.btngestionfesti.Text = "Gestions des festivals";
             this.btngestionfesti.UseVisualStyleBackColor = true;
-            this.btngestionfesti.Click += new System.EventHandler(this.btngestionfesti_Click);
             // 
-            // btndeconnection
+            // btnQuitter
             // 
-            this.button5.Location = new System.Drawing.Point(12, 401);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(139, 30);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Quitter";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnQuitter.Location = new System.Drawing.Point(3, 415);
+            this.btnQuitter.Name = "btnQuitter";
+            this.btnQuitter.Size = new System.Drawing.Size(75, 23);
+            this.btnQuitter.TabIndex = 5;
+            this.btnQuitter.Text = "Quitter";
+            this.btnQuitter.Click += new System.EventHandler(this.btnQuitter_Click);
             // 
-            // label2
+            // lblVeuillez
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(269, 98);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(241, 20);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Veuillez sélectionner une gestion";
+            this.lblVeuillez.AutoSize = true;
+            this.lblVeuillez.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblVeuillez.Location = new System.Drawing.Point(269, 98);
+            this.lblVeuillez.Name = "lblVeuillez";
+            this.lblVeuillez.Size = new System.Drawing.Size(241, 20);
+            this.lblVeuillez.TabIndex = 0;
+            this.lblVeuillez.Text = "Veuillez sélectionner une gestion";
             // 
             // Accueil
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.btndeconnection);
+            this.Controls.Add(this.lblVeuillez);
+            this.Controls.Add(this.btnQuitter);
             this.Controls.Add(this.btngestionfesti);
             this.Controls.Add(this.btngestionresa);
             this.Controls.Add(this.btngestionpie);
@@ -138,8 +134,8 @@
         private System.Windows.Forms.Button btngestionpie;
         private System.Windows.Forms.Button btngestionresa;
         private System.Windows.Forms.Button btngestionfesti;
-        private System.Windows.Forms.Button btndeconnection;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnQuitter;
+        private System.Windows.Forms.Label lblVeuillez;
     }
 }
 
