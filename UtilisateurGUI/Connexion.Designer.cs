@@ -104,7 +104,7 @@
             this.LblMessageNom.TabIndex = 6;
             this.LblMessageNom.Text = "Nom d\'utilisateur incorrect";
             this.LblMessageNom.Visible = false;
-            this.LblMessageNom.Click += new System.EventHandler(this.LblMessageNom_Click);
+           
             // 
             // LblMotDePasse
             // 
@@ -117,7 +117,7 @@
             this.LblMotDePasse.TabIndex = 7;
             this.LblMotDePasse.Text = "Mot de passe incorrect";
             this.LblMotDePasse.Visible = false;
-            this.LblMotDePasse.Click += new System.EventHandler(this.LblMotDePasse_Click);
+          
             // 
             // Connexion
             // 

@@ -11,6 +11,7 @@ using TheatreBO;
 using TheatreBLL;
 using System.Configuration;
 using static System.Collections.Specialized.BitVector32;
+using System.Security.Cryptography.X509Certificates;
 
 namespace TheatreGUI
 {
@@ -18,6 +19,9 @@ namespace TheatreGUI
     {
         public Connexion()
         {
+            this.KeyPreview = true;
+            this.KeyDown += new KeyEventHandler(Connexion_KeyDown);
+
             InitializeComponent();
             GestionUtilisateur.SetchaineConnexion(ConfigurationManager.ConnectionStrings["Utilisateur"]);
         }
@@ -53,17 +57,30 @@ namespace TheatreGUI
                     LblMessageNom.Visible = true;
                 }
             }
-
         }
-
-        private void LblMessageNom_Click(object sender, EventArgs e)
+       
+        private void Connexion_KeyDown(object sender, KeyEventArgs e)
         {
+            // Vérifie si la touche pressée est Entrée
+            if (e.KeyCode == Keys.Enter) // SI Keys.Enter soit la touche entrée, alors cela se connecte
+            {
+                btnConnexion_Click(sender, e);
+            }
 
+            else if (e.KeyCode == Keys.Down)
+            {
+                txtMDP.Select();
+            }
+
+            else if (e.KeyCode == Keys.Up)
+            {
+                txtLogin.Select();
+            }
         }
 
-        private void LblMotDePasse_Click(object sender, EventArgs e)
-        {
 
-        }
+
+
+
     }
 }
