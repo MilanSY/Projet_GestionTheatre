@@ -74,11 +74,11 @@ namespace TheatreGUI
             modifBtnColumn.UseColumnTextForButtonValue = true;
 
             // Création d'une en-tête de colonne pour la colonne 11
-            DataGridViewButtonColumn suprBtnColumn = new DataGridViewButtonColumn();
+            DataGridViewButtonColumn suppBtnColumn = new DataGridViewButtonColumn();
 
-            suprBtnColumn.Name = "Suprimer";
-            suprBtnColumn.Text = "Suprimer";
-            suprBtnColumn.UseColumnTextForButtonValue = true;
+            suppBtnColumn.Name = "Supprimer";
+            suppBtnColumn.Text = "Supprimer";
+            suppBtnColumn.UseColumnTextForButtonValue = true;
 
 
             // Ajout des 11 en-têtes de colonne au datagridview
@@ -92,7 +92,7 @@ namespace TheatreGUI
             dgv.Columns.Add(theColum);
             dgv.Columns.Add(autColum);
             dgv.Columns.Add(modifBtnColumn);
-            dgv.Columns.Add(suprBtnColumn);
+            dgv.Columns.Add(suppBtnColumn);
 
             // Définition du style apporté au datagridview
             dgv.ColumnHeadersVisible = true;
@@ -125,16 +125,16 @@ namespace TheatreGUI
             accueil.Show();
 
         }
-            // Code exécuté sur l'évènement Click du bouton Actualiser
-            private void btnActualiser_Click(object sender, EventArgs e)
-            {
-                // Création d'un objet List d'Utilisateur à afficher dans le datagridview
-                List<Utilisateur> liste = new List<Utilisateur>();
-                liste = GestionUtilisateur.GetUtilisateurs();
+        // Code exécuté sur l'évènement Click du bouton Actualiser
+        private void btnActualiser_Click(object sender, EventArgs e)
+        {
+            // Création d'un objet List d'Utilisateur à afficher dans le datagridview
+            List<Utilisateur> liste = new List<Utilisateur>();
+            liste = GestionUtilisateur.GetUtilisateurs();
 
-                // Rattachement de la List à la source de données du datagridview
-                dgv.DataSource = liste;
-            }
+            // Rattachement de la List à la source de données du datagridview
+            dgv.DataSource = liste;
+        }
 
         private void btnRafraichir_Click(object sender, EventArgs e)
         {
@@ -144,5 +144,53 @@ namespace TheatreGUI
             // Rattachement de la List à la source de données du datagridview
             dgv.DataSource = liste;
         }
+
+
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Vérifiez que l'événement ne provient pas de l'en-tête
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
+
+            if (dgv.Columns[e.ColumnIndex].Name == "Modifier")
+            {
+                int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
+                Console.WriteLine(id);
+                ModifierTheatre saisieForm = new ModifierTheatre(id);
+                Utils.DisplayFormAtLoc(this, saisieForm, Location);
+                return;
+            }
+            else if (dgv.Columns[e.ColumnIndex].Name == "Supprimer")
+            {
+                int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
+                string nom = dgv.Rows[e.RowIndex].Cells[1].Value.ToString();
+
+                // Confirmation de suppression
+                DialogResult result = MessageBox.Show(
+                    $"Êtes-vous sûr de vouloir supprimer la pièce \"{nom}\" ?",
+                    "Confirmation de suppression",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    if (GestionTheatres.SupprimerTheatre(id))
+                    {
+                        lblResultat.Text = $"La pièce N°{id} ({nom}) a été supprimée avec succès !";
+                        // Rafraîchissement du DataGridView
+                        List<Theatre> liste = GestionTheatres.GetTheatres();
+                        dgv.DataSource = liste;
+                    }
+                    else
+                    {
+                        lblResultat.Text = "Erreur : Impossible de supprimer la pièce.";
+                    }
+                }
+                return;
+            }
+        }
+
     }
+
 }
