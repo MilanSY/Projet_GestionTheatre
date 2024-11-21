@@ -24,5 +24,31 @@ namespace TheatreGUI
             this.Close();
             gestiontheatre.Show();
         }
+
+        private void btngestionfesti_Click(object sender, EventArgs e)
+        {
+            GestionFestival gestionFestival = new GestionFestival();
+            this.Close();
+            gestionFestival.Show();
+        }
+
+        private void btngestionresa_Click(object sender, EventArgs e)
+        {
+            GestionReservation reservation = new GestionReservation();
+            this.Close();
+            reservation.Show();
+        }
+
+        private void btngestionrepre_Click(object sender, EventArgs e)
+        {
+            GestionRepresentation representation = new GestionRepresentation(); 
+            this.Close();
+            representation.Show();
+        }
+
+        private void btndeconnection_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
