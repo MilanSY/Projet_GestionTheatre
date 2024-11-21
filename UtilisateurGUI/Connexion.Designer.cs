@@ -137,6 +137,7 @@
             this.Name = "Connexion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Connexion";
+            this.Load += new System.EventHandler(this.Connexion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
