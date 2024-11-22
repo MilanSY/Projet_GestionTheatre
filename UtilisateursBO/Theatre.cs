@@ -10,28 +10,27 @@ namespace TheatreBO
     public class Theatre
     {
         // attributs de l'objet theatre
-        public int id { get; set; }
-        public string nom { get; set; }
-        public float prix { get; set; }
-        public string description { get; set; }
-        public int? duree { get; set; }
-        public Compagnie compagnie { get; set; }
-        public Publics publicCateg { get; set; }
-        public Theme theme { get; set; }
-        public Auteur auteur { get; set; }
+        public int Id { get; set; }
+        public string Nom { get; set; }
+        public float Prix { get; set; }
+        public string Description { get; set; }
+        public int? Duree { get; set; }
+        public string Compagnie { get; set; }
+        public string PublicCateg { get; set; }
+        public string Theme { get; set; }
+        public string Auteur { get; set; }
 
-
-        public Theatre(int id, string nom, float prix, string description, int? duree, Compagnie compagnie, Publics publicCateg, Theme theme, Auteur auteur)
+        public Theatre(int id, string nom, float prix, string description, int? duree, string compagnie, string publicCateg, string theme, string auteur)
         {
-            this.id = id;
-            this.nom = nom;
-            this.prix = prix;
-            this.description = description;
-            this.duree = duree;
-            this.compagnie = compagnie;
-            this.publicCateg = publicCateg;
-            this.theme = theme;
-            this.auteur = auteur;
+            Id = id;
+            Nom = nom;
+            Prix = prix;
+            Description = description;
+            Duree = duree;
+            Compagnie = compagnie;
+            PublicCateg = publicCateg;
+            Theme = theme;
+            Auteur = auteur;
         }
 
     }
