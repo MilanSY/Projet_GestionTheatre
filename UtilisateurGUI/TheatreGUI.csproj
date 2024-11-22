@@ -47,17 +47,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connexion.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Connexion.Designer.cs">
-      <DependentUpon>Connexion.cs</DependentUpon>
-    </Compile>
     <Compile Include="Accueil.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Accueil.Designer.cs">
       <DependentUpon>Accueil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AjoutTheatre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AjoutTheatre.Designer.cs">
+      <DependentUpon>AjoutTheatre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Connexion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Connexion.Designer.cs">
+      <DependentUpon>Connexion.cs</DependentUpon>
     </Compile>
     <Compile Include="GestionFestival.cs">
       <SubType>Form</SubType>
@@ -92,9 +98,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils.cs" />
-    <EmbeddedResource Include="Accueil.resx">
-      <DependentUpon>Accueil.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Connexion.resx">
       <DependentUpon>Connexion.cs</DependentUpon>
     </EmbeddedResource>

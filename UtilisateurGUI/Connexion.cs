@@ -26,10 +26,6 @@ namespace TheatreGUI
             GestionUtilisateur.SetchaineConnexion(ConfigurationManager.ConnectionStrings["Utilisateur"]);
         }
 
-        private void Connexion_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnConnexion_Click(object sender, EventArgs e)
         {
@@ -43,7 +39,8 @@ namespace TheatreGUI
                     if (utilisateur.getMotDePasse() == txtMDP.Text.Trim())
                     {
                         Accueil accueil = new Accueil();
-                        Utils.DisplayFormAtLoc(this, accueil, Location);
+                        accueil.Show();
+                        this.Hide();
                     }
                     else
                     {
@@ -76,10 +73,6 @@ namespace TheatreGUI
                 txtLogin.Select();
             }
         }
-
-
-
-
 
     }
 }
