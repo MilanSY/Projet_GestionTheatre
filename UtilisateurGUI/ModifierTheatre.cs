@@ -53,10 +53,21 @@ namespace TheatreGUI
 
         private void btnModifier_Validating(object sender, CancelEventArgs e)
         {
+            
+        }
+
+        private void btnRetour_Click(object sender, EventArgs e)
+        {
+            GestionTheatre menu = new GestionTheatre();
+            Utils.DisplayFormAtLoc(this, menu);
+        }
+
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
+            checkIfEmpty();
             if (checkIfEmpty())
             {
                 MessageBox.Show("Veuillez remplir tous les champs obligatoires.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                e.Cancel = true;
             }
             else
             {
@@ -74,18 +85,8 @@ namespace TheatreGUI
                 );
 
                 GestionTheatres.UpdateTheatre(theatre);
+                MessageBox.Show("Le théâtre a été modifié avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-        }
-
-        private void btnRetour_Click(object sender, EventArgs e)
-        {
-            GestionTheatre menu = new GestionTheatre();
-            Utils.DisplayFormAtLoc(this, menu);
-        }
-
-        private void btnModifier_Click(object sender, EventArgs e)
-        {
-            checkIfEmpty();
         }
 
         // Controle de saisie 
