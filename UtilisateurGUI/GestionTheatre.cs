@@ -70,7 +70,7 @@ namespace TheatreGUI
 
             // Création d'une en-tête de colonne pour la colonne 9
             DataGridViewTextBoxColumn autColum = new DataGridViewTextBoxColumn();
-            autColum.DataPropertyName = "AuteurNomPrenom";
+            autColum.DataPropertyName = "AuteurNom";
             autColum.HeaderText = "Auteur";
             autColum.ReadOnly = true;
 

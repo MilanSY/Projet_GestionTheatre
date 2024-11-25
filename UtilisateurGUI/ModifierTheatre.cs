@@ -63,14 +63,14 @@ namespace TheatreGUI
                 // Introduire la modification dans la base de données
                 Theatre theatre = new Theatre(
                     this.id,
-                    txtNomPieceDeTheatre.Text,
-                    float.Parse(txtPrixPieceDeTheatre.Text),
-                    txtDescription.Text,
-                    int.TryParse(txtDureePieceDeTheatre.Text, out int duree) ? (int?)duree : null,
-                    new Compagnie { nom = txtCompagnie.Text },
-                    new Publics { categ = txtPublique.Text },
-                    new Theme { nom = txtNomThemePieceDeTheatre.Text },
-                    new Auteur { nom = txtNomAuteur.Text, prenom = txtPrenomAuteur.Text }
+                    txtNomPieceDeTheatre.Text.Trim(),
+                    float.Parse(txtPrixPieceDeTheatre.Text.Trim()),
+                    txtDescription.Text.Trim(),
+                    int.TryParse(txtDureePieceDeTheatre.Text.Trim(), out int duree) ? (int?)duree : null,
+                    new Compagnie { nom = txtCompagnie.Text.Trim() },
+                    new Publics { categ = txtPublique.Text.Trim() },
+                    new Theme { nom = txtNomThemePieceDeTheatre.Text.Trim() },
+                    new Auteur { nom = txtNomAuteur.Text.Trim(), prenom = txtPrenomAuteur.Text.Trim() }
                 );
 
                 GestionTheatres.UpdateTheatre(theatre);
@@ -142,7 +142,6 @@ namespace TheatreGUI
             {
                 errorProvider.SetError(txtCompagnie, "");
             }
-
 
             return hasError;
         }
