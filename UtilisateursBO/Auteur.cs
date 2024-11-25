@@ -24,5 +24,6 @@ namespace TheatreBO
         {
             return this.nom + " " + this.prenom;
         }
+
     }
 }

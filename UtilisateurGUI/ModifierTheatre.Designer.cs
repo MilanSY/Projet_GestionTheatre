@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTitreModifTheatre = new System.Windows.Forms.Label();
             this.lblNomPieceeTheatre = new System.Windows.Forms.Label();
             this.txtNomPieceDeTheatre = new System.Windows.Forms.TextBox();
@@ -37,7 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtNomThemePieceDeTheatre = new System.Windows.Forms.TextBox();
             this.lblNomThèmePieceDeTheatre = new System.Windows.Forms.Label();
-            this.txtPublic = new System.Windows.Forms.TextBox();
+            this.txtPublique = new System.Windows.Forms.TextBox();
             this.lblPublique = new System.Windows.Forms.Label();
             this.txtCompagnie = new System.Windows.Forms.TextBox();
             this.lblCompagnie = new System.Windows.Forms.Label();
@@ -49,17 +50,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnModifier = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
-            this.lblErreurNomPieceDeTheatre = new System.Windows.Forms.Label();
-            this.lblErreurPrix = new System.Windows.Forms.Label();
-            this.lblErreurDuree = new System.Windows.Forms.Label();
-            this.lblErreurTheme = new System.Windows.Forms.Label();
-            this.lblErreurPublique = new System.Windows.Forms.Label();
-            this.lblErreurPrenom = new System.Windows.Forms.Label();
-            this.lblErreurNomCompagnie = new System.Windows.Forms.Label();
-            this.lblErreurNomAuteur = new System.Windows.Forms.Label();
-            this.lblErreurDescription = new System.Windows.Forms.Label();
-            this.lblSuccesModification = new System.Windows.Forms.Label();
-            this.lblErreurModification = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitreModifTheatre
@@ -139,12 +131,12 @@
             this.lblNomThèmePieceDeTheatre.TabIndex = 7;
             this.lblNomThèmePieceDeTheatre.Text = "Nom du thème de la pièce de théâtre :";
             // 
-            // txtPublic
+            // txtPublique
             // 
-            this.txtPublic.Location = new System.Drawing.Point(709, 250);
-            this.txtPublic.Name = "txtPublic";
-            this.txtPublic.Size = new System.Drawing.Size(321, 20);
-            this.txtPublic.TabIndex = 12;
+            this.txtPublique.Location = new System.Drawing.Point(709, 250);
+            this.txtPublique.Name = "txtPublique";
+            this.txtPublique.Size = new System.Drawing.Size(321, 20);
+            this.txtPublique.TabIndex = 12;
             // 
             // lblPublique
             // 
@@ -234,6 +226,8 @@
             this.btnModifier.TabIndex = 19;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = true;
+            this.btnModifier.Click += new System.EventHandler(this.btnModifier_Click);
+            this.btnModifier.Validating += new System.ComponentModel.CancelEventHandler(this.btnModifier_Validating);
             // 
             // btnRetour
             // 
@@ -245,126 +239,9 @@
             this.btnRetour.UseVisualStyleBackColor = true;
             this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
-            // lblErreurNomPieceDeTheatre
+            // errorProvider1
             // 
-            this.lblErreurNomPieceDeTheatre.AutoSize = true;
-            this.lblErreurNomPieceDeTheatre.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurNomPieceDeTheatre.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurNomPieceDeTheatre.Location = new System.Drawing.Point(175, 165);
-            this.lblErreurNomPieceDeTheatre.Name = "lblErreurNomPieceDeTheatre";
-            this.lblErreurNomPieceDeTheatre.Size = new System.Drawing.Size(320, 17);
-            this.lblErreurNomPieceDeTheatre.TabIndex = 21;
-            this.lblErreurNomPieceDeTheatre.Text = "Veuillez saisir un nom de pièce de théâtre correct";
-            // 
-            // lblErreurPrix
-            // 
-            this.lblErreurPrix.AutoSize = true;
-            this.lblErreurPrix.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurPrix.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurPrix.Location = new System.Drawing.Point(842, 170);
-            this.lblErreurPrix.Name = "lblErreurPrix";
-            this.lblErreurPrix.Size = new System.Drawing.Size(188, 17);
-            this.lblErreurPrix.TabIndex = 22;
-            this.lblErreurPrix.Text = "Veuillez saisir un prix correct";
-            // 
-            // lblErreurDuree
-            // 
-            this.lblErreurDuree.AutoSize = true;
-            this.lblErreurDuree.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurDuree.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurDuree.Location = new System.Drawing.Point(284, 218);
-            this.lblErreurDuree.Name = "lblErreurDuree";
-            this.lblErreurDuree.Size = new System.Drawing.Size(211, 17);
-            this.lblErreurDuree.TabIndex = 23;
-            this.lblErreurDuree.Text = "Veuillez saisir une durée correct";
-            // 
-            // lblErreurTheme
-            // 
-            this.lblErreurTheme.AutoSize = true;
-            this.lblErreurTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurTheme.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurTheme.Location = new System.Drawing.Point(828, 222);
-            this.lblErreurTheme.Name = "lblErreurTheme";
-            this.lblErreurTheme.Size = new System.Drawing.Size(202, 17);
-            this.lblErreurTheme.TabIndex = 24;
-            this.lblErreurTheme.Text = "Veuillez sasir un thème correct";
-            // 
-            // lblErreurPublique
-            // 
-            this.lblErreurPublique.AutoSize = true;
-            this.lblErreurPublique.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurPublique.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurPublique.Location = new System.Drawing.Point(759, 273);
-            this.lblErreurPublique.Name = "lblErreurPublique";
-            this.lblErreurPublique.Size = new System.Drawing.Size(271, 17);
-            this.lblErreurPublique.TabIndex = 25;
-            this.lblErreurPublique.Text = "Veuillez saisir un type de publique correct";
-            // 
-            // lblErreurPrenom
-            // 
-            this.lblErreurPrenom.AutoSize = true;
-            this.lblErreurPrenom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurPrenom.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurPrenom.Location = new System.Drawing.Point(816, 318);
-            this.lblErreurPrenom.Name = "lblErreurPrenom";
-            this.lblErreurPrenom.Size = new System.Drawing.Size(214, 17);
-            this.lblErreurPrenom.TabIndex = 26;
-            this.lblErreurPrenom.Text = "Veuillez saisir un prénom correct";
-            // 
-            // lblErreurNomCompagnie
-            // 
-            this.lblErreurNomCompagnie.AutoSize = true;
-            this.lblErreurNomCompagnie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurNomCompagnie.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurNomCompagnie.Location = new System.Drawing.Point(209, 268);
-            this.lblErreurNomCompagnie.Name = "lblErreurNomCompagnie";
-            this.lblErreurNomCompagnie.Size = new System.Drawing.Size(286, 17);
-            this.lblErreurNomCompagnie.TabIndex = 27;
-            this.lblErreurNomCompagnie.Text = "Veuillez saisir un nom de compagnie correct";
-            // 
-            // lblErreurNomAuteur
-            // 
-            this.lblErreurNomAuteur.AutoSize = true;
-            this.lblErreurNomAuteur.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurNomAuteur.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurNomAuteur.Location = new System.Drawing.Point(248, 312);
-            this.lblErreurNomAuteur.Name = "lblErreurNomAuteur";
-            this.lblErreurNomAuteur.Size = new System.Drawing.Size(249, 17);
-            this.lblErreurNomAuteur.TabIndex = 28;
-            this.lblErreurNomAuteur.Text = "Veuillez saisir un nom d\'auteur correct";
-            // 
-            // lblErreurDescription
-            // 
-            this.lblErreurDescription.AutoSize = true;
-            this.lblErreurDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurDescription.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurDescription.Location = new System.Drawing.Point(259, 422);
-            this.lblErreurDescription.Name = "lblErreurDescription";
-            this.lblErreurDescription.Size = new System.Drawing.Size(236, 17);
-            this.lblErreurDescription.TabIndex = 29;
-            this.lblErreurDescription.Text = "Veuillez saisir une description valide";
-            // 
-            // lblSuccesModification
-            // 
-            this.lblSuccesModification.AutoSize = true;
-            this.lblSuccesModification.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblSuccesModification.ForeColor = System.Drawing.Color.Green;
-            this.lblSuccesModification.Location = new System.Drawing.Point(535, 377);
-            this.lblSuccesModification.Name = "lblSuccesModification";
-            this.lblSuccesModification.Size = new System.Drawing.Size(153, 17);
-            this.lblSuccesModification.TabIndex = 30;
-            this.lblSuccesModification.Text = "Modification effectuée !";
-            // 
-            // lblErreurModification
-            // 
-            this.lblErreurModification.AutoSize = true;
-            this.lblErreurModification.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurModification.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurModification.Location = new System.Drawing.Point(535, 402);
-            this.lblErreurModification.Name = "lblErreurModification";
-            this.lblErreurModification.Size = new System.Drawing.Size(155, 17);
-            this.lblErreurModification.TabIndex = 31;
-            this.lblErreurModification.Text = "Erreur base de donnée";
+            this.errorProvider1.ContainerControl = this;
             // 
             // ModifierTheatre
             // 
@@ -372,17 +249,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1075, 516);
-            this.Controls.Add(this.lblErreurModification);
-            this.Controls.Add(this.lblSuccesModification);
-            this.Controls.Add(this.lblErreurDescription);
-            this.Controls.Add(this.lblErreurNomAuteur);
-            this.Controls.Add(this.lblErreurNomCompagnie);
-            this.Controls.Add(this.lblErreurPrenom);
-            this.Controls.Add(this.lblErreurPublique);
-            this.Controls.Add(this.lblErreurTheme);
-            this.Controls.Add(this.lblErreurDuree);
-            this.Controls.Add(this.lblErreurPrix);
-            this.Controls.Add(this.lblErreurNomPieceDeTheatre);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnModifier);
             this.Controls.Add(this.label1);
@@ -391,7 +257,7 @@
             this.Controls.Add(this.lblPrenomAuteur);
             this.Controls.Add(this.txtNomAuteur);
             this.Controls.Add(this.lblNomAuteur);
-            this.Controls.Add(this.txtPublic);
+            this.Controls.Add(this.txtPublique);
             this.Controls.Add(this.lblPublique);
             this.Controls.Add(this.txtCompagnie);
             this.Controls.Add(this.lblCompagnie);
@@ -407,6 +273,8 @@
             this.Name = "ModifierTheatre";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModifierTheatre";
+            this.Load += new System.EventHandler(this.ModifierTheatre_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -423,7 +291,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNomThemePieceDeTheatre;
         private System.Windows.Forms.Label lblNomThèmePieceDeTheatre;
-        private System.Windows.Forms.TextBox txtPublic;
+        private System.Windows.Forms.TextBox txtPublique;
         private System.Windows.Forms.Label lblPublique;
         private System.Windows.Forms.TextBox txtCompagnie;
         private System.Windows.Forms.Label lblCompagnie;
@@ -435,16 +303,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnModifier;
         private System.Windows.Forms.Button btnRetour;
-        private System.Windows.Forms.Label lblErreurNomPieceDeTheatre;
-        private System.Windows.Forms.Label lblErreurPrix;
-        private System.Windows.Forms.Label lblErreurDuree;
-        private System.Windows.Forms.Label lblErreurTheme;
-        private System.Windows.Forms.Label lblErreurPublique;
-        private System.Windows.Forms.Label lblErreurPrenom;
-        private System.Windows.Forms.Label lblErreurNomCompagnie;
-        private System.Windows.Forms.Label lblErreurNomAuteur;
-        private System.Windows.Forms.Label lblErreurDescription;
-        private System.Windows.Forms.Label lblSuccesModification;
-        private System.Windows.Forms.Label lblErreurModification;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
