@@ -65,7 +65,9 @@ namespace TheatreGUI
         private void btnModifier_Click(object sender, EventArgs e)
         {
             checkIfEmpty();
-            if (checkIfEmpty())
+            checkIfFormatValid();
+
+            if (checkIfEmpty() && checkIfFormatValid())
             {
                 MessageBox.Show("Veuillez remplir tous les champs obligatoires.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -89,7 +91,7 @@ namespace TheatreGUI
             }
         }
 
-        // Controle de saisie 
+        // Controle de saisie si les champs sont vides
         private bool checkIfEmpty()
         {
             bool hasError = false;
@@ -144,7 +146,96 @@ namespace TheatreGUI
                 errorProvider.SetError(txtCompagnie, "");
             }
 
+            if (string.IsNullOrWhiteSpace(txtPublique.Text))
+            {
+                errorProvider.SetError(txtPublique, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtPublique, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtNomAuteur.Text))
+            {
+                errorProvider.SetError(txtNomAuteur, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtNomAuteur, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPrenomAuteur.Text))
+            {
+                errorProvider.SetError(txtPrenomAuteur, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtPrenomAuteur, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                errorProvider.SetError(txtDescription, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtDescription, "");
+            }
+
             return hasError;
         }
+        private bool checkIfFormatValid()
+        {
+            bool hasError = false;
+
+            if (!float.TryParse(txtPrixPieceDeTheatre.Text.Trim(), out _))
+            {
+                errorProvider.SetError(txtPrixPieceDeTheatre, "Le prix doit être un nombre valide.");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtPrixPieceDeTheatre, "");
+            }
+
+            if (!int.TryParse(txtDureePieceDeTheatre.Text.Trim(), out _))
+            {
+                errorProvider.SetError(txtDureePieceDeTheatre, "La durée doit être un nombre entier.");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtDureePieceDeTheatre, "");
+            }
+
+            if (txtNomPieceDeTheatre.Text.Length > 100)
+            {
+                errorProvider.SetError(txtNomPieceDeTheatre, "Le nom ne doit pas dépasser 100 caractères.");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtNomPieceDeTheatre, "");
+            }
+
+            if (txtDescription.Text.Length > 2000)
+            {
+                errorProvider.SetError(txtDescription, "La description ne doit pas dépasser 2000 caractères.");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtDescription, "");
+            }
+
+            return hasError;
+        }
+
+
     }
+
 }
