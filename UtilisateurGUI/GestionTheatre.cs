@@ -25,21 +25,25 @@ namespace TheatreGUI
             DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
             idColumn.DataPropertyName = "Id";
             idColumn.HeaderText = "Identifiant";
+            idColumn.ReadOnly = true;   
 
             // Création d'une en-tête de colonne pour la colonne 2
             DataGridViewTextBoxColumn nomColumn = new DataGridViewTextBoxColumn();
             nomColumn.DataPropertyName = "Nom";
             nomColumn.HeaderText = "Nom";
+            nomColumn.ReadOnly = true;
 
             // Création d'une en-tête de colonne pour la colonne 3
             DataGridViewTextBoxColumn prixColum = new DataGridViewTextBoxColumn();
             prixColum.DataPropertyName = "Prix";
             prixColum.HeaderText = "Prix";
+            prixColum.ReadOnly = true;
 
             // Création d'une en-tête de colonne pour la colonne 4
             DataGridViewTextBoxColumn descriptColum = new DataGridViewTextBoxColumn();
             descriptColum.DataPropertyName = "Description";
             descriptColum.HeaderText = "Description";
+            descriptColum.ReadOnly = true;
 
             // Création d'une en-tête de colonne pour la colonne 5
             DataGridViewTextBoxColumn dureeColum = new DataGridViewTextBoxColumn();
@@ -50,32 +54,34 @@ namespace TheatreGUI
             DataGridViewTextBoxColumn compColum = new DataGridViewTextBoxColumn();
             compColum.DataPropertyName = "CompagnieNom";
             compColum.HeaderText = "Compagnie";
+            compColum.ReadOnly = true;
 
             // Création d'une en-tête de colonne pour la colonne 7
             DataGridViewTextBoxColumn pubColum = new DataGridViewTextBoxColumn();
             pubColum.DataPropertyName = "PublicCategNom";
             pubColum.HeaderText = "Type de publique";
+            pubColum.ReadOnly = true;
 
             // Création d'une en-tête de colonne pour la colonne 8
             DataGridViewTextBoxColumn theColum = new DataGridViewTextBoxColumn();
             theColum.DataPropertyName = "ThemeNom";
             theColum.HeaderText = "Theme";
+            theColum.ReadOnly = true;
 
             // Création d'une en-tête de colonne pour la colonne 9
             DataGridViewTextBoxColumn autColum = new DataGridViewTextBoxColumn();
-            autColum.DataPropertyName = "AuteurNomPrenom";
+            autColum.DataPropertyName = "AuteurNom";
             autColum.HeaderText = "Auteur";
+            autColum.ReadOnly = true;
 
             // Création d'une en-tête de colonne pour la colonne 10
             DataGridViewButtonColumn modifBtnColumn = new DataGridViewButtonColumn();
-
             modifBtnColumn.Name = "Modifier";
             modifBtnColumn.Text = "Modifier";
             modifBtnColumn.UseColumnTextForButtonValue = true;
 
             // Création d'une en-tête de colonne pour la colonne 11
             DataGridViewButtonColumn suppBtnColumn = new DataGridViewButtonColumn();
-
             suppBtnColumn.Name = "Supprimer";
             suppBtnColumn.Text = "Supprimer";
             suppBtnColumn.UseColumnTextForButtonValue = true;
@@ -201,7 +207,6 @@ namespace TheatreGUI
                 return;
             }
         }
-
     }
 
 }

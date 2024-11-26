@@ -17,7 +17,9 @@ namespace TheatreBO
         public string CompagnieNom { get; set; }
         public string PublicCategNom { get; set; }
         public string ThemeNom { get; set; }
-        public string AuteurNomPrenom { get; set; }
+        public string AuteurNom { get; set; }
+
+        public string AuteurPrenom { get; set; }
 
         public TheatreVue(Theatre theatre)
         {
@@ -29,7 +31,8 @@ namespace TheatreBO
             CompagnieNom = theatre.compagnie.nom;
             PublicCategNom = theatre.publicCateg.categ;
             ThemeNom = theatre.theme.nom;
-            AuteurNomPrenom = theatre.auteur.getNomPrenom();
+            AuteurNom = theatre.auteur.nom;
+            AuteurPrenom = theatre.auteur.prenom;
         }
     }
 }

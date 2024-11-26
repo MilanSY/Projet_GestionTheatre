@@ -58,7 +58,6 @@
             this.dgv.Size = new System.Drawing.Size(1127, 552);
             this.dgv.TabIndex = 1;
             this.dgv.CellClick += dgv_CellClick;
-
             // 
             // btnRetour
             // 
