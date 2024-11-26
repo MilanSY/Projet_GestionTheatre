@@ -127,6 +127,78 @@ namespace TheatreDAL
         }
 
 
+        public static List<Theatre> GetTheatresObject()
+        {
+            int id;
+            string nom, description;
+            Compagnie compagnie;
+            Publics publicCateg;
+            Theme theme;
+            Auteur auteur;
+            float prix;
+            int? duree;
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+
+
+            // Création d'une liste vide d'objets Theatre
+            List<Theatre> listTheatres = new List<Theatre>();
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = @"
+                SELECT p.pie_id,
+                    p.pie_nom,
+                    p.pie_prix,
+                    p.pie_descrip,
+                    p.pie_duree,
+                    p.pie_comp,
+                    p.pie_pub,
+                    p.pie_the,
+                    p.pie_aut,
+                    c.comp_nom AS compagnieNom,
+                    c.comp_ville AS compagnieVille,
+                    c.comp_directeur AS compagnieDirecteur,
+                    pu.pub_categ AS publicCateg, 
+                    t.the_nom AS theme,
+                    a.aut_prenom AS auteurPrenom,
+                    a.aut_nom AS auteurNom 
+                FROM Pieces p 
+                LEFT JOIN Compagnies c ON p.pie_comp = c.comp_id 
+                LEFT JOIN Publics pu ON p.pie_pub = pu.pub_id 
+                LEFT JOIN Theme t ON p.pie_the = t.the_id 
+                LEFT JOIN Auteur a ON p.pie_aut = a.aut_id;";
+            connection.Open();
+
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+
+            // Remplissage de la liste
+            while (monReader.Read())
+            {
+                id = Int32.Parse(monReader["pie_id"].ToString());
+                nom = monReader["pie_nom"].ToString();
+                prix = float.Parse(monReader["pie_prix"].ToString());
+                description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
+                duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
+                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
+                publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
+                theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
+                auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
+
+                // Création d'un objet Theatre
+                Theatre unTheatre = new Theatre(id, nom, prix, description, duree, compagnie, publicCateg, theme, auteur);
+                // Ajout à la liste
+                listTheatres.Add(unTheatre);
+            }
+
+            // Fermeture de la connexion
+            connection.Close();
+
+            return listTheatres;
+        }
+
+
 
         //prend en paramètre un id et renvoie la piece de théâtre avec cet identifiant, et null si l'identifiant équivaut à rien
         public static Theatre GetTheatreById(int id)
@@ -224,5 +296,13 @@ namespace TheatreDAL
                 connection.Close();
             }
         }
+
+        public static bool AjoutTheatre(Theatre unTheatre)
+        {
+
+
+            return true;
+        }
+
     }
 }
