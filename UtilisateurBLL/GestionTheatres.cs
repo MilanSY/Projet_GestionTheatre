@@ -18,13 +18,13 @@ namespace TheatreBLL
             string chaine = chset.ConnectionString;
             ConnexionBD.GetConnexionBD().SetchaineConnexion(chaine);
         }
-        public static void UpdateTheatre(int id, string nom, float prix, string description, int? duree, string compagnie, string publicCateg, string theme, string auteurPrenom, string auteurNom)
+        public static void UpdateTheatre(Theatre unTheatre)
         {
-            TheatreDAO.UpdateTheatre( id, nom, prix, description, duree, compagnie, publicCateg, theme, auteurPrenom, auteurNom);
+            TheatreDAO.UpdateTheatre(unTheatre);
         }
 
         // Méthode qui permet de récupérer les informations d'un théâtre par son ID
-        public static Theatre GetTheatreByID(int id)
+        public static Theatre GetTheatreById(int id)
         {
             return TheatreDAO.GetTheatreById(id);
         }

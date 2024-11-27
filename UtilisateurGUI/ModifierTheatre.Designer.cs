@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblTitreModifTheatre = new System.Windows.Forms.Label();
             this.lblNomPieceeTheatre = new System.Windows.Forms.Label();
             this.txtNomPieceDeTheatre = new System.Windows.Forms.TextBox();
@@ -37,8 +38,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtNomThemePieceDeTheatre = new System.Windows.Forms.TextBox();
             this.lblNomThèmePieceDeTheatre = new System.Windows.Forms.Label();
-            this.txtPublic = new System.Windows.Forms.TextBox();
-            this.lblPublic = new System.Windows.Forms.Label();
+            this.txtPublique = new System.Windows.Forms.TextBox();
+            this.lblPublique = new System.Windows.Forms.Label();
             this.txtCompagnie = new System.Windows.Forms.TextBox();
             this.lblCompagnie = new System.Windows.Forms.Label();
             this.txtPrenomAuteur = new System.Windows.Forms.TextBox();
@@ -49,6 +50,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnModifier = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitreModifTheatre
@@ -128,22 +131,22 @@
             this.lblNomThèmePieceDeTheatre.TabIndex = 7;
             this.lblNomThèmePieceDeTheatre.Text = "Nom du thème de la pièce de théâtre :";
             // 
-            // txtPublic
+            // txtPublique
             // 
-            this.txtPublic.Location = new System.Drawing.Point(686, 250);
-            this.txtPublic.Name = "txtPublic";
-            this.txtPublic.Size = new System.Drawing.Size(344, 20);
-            this.txtPublic.TabIndex = 12;
+            this.txtPublique.Location = new System.Drawing.Point(709, 250);
+            this.txtPublique.Name = "txtPublique";
+            this.txtPublique.Size = new System.Drawing.Size(321, 20);
+            this.txtPublique.TabIndex = 12;
             // 
-            // lblPublic
+            // lblPublique
             // 
-            this.lblPublic.AutoSize = true;
-            this.lblPublic.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lblPublic.Location = new System.Drawing.Point(534, 245);
-            this.lblPublic.Name = "lblPublic";
-            this.lblPublic.Size = new System.Drawing.Size(146, 24);
-            this.lblPublic.TabIndex = 11;
-            this.lblPublic.Text = "Type de public :";
+            this.lblPublique.AutoSize = true;
+            this.lblPublique.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.lblPublique.Location = new System.Drawing.Point(534, 245);
+            this.lblPublique.Name = "lblPublique";
+            this.lblPublique.Size = new System.Drawing.Size(169, 24);
+            this.lblPublique.TabIndex = 11;
+            this.lblPublique.Text = "Type de publique :";
             // 
             // txtCompagnie
             // 
@@ -164,9 +167,9 @@
             // 
             // txtPrenomAuteur
             // 
-            this.txtPrenomAuteur.Location = new System.Drawing.Point(732, 295);
+            this.txtPrenomAuteur.Location = new System.Drawing.Point(720, 295);
             this.txtPrenomAuteur.Name = "txtPrenomAuteur";
-            this.txtPrenomAuteur.Size = new System.Drawing.Size(298, 20);
+            this.txtPrenomAuteur.Size = new System.Drawing.Size(310, 20);
             this.txtPrenomAuteur.TabIndex = 16;
             // 
             // lblPrenomAuteur
@@ -198,7 +201,7 @@
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(158, 338);
+            this.txtDescription.Location = new System.Drawing.Point(158, 348);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(337, 71);
             this.txtDescription.TabIndex = 17;
@@ -208,7 +211,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.label1.Location = new System.Drawing.Point(38, 338);
+            this.label1.Location = new System.Drawing.Point(38, 348);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 24);
             this.label1.TabIndex = 18;
@@ -217,12 +220,14 @@
             // btnModifier
             // 
             this.btnModifier.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.25F);
-            this.btnModifier.Location = new System.Drawing.Point(825, 338);
+            this.btnModifier.Location = new System.Drawing.Point(825, 348);
             this.btnModifier.Name = "btnModifier";
             this.btnModifier.Size = new System.Drawing.Size(205, 71);
             this.btnModifier.TabIndex = 19;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = true;
+            this.btnModifier.Click += new System.EventHandler(this.btnModifier_Click);
+            this.btnModifier.Validating += new System.ComponentModel.CancelEventHandler(this.btnModifier_Validating);
             // 
             // btnRetour
             // 
@@ -234,11 +239,14 @@
             this.btnRetour.UseVisualStyleBackColor = true;
             this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // ModifierTheatre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1075, 516);
             this.Controls.Add(this.btnRetour);
@@ -249,8 +257,8 @@
             this.Controls.Add(this.lblPrenomAuteur);
             this.Controls.Add(this.txtNomAuteur);
             this.Controls.Add(this.lblNomAuteur);
-            this.Controls.Add(this.txtPublic);
-            this.Controls.Add(this.lblPublic);
+            this.Controls.Add(this.txtPublique);
+            this.Controls.Add(this.lblPublique);
             this.Controls.Add(this.txtCompagnie);
             this.Controls.Add(this.lblCompagnie);
             this.Controls.Add(this.txtNomThemePieceDeTheatre);
@@ -265,6 +273,8 @@
             this.Name = "ModifierTheatre";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ModifierTheatre";
+            this.Load += new System.EventHandler(this.ModifierTheatre_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,8 +291,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtNomThemePieceDeTheatre;
         private System.Windows.Forms.Label lblNomThèmePieceDeTheatre;
-        private System.Windows.Forms.TextBox txtPublic;
-        private System.Windows.Forms.Label lblPublic;
+        private System.Windows.Forms.TextBox txtPublique;
+        private System.Windows.Forms.Label lblPublique;
         private System.Windows.Forms.TextBox txtCompagnie;
         private System.Windows.Forms.Label lblCompagnie;
         private System.Windows.Forms.TextBox txtPrenomAuteur;
@@ -293,5 +303,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnModifier;
         private System.Windows.Forms.Button btnRetour;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

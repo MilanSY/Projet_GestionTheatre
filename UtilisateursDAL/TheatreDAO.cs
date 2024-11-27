@@ -11,7 +11,7 @@ namespace TheatreDAL
 {
     public class TheatreDAO
     {
-        public static void UpdateTheatre(int id, string nom, float prix, string description, int? duree, string compagnie, string publicCateg, string theme, string auteurPrenom, string auteurNom)
+        public static void UpdateTheatre(Theatre unTheatre)
         {
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
             SqlConnection connection = new SqlConnection(connectionString);
@@ -29,28 +29,24 @@ namespace TheatreDAL
                     pie_aut = @auteurId
                 WHERE pie_id = @id";
             SqlCommand command = new SqlCommand(query, connection);
-
-            //using (SqlCommand command = new SqlCommand(query, connection)) -- >  pas de ça (chat gpt...)
-            
-            // Ajout des paramètres
-            command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
-            command.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = nom });
-            command.Parameters.Add(new SqlParameter("@prix", System.Data.SqlDbType.Float) { Value = prix });
-            command.Parameters.Add(new SqlParameter("@description", System.Data.SqlDbType.NVarChar) { Value = description ?? (object)DBNull.Value });
-            command.Parameters.Add(new SqlParameter("@duree", System.Data.SqlDbType.Int) { Value = duree ?? (object)DBNull.Value });
-            //faire une fonction GestionCompanie.getCompanyIdByName(nom)
-            command.Parameters.Add(new SqlParameter("@compagnieId", System.Data.SqlDbType.Int) { Value = compagnie });
-            //faire une fonction GestionPublic.getPublicIdByName(type)
-            command.Parameters.Add(new SqlParameter("@publicId", System.Data.SqlDbType.Int) { Value = publicCateg });
-            //faire une fonction GestionTheme.getThemeIdByName(nom)
-            command.Parameters.Add(new SqlParameter("@themeId", System.Data.SqlDbType.Int) { Value = theme });
-            //faire une fonction GestionAueur.getAuteurIdByNames(prenom, nom)
-            command.Parameters.Add(new SqlParameter("@auteurId", System.Data.SqlDbType.Int) { Value = (auteurPrenom,auteurNom) });
+            unTheatre.auteur.id = GetAuteurIdByName(unTheatre.auteur);
+            unTheatre.compagnie.id = GetCompagnieIdByName(unTheatre.compagnie.nom);
+            unTheatre.publicCateg.id = GetPublicIdByName(unTheatre.publicCateg.categ);
+            unTheatre.theme.id = GetThemeByIdByName(unTheatre.theme.nom);
+            command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = unTheatre.id });
+            command.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = unTheatre.nom });
+            command.Parameters.Add(new SqlParameter("@prix", System.Data.SqlDbType.Float) { Value = unTheatre.prix });
+            command.Parameters.Add(new SqlParameter("@description", System.Data.SqlDbType.NVarChar) { Value = unTheatre.description ?? (object)DBNull.Value });
+            command.Parameters.Add(new SqlParameter("@duree", System.Data.SqlDbType.Int) { Value = unTheatre.duree ?? (object)DBNull.Value });
+            command.Parameters.Add(new SqlParameter("@compagnieId", System.Data.SqlDbType.Int) { Value = unTheatre.compagnie.id });
+            command.Parameters.Add(new SqlParameter("@publicId", System.Data.SqlDbType.Int) { Value = unTheatre.publicCateg.id });
+            command.Parameters.Add(new SqlParameter("@themeId", System.Data.SqlDbType.Int) { Value = unTheatre.theme.id });
+            command.Parameters.Add(new SqlParameter("@auteurId", System.Data.SqlDbType.Int) { Value = unTheatre.auteur.id });
 
             // Exécution de la commande
             command.ExecuteNonQuery();
             
-            //    connection.Close();
+            connection.Close();
 
         }
 
@@ -200,7 +196,7 @@ namespace TheatreDAL
 
 
 
-        //prend en paramètre un id et renvoie la piece de théâtre avec cet identifiant, et null si l'identifiant équivaut à rien
+        // Prend en paramètre un id et renvoie la piece de théâtre avec cet identifiant, et null si l'identifiant équivaut à rien
         public static Theatre GetTheatreById(int id)
         {
             string nom, description;
@@ -249,7 +245,7 @@ namespace TheatreDAL
                 prix = float.Parse(monReader["pie_prix"].ToString());
                 description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
                 duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
-                compagnie = monReader["compagnie"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
+                compagnie = monReader["pie_comp"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
                 publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
                 theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
                 auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
@@ -304,5 +300,74 @@ namespace TheatreDAL
             return true;
         }
 
+        public static int GetAuteurIdByName(Auteur auteur)
+        {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string query = "SELECT aut_id FROM Auteur WHERE aut_nom = @aut_nom AND aut_prenom = @aut_prenom";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add(new SqlParameter("@aut_nom", System.Data.SqlDbType.NVarChar) { Value = auteur.nom });
+            command.Parameters.Add(new SqlParameter("@aut_prenom", System.Data.SqlDbType.NVarChar) { Value = auteur.prenom });
+            var result = command.ExecuteScalar();
+            connection.Close();
+
+            if (result != null)
+            {
+                return (int)result;
+            }
+            else
+            {
+                throw new Exception("Auteur not found");
+            }
+        }
+        public static int GetCompagnieIdByName(string nom)
+        {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string query = "SELECT comp_id FROM Compagnies WHERE comp_nom = @nom";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = nom });
+
+            int compagnieId = (int)command.ExecuteScalar();
+            connection.Close();
+
+            return compagnieId;
+        }
+
+        public static int GetPublicIdByName(string categ)
+        {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string query = "SELECT pub_id FROM Publics WHERE pub_categ = @categ";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add(new SqlParameter("@categ", System.Data.SqlDbType.NVarChar) { Value = categ });
+
+            int publicId = (int)command.ExecuteScalar();
+            connection.Close();
+
+            return publicId;
+        }
+
+        public static int GetThemeByIdByName(string theme)
+        {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string query = "SELECT the_id FROM Theme WHERE the_nom = @nom";
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = theme });
+
+            int themeId = (int)command.ExecuteScalar();
+            connection.Close();
+
+            return themeId;
+        }
     }
 }
