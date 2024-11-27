@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auteur.cs" />
+    <Compile Include="RepresentationVue.cs" />
     <Compile Include="Compagnie.cs" />
     <Compile Include="Festival.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
