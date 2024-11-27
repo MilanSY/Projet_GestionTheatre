@@ -80,7 +80,7 @@ namespace TheatreGUI
                 );
 
                 GestionTheatres.AjoutTheatre(theatre);
-                MessageBox.Show("Le théâtre a été modifié avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Le théâtre a été ajouté avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

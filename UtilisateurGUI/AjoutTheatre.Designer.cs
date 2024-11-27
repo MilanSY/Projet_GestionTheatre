@@ -194,11 +194,11 @@
             // lblTitre
             // 
             this.lblTitre.Font = new System.Drawing.Font("Arial Narrow", 27.75F);
-            this.lblTitre.Location = new System.Drawing.Point(178, 9);
+            this.lblTitre.Location = new System.Drawing.Point(372, 9);
             this.lblTitre.Name = "lblTitre";
-            this.lblTitre.Size = new System.Drawing.Size(646, 43);
+            this.lblTitre.Size = new System.Drawing.Size(405, 43);
             this.lblTitre.TabIndex = 21;
-            this.lblTitre.Text = "Modifier les informations de la pièce de théâtre";
+            this.lblTitre.Text = "Ajouter une pièce de théâtre";
             // 
             // cboTheme
             // 
