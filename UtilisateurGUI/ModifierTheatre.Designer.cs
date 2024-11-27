@@ -36,20 +36,20 @@
             this.lblDureePieceDeTheatre = new System.Windows.Forms.Label();
             this.txtPrixPieceDeTheatre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtNomThemePieceDeTheatre = new System.Windows.Forms.TextBox();
-            this.lblNomThèmePieceDeTheatre = new System.Windows.Forms.Label();
-            this.txtPublique = new System.Windows.Forms.TextBox();
-            this.lblPublique = new System.Windows.Forms.Label();
-            this.txtCompagnie = new System.Windows.Forms.TextBox();
             this.lblCompagnie = new System.Windows.Forms.Label();
-            this.txtPrenomAuteur = new System.Windows.Forms.TextBox();
-            this.lblPrenomAuteur = new System.Windows.Forms.Label();
             this.txtNomAuteur = new System.Windows.Forms.TextBox();
             this.lblNomAuteur = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnModifier = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
+            this.cboCompagnie = new System.Windows.Forms.ComboBox();
+            this.cboAuteur = new System.Windows.Forms.ComboBox();
+            this.cboTheme = new System.Windows.Forms.ComboBox();
+            this.cboPublic = new System.Windows.Forms.ComboBox();
+            this.lblAuteur = new System.Windows.Forms.Label();
+            this.lblPublic = new System.Windows.Forms.Label();
+            this.lblTheme = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +82,7 @@
             // 
             // txtDureePieceDeTheatre
             // 
-            this.txtDureePieceDeTheatre.Location = new System.Drawing.Point(415, 195);
+            this.txtDureePieceDeTheatre.Location = new System.Drawing.Point(415, 200);
             this.txtDureePieceDeTheatre.Name = "txtDureePieceDeTheatre";
             this.txtDureePieceDeTheatre.Size = new System.Drawing.Size(80, 20);
             this.txtDureePieceDeTheatre.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             this.lblDureePieceDeTheatre.AutoSize = true;
             this.lblDureePieceDeTheatre.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lblDureePieceDeTheatre.Location = new System.Drawing.Point(38, 190);
+            this.lblDureePieceDeTheatre.Location = new System.Drawing.Point(38, 195);
             this.lblDureePieceDeTheatre.Name = "lblDureePieceDeTheatre";
             this.lblDureePieceDeTheatre.Size = new System.Drawing.Size(369, 24);
             this.lblDureePieceDeTheatre.TabIndex = 3;
@@ -114,47 +114,6 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Prix de la pièce de théâtre (en euros) :";
             // 
-            // txtNomThemePieceDeTheatre
-            // 
-            this.txtNomThemePieceDeTheatre.Location = new System.Drawing.Point(873, 199);
-            this.txtNomThemePieceDeTheatre.Name = "txtNomThemePieceDeTheatre";
-            this.txtNomThemePieceDeTheatre.Size = new System.Drawing.Size(157, 20);
-            this.txtNomThemePieceDeTheatre.TabIndex = 8;
-            // 
-            // lblNomThèmePieceDeTheatre
-            // 
-            this.lblNomThèmePieceDeTheatre.AutoSize = true;
-            this.lblNomThèmePieceDeTheatre.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lblNomThèmePieceDeTheatre.Location = new System.Drawing.Point(534, 195);
-            this.lblNomThèmePieceDeTheatre.Name = "lblNomThèmePieceDeTheatre";
-            this.lblNomThèmePieceDeTheatre.Size = new System.Drawing.Size(333, 24);
-            this.lblNomThèmePieceDeTheatre.TabIndex = 7;
-            this.lblNomThèmePieceDeTheatre.Text = "Nom du thème de la pièce de théâtre :";
-            // 
-            // txtPublique
-            // 
-            this.txtPublique.Location = new System.Drawing.Point(709, 250);
-            this.txtPublique.Name = "txtPublique";
-            this.txtPublique.Size = new System.Drawing.Size(321, 20);
-            this.txtPublique.TabIndex = 12;
-            // 
-            // lblPublique
-            // 
-            this.lblPublique.AutoSize = true;
-            this.lblPublique.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lblPublique.Location = new System.Drawing.Point(534, 245);
-            this.lblPublique.Name = "lblPublique";
-            this.lblPublique.Size = new System.Drawing.Size(169, 24);
-            this.lblPublique.TabIndex = 11;
-            this.lblPublique.Text = "Type de publique :";
-            // 
-            // txtCompagnie
-            // 
-            this.txtCompagnie.Location = new System.Drawing.Point(251, 245);
-            this.txtCompagnie.Name = "txtCompagnie";
-            this.txtCompagnie.Size = new System.Drawing.Size(244, 20);
-            this.txtCompagnie.TabIndex = 10;
-            // 
             // lblCompagnie
             // 
             this.lblCompagnie.AutoSize = true;
@@ -165,26 +124,9 @@
             this.lblCompagnie.TabIndex = 9;
             this.lblCompagnie.Text = "Nom de la compagnie :";
             // 
-            // txtPrenomAuteur
-            // 
-            this.txtPrenomAuteur.Location = new System.Drawing.Point(720, 295);
-            this.txtPrenomAuteur.Name = "txtPrenomAuteur";
-            this.txtPrenomAuteur.Size = new System.Drawing.Size(310, 20);
-            this.txtPrenomAuteur.TabIndex = 16;
-            // 
-            // lblPrenomAuteur
-            // 
-            this.lblPrenomAuteur.AutoSize = true;
-            this.lblPrenomAuteur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lblPrenomAuteur.Location = new System.Drawing.Point(534, 290);
-            this.lblPrenomAuteur.Name = "lblPrenomAuteur";
-            this.lblPrenomAuteur.Size = new System.Drawing.Size(180, 24);
-            this.lblPrenomAuteur.TabIndex = 15;
-            this.lblPrenomAuteur.Text = "Prénom de l\'auteur :";
-            // 
             // txtNomAuteur
             // 
-            this.txtNomAuteur.Location = new System.Drawing.Point(198, 289);
+            this.txtNomAuteur.Location = new System.Drawing.Point(198, 296);
             this.txtNomAuteur.Name = "txtNomAuteur";
             this.txtNomAuteur.Size = new System.Drawing.Size(297, 20);
             this.txtNomAuteur.TabIndex = 14;
@@ -193,7 +135,7 @@
             // 
             this.lblNomAuteur.AutoSize = true;
             this.lblNomAuteur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lblNomAuteur.Location = new System.Drawing.Point(38, 285);
+            this.lblNomAuteur.Location = new System.Drawing.Point(38, 294);
             this.lblNomAuteur.Name = "lblNomAuteur";
             this.lblNomAuteur.Size = new System.Drawing.Size(154, 24);
             this.lblNomAuteur.TabIndex = 13;
@@ -239,6 +181,68 @@
             this.btnRetour.UseVisualStyleBackColor = true;
             this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
+            // cboCompagnie
+            // 
+            this.cboCompagnie.FormattingEnabled = true;
+            this.cboCompagnie.Location = new System.Drawing.Point(251, 243);
+            this.cboCompagnie.Name = "cboCompagnie";
+            this.cboCompagnie.Size = new System.Drawing.Size(244, 21);
+            this.cboCompagnie.TabIndex = 49;
+            // 
+            // cboAuteur
+            // 
+            this.cboAuteur.FormattingEnabled = true;
+            this.cboAuteur.Location = new System.Drawing.Point(694, 294);
+            this.cboAuteur.Name = "cboAuteur";
+            this.cboAuteur.Size = new System.Drawing.Size(336, 21);
+            this.cboAuteur.TabIndex = 55;
+            // 
+            // cboTheme
+            // 
+            this.cboTheme.FormattingEnabled = true;
+            this.cboTheme.Location = new System.Drawing.Point(871, 198);
+            this.cboTheme.Name = "cboTheme";
+            this.cboTheme.Size = new System.Drawing.Size(159, 21);
+            this.cboTheme.TabIndex = 56;
+            // 
+            // cboPublic
+            // 
+            this.cboPublic.FormattingEnabled = true;
+            this.cboPublic.Location = new System.Drawing.Point(686, 243);
+            this.cboPublic.Name = "cboPublic";
+            this.cboPublic.Size = new System.Drawing.Size(344, 21);
+            this.cboPublic.TabIndex = 57;
+            // 
+            // lblAuteur
+            // 
+            this.lblAuteur.AutoSize = true;
+            this.lblAuteur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.lblAuteur.Location = new System.Drawing.Point(534, 291);
+            this.lblAuteur.Name = "lblAuteur";
+            this.lblAuteur.Size = new System.Drawing.Size(154, 24);
+            this.lblAuteur.TabIndex = 54;
+            this.lblAuteur.Text = "Nom de l\'auteur :";
+            // 
+            // lblPublic
+            // 
+            this.lblPublic.AutoSize = true;
+            this.lblPublic.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.lblPublic.Location = new System.Drawing.Point(534, 238);
+            this.lblPublic.Name = "lblPublic";
+            this.lblPublic.Size = new System.Drawing.Size(146, 24);
+            this.lblPublic.TabIndex = 53;
+            this.lblPublic.Text = "Type de public :";
+            // 
+            // lblTheme
+            // 
+            this.lblTheme.AutoSize = true;
+            this.lblTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.lblTheme.Location = new System.Drawing.Point(534, 195);
+            this.lblTheme.Name = "lblTheme";
+            this.lblTheme.Size = new System.Drawing.Size(333, 24);
+            this.lblTheme.TabIndex = 52;
+            this.lblTheme.Text = "Nom du thème de la pièce de théâtre :";
+            // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
@@ -249,20 +253,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(1075, 516);
+            this.Controls.Add(this.cboAuteur);
+            this.Controls.Add(this.cboTheme);
+            this.Controls.Add(this.cboPublic);
+            this.Controls.Add(this.lblAuteur);
+            this.Controls.Add(this.lblPublic);
+            this.Controls.Add(this.lblTheme);
+            this.Controls.Add(this.cboCompagnie);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnModifier);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.txtPrenomAuteur);
-            this.Controls.Add(this.lblPrenomAuteur);
             this.Controls.Add(this.txtNomAuteur);
             this.Controls.Add(this.lblNomAuteur);
-            this.Controls.Add(this.txtPublique);
-            this.Controls.Add(this.lblPublique);
-            this.Controls.Add(this.txtCompagnie);
             this.Controls.Add(this.lblCompagnie);
-            this.Controls.Add(this.txtNomThemePieceDeTheatre);
-            this.Controls.Add(this.lblNomThèmePieceDeTheatre);
             this.Controls.Add(this.txtPrixPieceDeTheatre);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtDureePieceDeTheatre);
@@ -289,14 +293,7 @@
         private System.Windows.Forms.Label lblDureePieceDeTheatre;
         private System.Windows.Forms.TextBox txtPrixPieceDeTheatre;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtNomThemePieceDeTheatre;
-        private System.Windows.Forms.Label lblNomThèmePieceDeTheatre;
-        private System.Windows.Forms.TextBox txtPublique;
-        private System.Windows.Forms.Label lblPublique;
-        private System.Windows.Forms.TextBox txtCompagnie;
         private System.Windows.Forms.Label lblCompagnie;
-        private System.Windows.Forms.TextBox txtPrenomAuteur;
-        private System.Windows.Forms.Label lblPrenomAuteur;
         private System.Windows.Forms.TextBox txtNomAuteur;
         private System.Windows.Forms.Label lblNomAuteur;
         private System.Windows.Forms.RichTextBox txtDescription;
@@ -304,5 +301,12 @@
         private System.Windows.Forms.Button btnModifier;
         private System.Windows.Forms.Button btnRetour;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ComboBox cboCompagnie;
+        private System.Windows.Forms.ComboBox cboAuteur;
+        private System.Windows.Forms.ComboBox cboTheme;
+        private System.Windows.Forms.ComboBox cboPublic;
+        private System.Windows.Forms.Label lblAuteur;
+        private System.Windows.Forms.Label lblPublic;
+        private System.Windows.Forms.Label lblTheme;
     }
 }

@@ -15,125 +15,213 @@ namespace TheatreGUI
 {
     public partial class AjoutTheatre : Form
     {
+        private ErrorProvider errorProvider;
         public AjoutTheatre()
         {
             InitializeComponent();
 
-            List<TheatreVue> listeTheatres = GestionTheatres.GetTheatres();
 
-            // Récupération des thèmes uniques
+            errorProvider = new ErrorProvider();
 
-            // Lier les données à la ComboBox
-            cbxTheme.DisplayMember = "Nom";       // Propriété à afficher dans la ComboBox
-            cbxTheme.ValueMember = "Id";          // Propriété utilisée en interne pour l'identifiant
+        }
+        private void AjoutTheatre_Load(object sender, EventArgs e)
+        {
+            errorProvider.ContainerControl = this;
+
+            //remplissage des combo box
+            List<Auteur> listAuteur = GestionTheatres.GetAuteurs();
+            foreach (Auteur auteur in listAuteur)
+            {
+                cboAuteur.Items.Add(auteur.nom + " " + auteur.prenom);
+            }
+            List<Theme> listTheme = GestionTheatres.GetThemes();
+            foreach (Theme theme in listTheme)
+            {
+                cboTheme.Items.Add(theme.nom);
+            }
+            List<Publics> listPublic = GestionTheatres.GetPublics();
+            foreach (Publics pub in listPublic)
+            {
+                cboPublic.Items.Add(pub.categ);
+            }
+            List<Compagnie> listCompagnie = GestionTheatres.GetCompagnies();
+            foreach (Compagnie comp in listCompagnie)
+            {
+                cboCompagnie.Items.Add(comp.nom);
+            }
         }
 
         private void btnAjouter_Click(object sender, EventArgs e)
         {
-            lblErreurAuteur.Visible = false;
-            lblErreurDescription.Visible = false;
-            lblErreurNom.Visible = false;
-            lblErreurDuree.Visible = false;
-            lblErreurCompagnie.Visible = false;
-            lblErreurPrix.Visible = false;
-            lblErreurPublic.Visible = false;
-            lblErreurTheme.Visible = false;
+            checkIfEmpty();
+            checkIfFormatValid();
 
 
-
-            List<string> erreurs = new List<string>();
-            string nom = txtNom.Text.Trim();
-
-            if (nom == "")
+            if (checkIfEmpty() && checkIfFormatValid())
             {
-                lblErreurNom.Visible = true;
-                lblErreurNom.Text = "Veuillez saisir un nom";
-                txtNom.Text = "";
-                erreurs.Add(lblErreurNom.Text);
+                MessageBox.Show("Veuillez remplir tous les champs obligatoires.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            string description = txtDescription.Text.Trim();
-
-            if (description == "")
+            else
             {
-                lblErreurDescription.Visible = true;
-                lblErreurDescription.Text = "veuillez saisir une description";
-                txtDescription.Text = "";
-                erreurs.Add(lblErreurDescription.Text);
+                string[] auteur = cboAuteur.Text.Split(' ');
+
+                // Introduire la modification dans la base de données
+                Theatre theatre = new Theatre(
+                    -1,
+                    txtNom.Text.Trim(),
+                    float.Parse(txtPrix.Text.Trim()),
+                    txtDescription.Text.Trim(),
+                    int.TryParse(txtDuree.Text.Trim(), out int duree) ? (int?)duree : null,
+                    new Compagnie { nom = cboCompagnie.Text.Trim() },
+                    new Publics { categ = cboPublic.Text.Trim() },
+                    new Theme { nom = cboTheme.Text.Trim() },
+                    new Auteur { nom = auteur[0], prenom = auteur[1] }
+                );
+
+                GestionTheatres.AjoutTheatre(theatre);
+                MessageBox.Show("Le théâtre a été modifié avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-            string duree = txtDuree.Text.Trim();
-
-            if (duree == "")
-            {
-                lblErreurDuree.Visible = true;
-                lblErreurDuree.Text = "veuillez saisir une durée";
-                txtDuree.Text = "";
-                erreurs.Add(lblErreurDuree.Text);
-            }
-            else if (!Utils.OnlyNumbers(duree))
-            {
-                lblErreurDuree.Visible = true;
-                lblErreurDuree.Text = "la durée ne peut contenir que des chiffres";
-                erreurs.Add(lblErreurDuree.Text);
-            }
-
-            string prix = txtPrix.Text.Trim();
-
-            if (prix == "")
-            {
-                lblErreurPrix.Visible = true;
-                lblErreurPrix.Text = "veuillez saisir un prix";
-                txtDuree.Text = "";
-                erreurs.Add(lblErreurPrix.Text);
-            }
-            else if (!Utils.OnlyNumbers(prix))
-            {
-                lblErreurPrix.Visible = true;
-                lblErreurPrix.Text = "le prix ne peut contenir que des nombres réels";
-                erreurs.Add(lblErreurPrix.Text);
-            }
-
-
-            string auteur = cbxAuteur.Text;
-
-            if ( auteur == "")
-            {
-                lblErreurPrix.Visible = true;
-                lblErreurPrix.Text = "veuillez selectionné un auteur";
-                txtDuree.Text = "";
-                erreurs.Add(lblErreurPrix.Text);
-            }
-
-            string theme = cbxTheme.Text;
-
-            if ( theme == "")
-            {
-                lblErreurPrix.Visible = true;
-                lblErreurPrix.Text = "veuillez selectionné un theme";
-                txtDuree.Text = "";
-                erreurs.Add(lblErreurPrix.Text);
-            }
-
-            string publicCateg = cbxPublic.Text;
-
-            if (publicCateg ==  "")
-            {
-                lblErreurPublic.Visible = true;
-                lblErreurPublic.Text = "veuillez selectionné un theme";
-                txtDuree.Text = "";
-                erreurs.Add(lblErreurPublic.Text);
-            }
-
-
-
-
-
         }
 
+
+        // Controle de saisie si les champs sont vides
+        private bool checkIfEmpty()
+        {
+            bool hasError = false;
+
+            if (string.IsNullOrWhiteSpace(txtNom.Text))
+            {
+                errorProvider.SetError(txtNom, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtNom, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPrix.Text))
+            {
+                errorProvider.SetError(txtPrix, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtPrix, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDuree.Text))
+            {
+                errorProvider.SetError(txtDuree, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtDuree, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(cboTheme.Text))
+            {
+                errorProvider.SetError(cboTheme, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(cboTheme, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(cboCompagnie.Text))
+            {
+                errorProvider.SetError(cboCompagnie, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(cboCompagnie, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(cboPublic.Text))
+            {
+                errorProvider.SetError(cboPublic, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(cboPublic, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(cboAuteur.Text))
+            {
+                errorProvider.SetError(cboAuteur, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(cboAuteur, "");
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDescription.Text))
+            {
+                errorProvider.SetError(txtDescription, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtDescription, "");
+            }
+
+            return hasError;
+        }
+        private bool checkIfFormatValid()
+        {
+            bool hasError = false;
+
+            if (!float.TryParse(txtPrix.Text.Trim(), out _))
+            {
+                errorProvider.SetError(txtPrix, "Le prix doit être un nombre valide.");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtPrix, "");
+            }
+
+            if (!int.TryParse(txtDuree.Text.Trim(), out _))
+            {
+                errorProvider.SetError(txtDuree, "La durée doit être un nombre entier.");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtDuree, "");
+            }
+
+            if (txtNom.Text.Length > 100)
+            {
+                errorProvider.SetError(txtNom, "Le nom ne doit pas dépasser 100 caractères.");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtNom, "");
+            }
+
+            if (txtDescription.Text.Length > 2000)
+            {
+                errorProvider.SetError(txtDescription, "La description ne doit pas dépasser 2000 caractères.");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtDescription, "");
+            }
+
+            return hasError;
+        }
         private void btnRetour_Click(object sender, EventArgs e)
         {
             Utils.DisplayFormAtLoc(this, new GestionTheatre());
         }
+
     }
 }
