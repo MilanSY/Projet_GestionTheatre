@@ -43,5 +43,26 @@ namespace TheatreBLL
         {
             return TheatreDAO.AjoutTheatre(unTheatre);
         }
+
+        public static List<Compagnie> GetCompagnies()
+        {
+            return TheatreDAO.GetCompagnies();
+        }
+
+        public static List<Auteur> GetAuteurs()
+        {
+            return TheatreDAO.GetAuteurs();
+        }
+
+
+        public static List<Publics> GetPublics()
+        {
+            return TheatreDAO.GetPublics();
+        }
+
+        public static List<Theme> GetThemes()
+        {
+            return TheatreDAO.GetThemes();
+        }
     }
 }

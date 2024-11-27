@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnRetour = new System.Windows.Forms.Button();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
@@ -43,19 +44,21 @@
             this.txtNom = new System.Windows.Forms.TextBox();
             this.lblNom = new System.Windows.Forms.Label();
             this.lblTitre = new System.Windows.Forms.Label();
-            this.cbxAuteur = new System.Windows.Forms.ComboBox();
-            this.cbxTheme = new System.Windows.Forms.ComboBox();
-            this.cbxPublic = new System.Windows.Forms.ComboBox();
+            this.cboTheme = new System.Windows.Forms.ComboBox();
+            this.cboPublic = new System.Windows.Forms.ComboBox();
             this.lblErreurNom = new System.Windows.Forms.Label();
             this.lblErreurDuree = new System.Windows.Forms.Label();
             this.lblErreurCompagnie = new System.Windows.Forms.Label();
-            this.cbxCompagnie = new System.Windows.Forms.ComboBox();
+            this.cboCompagnie = new System.Windows.Forms.ComboBox();
             this.lblErreurPrix = new System.Windows.Forms.Label();
             this.lblErreurTheme = new System.Windows.Forms.Label();
             this.lblErreurPublic = new System.Windows.Forms.Label();
             this.lblErreurAuteur = new System.Windows.Forms.Label();
             this.lblErreurDescription = new System.Windows.Forms.Label();
             this.lblResultat = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.cboAuteur = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRetour
@@ -197,29 +200,21 @@
             this.lblTitre.TabIndex = 21;
             this.lblTitre.Text = "Modifier les informations de la pièce de théâtre";
             // 
-            // cbxAuteur
+            // cboTheme
             // 
-            this.cbxAuteur.FormattingEnabled = true;
-            this.cbxAuteur.Location = new System.Drawing.Point(682, 252);
-            this.cbxAuteur.Name = "cbxAuteur";
-            this.cbxAuteur.Size = new System.Drawing.Size(336, 21);
-            this.cbxAuteur.TabIndex = 42;
+            this.cboTheme.FormattingEnabled = true;
+            this.cboTheme.Location = new System.Drawing.Point(859, 156);
+            this.cboTheme.Name = "cboTheme";
+            this.cboTheme.Size = new System.Drawing.Size(159, 21);
+            this.cboTheme.TabIndex = 43;
             // 
-            // cbxTheme
+            // cboPublic
             // 
-            this.cbxTheme.FormattingEnabled = true;
-            this.cbxTheme.Location = new System.Drawing.Point(859, 156);
-            this.cbxTheme.Name = "cbxTheme";
-            this.cbxTheme.Size = new System.Drawing.Size(159, 21);
-            this.cbxTheme.TabIndex = 43;
-            // 
-            // cbxPublic
-            // 
-            this.cbxPublic.FormattingEnabled = true;
-            this.cbxPublic.Location = new System.Drawing.Point(674, 201);
-            this.cbxPublic.Name = "cbxPublic";
-            this.cbxPublic.Size = new System.Drawing.Size(344, 21);
-            this.cbxPublic.TabIndex = 44;
+            this.cboPublic.FormattingEnabled = true;
+            this.cboPublic.Location = new System.Drawing.Point(674, 201);
+            this.cboPublic.Name = "cboPublic";
+            this.cboPublic.Size = new System.Drawing.Size(344, 21);
+            this.cboPublic.TabIndex = 44;
             // 
             // lblErreurNom
             // 
@@ -257,13 +252,13 @@
             this.lblErreurCompagnie.Text = "La compagnie est incorecte";
             this.lblErreurCompagnie.Visible = false;
             // 
-            // cbxCompagnie
+            // cboCompagnie
             // 
-            this.cbxCompagnie.FormattingEnabled = true;
-            this.cbxCompagnie.Location = new System.Drawing.Point(239, 201);
-            this.cbxCompagnie.Name = "cbxCompagnie";
-            this.cbxCompagnie.Size = new System.Drawing.Size(244, 21);
-            this.cbxCompagnie.TabIndex = 48;
+            this.cboCompagnie.FormattingEnabled = true;
+            this.cboCompagnie.Location = new System.Drawing.Point(239, 201);
+            this.cboCompagnie.Name = "cboCompagnie";
+            this.cboCompagnie.Size = new System.Drawing.Size(244, 21);
+            this.cboCompagnie.TabIndex = 48;
             // 
             // lblErreurPrix
             // 
@@ -337,6 +332,18 @@
             this.lblResultat.Text = "Resultat";
             this.lblResultat.Visible = false;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // cboAuteur
+            // 
+            this.cboAuteur.FormattingEnabled = true;
+            this.cboAuteur.Location = new System.Drawing.Point(682, 252);
+            this.cboAuteur.Name = "cboAuteur";
+            this.cboAuteur.Size = new System.Drawing.Size(336, 21);
+            this.cboAuteur.TabIndex = 42;
+            // 
             // AjoutTheatre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -346,13 +353,13 @@
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.lblErreurDescription);
             this.Controls.Add(this.lblErreurAuteur);
-            this.Controls.Add(this.cbxAuteur);
-            this.Controls.Add(this.cbxTheme);
+            this.Controls.Add(this.cboAuteur);
+            this.Controls.Add(this.cboTheme);
             this.Controls.Add(this.txtPrix);
             this.Controls.Add(this.txtNom);
             this.Controls.Add(this.txtDuree);
-            this.Controls.Add(this.cbxCompagnie);
-            this.Controls.Add(this.cbxPublic);
+            this.Controls.Add(this.cboCompagnie);
+            this.Controls.Add(this.cboPublic);
             this.Controls.Add(this.lblErreurPublic);
             this.Controls.Add(this.lblErreurTheme);
             this.Controls.Add(this.lblErreurPrix);
@@ -372,6 +379,8 @@
             this.Controls.Add(this.lblTitre);
             this.Name = "AjoutTheatre";
             this.Text = "AjoutTheatre";
+            this.Load += new System.EventHandler(this.AjoutTheatre_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -394,18 +403,19 @@
         private System.Windows.Forms.TextBox txtNom;
         private System.Windows.Forms.Label lblNom;
         private System.Windows.Forms.Label lblTitre;
-        private System.Windows.Forms.ComboBox cbxAuteur;
-        private System.Windows.Forms.ComboBox cbxTheme;
-        private System.Windows.Forms.ComboBox cbxPublic;
+        private System.Windows.Forms.ComboBox cboTheme;
+        private System.Windows.Forms.ComboBox cboPublic;
         private System.Windows.Forms.Label lblErreurNom;
         private System.Windows.Forms.Label lblErreurDuree;
         private System.Windows.Forms.Label lblErreurCompagnie;
-        private System.Windows.Forms.ComboBox cbxCompagnie;
+        private System.Windows.Forms.ComboBox cboCompagnie;
         private System.Windows.Forms.Label lblErreurPrix;
         private System.Windows.Forms.Label lblErreurTheme;
         private System.Windows.Forms.Label lblErreurPublic;
         private System.Windows.Forms.Label lblErreurAuteur;
         private System.Windows.Forms.Label lblErreurDescription;
         private System.Windows.Forms.Label lblResultat;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.ComboBox cboAuteur;
     }
 }

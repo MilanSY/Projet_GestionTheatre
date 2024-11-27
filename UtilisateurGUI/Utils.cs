@@ -41,7 +41,6 @@ namespace TheatreGUI
 
             // Compte le nombre de points décimaux et de signes négatifs
             int decimalPointCount = 0;
-            int negativeSignCount = 0;
 
             for (int i = 0; i < str.Length; i++)
             {

@@ -36,17 +36,38 @@ namespace TheatreGUI
             // Valeur du prix du théâtre
             txtPrixPieceDeTheatre.Text = vue.Prix.ToString();
             // Valeur du thème du théâtre
-            txtNomThemePieceDeTheatre.Text = vue.ThemeNom;
+            cboTheme.Text = vue.ThemeNom;
             // Valeur de la compagnie du théâtre
-            txtCompagnie.Text = vue.CompagnieNom;
+            cboCompagnie.Text = vue.CompagnieNom;
             // Valeur de la catégorie de publique du théâtre
-            txtPublique.Text = vue.PublicCategNom;
+            cboPublic.Text = vue.PublicCategNom;
             // Valeur du nom de l'auteur du théâtre
-            txtNomAuteur.Text = vue.AuteurNom;
-            // Valeur du prenom de l'auteur du théâtre
-            txtPrenomAuteur.Text = vue.AuteurPrenom;
+            cboAuteur.Text = vue.AuteurNom + " " + vue.AuteurPrenom;
             // Valeur de la description du théâtre
             txtDescription.Text = vue.Description;
+
+
+            //remplissage des combo box
+            List<Auteur> listAuteur = GestionTheatres.GetAuteurs();
+            foreach (Auteur auteur in listAuteur)
+            {
+                cboAuteur.Items.Add(auteur.nom + " " + auteur.prenom);
+            }
+            List<Theme> listTheme = GestionTheatres.GetThemes();
+            foreach (Theme theme in listTheme)
+            {
+                cboTheme.Items.Add(theme.nom);
+            }
+            List<Publics> listPublic = GestionTheatres.GetPublics();
+            foreach (Publics pub in listPublic)
+            {
+                cboPublic.Items.Add(pub.categ);
+            }
+            List<Compagnie> listCompagnie = GestionTheatres.GetCompagnies();
+            foreach (Compagnie comp in listCompagnie)
+            {
+                cboCompagnie.Items.Add(comp.nom);
+            }
         }
 
 
@@ -73,6 +94,8 @@ namespace TheatreGUI
             }
             else
             {
+                string[] auteur = cboAuteur.Text.Split(' ');
+
                 // Introduire la modification dans la base de données
                 Theatre theatre = new Theatre(
                     this.id,
@@ -80,12 +103,12 @@ namespace TheatreGUI
                     float.Parse(txtPrixPieceDeTheatre.Text.Trim()),
                     txtDescription.Text.Trim(),
                     int.TryParse(txtDureePieceDeTheatre.Text.Trim(), out int duree) ? (int?)duree : null,
-                    new Compagnie { nom = txtCompagnie.Text.Trim() },
-                    new Publics { categ = txtPublique.Text.Trim() },
-                    new Theme { nom = txtNomThemePieceDeTheatre.Text.Trim() },
-                    new Auteur { nom = txtNomAuteur.Text.Trim(), prenom = txtPrenomAuteur.Text.Trim() }
+                    new Compagnie { nom = cboCompagnie.Text.Trim() },
+                    new Publics { categ = cboPublic.Text.Trim() },
+                    new Theme { nom = cboTheme.Text.Trim() },
+                    new Auteur { nom = auteur[0], prenom = auteur[1]}
                 );
-
+                
                 GestionTheatres.UpdateTheatre(theatre);
                 MessageBox.Show("Le théâtre a été modifié avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -126,55 +149,46 @@ namespace TheatreGUI
                 errorProvider.SetError(txtDureePieceDeTheatre, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtNomThemePieceDeTheatre.Text))
+            if (string.IsNullOrWhiteSpace(cboTheme.Text))
             {
-                errorProvider.SetError(txtNomThemePieceDeTheatre, "Veuillez remplir ce champ");
+                errorProvider.SetError(cboTheme, "Veuillez remplir ce champ");
                 hasError = true;
             }
             else
             {
-                errorProvider.SetError(txtNomThemePieceDeTheatre, "");
+                errorProvider.SetError(cboTheme, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtCompagnie.Text))
+            if (string.IsNullOrWhiteSpace(cboCompagnie.Text))
             {
-                errorProvider.SetError(txtCompagnie, "Veuillez remplir ce champ");
+                errorProvider.SetError(cboCompagnie, "Veuillez remplir ce champ");
                 hasError = true;
             }
             else
             {
-                errorProvider.SetError(txtCompagnie, "");
+                errorProvider.SetError(cboCompagnie, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtPublique.Text))
+            if (string.IsNullOrWhiteSpace(cboPublic.Text))
             {
-                errorProvider.SetError(txtPublique, "Veuillez remplir ce champ");
+                errorProvider.SetError(cboPublic, "Veuillez remplir ce champ");
                 hasError = true;
             }
             else
             {
-                errorProvider.SetError(txtPublique, "");
+                errorProvider.SetError(cboPublic, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtNomAuteur.Text))
+            if (string.IsNullOrWhiteSpace(cboAuteur.Text))
             {
-                errorProvider.SetError(txtNomAuteur, "Veuillez remplir ce champ");
+                errorProvider.SetError(cboAuteur, "Veuillez remplir ce champ");
                 hasError = true;
             }
             else
             {
-                errorProvider.SetError(txtNomAuteur, "");
+                errorProvider.SetError(cboAuteur, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtPrenomAuteur.Text))
-            {
-                errorProvider.SetError(txtPrenomAuteur, "Veuillez remplir ce champ");
-                hasError = true;
-            }
-            else
-            {
-                errorProvider.SetError(txtPrenomAuteur, "");
-            }
 
             if (string.IsNullOrWhiteSpace(txtDescription.Text))
             {

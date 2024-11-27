@@ -207,6 +207,11 @@ namespace TheatreGUI
                 return;
             }
         }
+
+        private void btnAjouter_Click(object sender, EventArgs e)
+        {
+            Utils.DisplayFormAtLoc(this, new AjoutTheatre());
+        }
     }
 
 }
