@@ -38,5 +38,10 @@ namespace TheatreBLL
         {
             return TheatreDAO.SupprimerTheatre(id);
         }
+
+        public static bool AjoutTheatre(Theatre unTheatre)
+        {
+            return TheatreDAO.AjoutTheatre(unTheatre);
+        }
     }
 }

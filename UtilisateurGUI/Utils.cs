@@ -18,16 +18,66 @@ namespace TheatreGUI
             currentForm.Close();
         }
 
-        public static bool IsAlphanumeric(string str)
+        // Retourne false dès qu'un chiffre est trouvé, true sinon
+        public static bool NoNumbers(string str)
         {
             foreach (char c in str)
             {
-                if (!char.IsLetterOrDigit(c))
+                if (char.IsDigit(c))
                 {
+                    Console.WriteLine(c);
+                    Console.WriteLine(!char.IsDigit(c));
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static bool OnlyFloat(string str)
+        {
+            // Vérifie si la chaîne est vide ou null
+            if (string.IsNullOrEmpty(str))
+                return false;
+
+            // Compte le nombre de points décimaux et de signes négatifs
+            int decimalPointCount = 0;
+            int negativeSignCount = 0;
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                char c = str[i];
+
+                if (c == '.' || c == ',')
+                {
+                    decimalPointCount++;
+
+                    // Si plus d'un point décimal, ce n'est pas un float valide
+                    if (decimalPointCount > 1)
+                        return false;
+                }
+                else if (!char.IsDigit(c))
+                {
+                    // Retourne false si un caractère non numérique est trouvé
                     return false;
                 }
             }
 
+            // Si tout est correct, retourne true
+            return true;
+        }
+
+        // Retourne false dès qu'un caractère non numérique est trouvé, true sinon
+        public static bool OnlyNumbers(string str)
+        {
+            foreach (char c in str)
+            {
+                if (!char.IsDigit(c))
+                {
+                    Console.WriteLine(c);
+                    Console.WriteLine(!char.IsDigit(c));
+                    return false;
+                }
+            }
             return true;
         }
     }
