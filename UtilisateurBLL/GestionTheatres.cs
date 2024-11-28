@@ -64,5 +64,10 @@ namespace TheatreBLL
         {
             return TheatreDAO.GetThemes();
         }
+
+        public static int GetTheatreIdByName(string name)
+        {
+            return TheatreDAO.GetThemeByIdByName(name);
+        }
     }
 }
