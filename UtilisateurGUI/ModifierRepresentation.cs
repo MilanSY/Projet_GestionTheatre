@@ -61,12 +61,12 @@ namespace TheatreGUI
 
             Representation repr = new Representation (
                     id,
-                    txtHeure.Text.Trim().ToLower(),
-                    dtpDate.Text.Trim().ToLower(),
-                    txtLieu.Text.Trim().ToLower(),
+                    txtHeure.Text.Trim(),
+                    dtpDate.Text.Trim(),
+                    txtLieu.Text.Trim(),
                     Int32.Parse(txtPlace.Text.Trim()),
-                    new Theatre{ nom = cboPiece.Text.Trim().ToLower() },
-                    new Tarif { libelle = cboTarif.Text.Trim().ToLower() }
+                    new Theatre{ nom = cboPiece.Text.Trim() },
+                    new Tarif { libelle = cboTarif.Text.Trim() }
                 );
 
             GestionRepresentations.ModifierRepresentation(repr);
