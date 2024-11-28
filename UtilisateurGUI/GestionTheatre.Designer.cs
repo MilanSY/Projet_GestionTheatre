@@ -52,7 +52,7 @@
             this.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(29, 86);
+            this.dgv.Location = new System.Drawing.Point(21, 86);
             this.dgv.Name = "dgv";
             this.dgv.RowHeadersVisible = false;
             this.dgv.Size = new System.Drawing.Size(1127, 552);
@@ -104,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 749);
+            this.ClientSize = new System.Drawing.Size(1154, 749);
             this.Controls.Add(this.lblResultat);
             this.Controls.Add(this.btnRafraichir);
             this.Controls.Add(this.btnAjouter);
