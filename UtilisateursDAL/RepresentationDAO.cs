@@ -279,5 +279,46 @@ namespace TheatreDAL
             return true;
         }
 
+
+        public static bool AjouterRepresentation(Representation representation)
+        {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            representation.theatre.id = TheatreDAO.GetTheatreIdByName(representation.theatre.nom);
+            representation.tarif.id = GetTarifIdByName(representation.tarif.libelle);
+
+            connection.Open();
+            string query = @"
+                INSERT INTO Representation(
+                    rep_heure,
+                    rep_date,
+                    rep_lieu,
+                    rep_nb_place_max,
+                    rep_pie,
+                    rep_tar)
+                VALUES(@heure,
+                     @date,
+                     @lieu,
+                     @nbPlace,
+                     @pieceId,
+                     @tarifId);";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.Add(new SqlParameter("@date", System.Data.SqlDbType.Date) { Value = representation.date });
+            cmd.Parameters.Add(new SqlParameter("@heure", System.Data.SqlDbType.Time) { Value = representation.heure });
+            cmd.Parameters.Add(new SqlParameter("@nbPlace", System.Data.SqlDbType.Int) { Value = representation.nbPlaceMax });
+            cmd.Parameters.Add(new SqlParameter("@lieu", System.Data.SqlDbType.NVarChar) { Value = representation.lieu });
+            cmd.Parameters.Add(new SqlParameter("@pieceId", System.Data.SqlDbType.Int) { Value = representation.theatre.id });
+            cmd.Parameters.Add(new SqlParameter("@tarifId", System.Data.SqlDbType.Int) { Value = representation.tarif.id });
+
+            // Exécution de la commande
+            cmd.ExecuteNonQuery();
+
+            connection.Close();
+
+            return true;
+        }
     }
 }
