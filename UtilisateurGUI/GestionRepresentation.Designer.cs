@@ -115,5 +115,6 @@
         private System.Windows.Forms.Button btnRafraichir;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnRetour;
+        private System.Windows.Forms.Label lblResultat;
     }
 }

@@ -60,7 +60,6 @@ namespace TheatreDAL
                     nbPlaceMax,
                     theatre,
                     tarif
-                    
                 );
 
                 // Ajout à la liste
@@ -71,6 +70,43 @@ namespace TheatreDAL
             connection.Close();
 
             return listRepresentation;
+        }
+
+        public static bool SupprimerRepresentation(int id)
+        {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = connection;
+                cmd.CommandText = "DELETE FROM Representation WHERE rep_id = @id";
+                cmd.Parameters.AddWithValue("@id", id);
+
+                try
+                {
+                    connection.Open();
+                    int nbLignes = cmd.ExecuteNonQuery();
+                    return nbLignes == 1;
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 547) // Foreign key constraint violation
+                    {
+                        // Handle the foreign key constraint violation
+                        Console.WriteLine("Cannot delete the representation because it is referenced by other records.");
+                        return false;
+                    }
+                    else
+                    {
+                        // Re-throw the exception if it's not a foreign key constraint violation
+                        throw;
+                    }
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
     }
 }
