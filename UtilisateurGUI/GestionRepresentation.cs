@@ -158,7 +158,7 @@ namespace TheatreGUI
             {
                 int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
                 Console.WriteLine(id);
-                ModifierTheatre modifier = new ModifierTheatre(id);
+                ModifierRepresentation modifier = new ModifierRepresentation(id);
                 Utils.DisplayFormAtLoc(this, modifier);
                 return;
             }
@@ -193,7 +193,7 @@ namespace TheatreGUI
             }
         }
 
-        private void btnAjouter_Click(object sender, EventArgs e)
+        private void btnAjouter_Click(object sender, EventArgs negro)
         {
             Utils.DisplayFormAtLoc(this, new AjoutRepresentation());
         }

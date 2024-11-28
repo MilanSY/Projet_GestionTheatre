@@ -34,5 +34,6 @@ namespace TheatreBO
             this.auteur = auteur;
         }
 
+        public Theatre() { }
     }
 }

@@ -38,16 +38,11 @@
             this.lblPlace = new System.Windows.Forms.Label();
             this.txtLieu = new System.Windows.Forms.TextBox();
             this.lblLieu = new System.Windows.Forms.Label();
-            this.lblDate = new System.Windows.Forms.Label();
-            this.txtDateAnnee = new System.Windows.Forms.TextBox();
-            this.lblDateAnnee = new System.Windows.Forms.Label();
-            this.txtDateMois = new System.Windows.Forms.TextBox();
-            this.lblDateMois = new System.Windows.Forms.Label();
-            this.txtDateJour = new System.Windows.Forms.TextBox();
-            this.lblDateJour = new System.Windows.Forms.Label();
             this.txtHeure = new System.Windows.Forms.TextBox();
             this.lblHeure = new System.Windows.Forms.Label();
             this.lblTitre = new System.Windows.Forms.Label();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
+            this.lblDate = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnRetour
@@ -69,6 +64,7 @@
             this.btnAjouter.TabIndex = 68;
             this.btnAjouter.Text = "Ajouter";
             this.btnAjouter.UseVisualStyleBackColor = true;
+            this.btnAjouter.Click += new System.EventHandler(this.btnAjouter_Click);
             // 
             // lblTarif
             // 
@@ -140,67 +136,6 @@
             this.lblLieu.TabIndex = 60;
             this.lblLieu.Text = "Lieu de la représentation:";
             // 
-            // lblDate
-            // 
-            this.lblDate.AutoSize = true;
-            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDate.Location = new System.Drawing.Point(592, 204);
-            this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(193, 20);
-            this.lblDate.TabIndex = 59;
-            this.lblDate.Text = "Date de la représentation:";
-            // 
-            // txtDateAnnee
-            // 
-            this.txtDateAnnee.Location = new System.Drawing.Point(658, 290);
-            this.txtDateAnnee.Name = "txtDateAnnee";
-            this.txtDateAnnee.Size = new System.Drawing.Size(85, 20);
-            this.txtDateAnnee.TabIndex = 58;
-            // 
-            // lblDateAnnee
-            // 
-            this.lblDateAnnee.AutoSize = true;
-            this.lblDateAnnee.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateAnnee.Location = new System.Drawing.Point(592, 290);
-            this.lblDateAnnee.Name = "lblDateAnnee";
-            this.lblDateAnnee.Size = new System.Drawing.Size(60, 20);
-            this.lblDateAnnee.TabIndex = 57;
-            this.lblDateAnnee.Text = "Année:";
-            // 
-            // txtDateMois
-            // 
-            this.txtDateMois.Location = new System.Drawing.Point(658, 264);
-            this.txtDateMois.Name = "txtDateMois";
-            this.txtDateMois.Size = new System.Drawing.Size(85, 20);
-            this.txtDateMois.TabIndex = 56;
-            // 
-            // lblDateMois
-            // 
-            this.lblDateMois.AutoSize = true;
-            this.lblDateMois.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateMois.Location = new System.Drawing.Point(592, 264);
-            this.lblDateMois.Name = "lblDateMois";
-            this.lblDateMois.Size = new System.Drawing.Size(46, 20);
-            this.lblDateMois.TabIndex = 55;
-            this.lblDateMois.Text = "Mois:";
-            // 
-            // txtDateJour
-            // 
-            this.txtDateJour.Location = new System.Drawing.Point(658, 238);
-            this.txtDateJour.Name = "txtDateJour";
-            this.txtDateJour.Size = new System.Drawing.Size(85, 20);
-            this.txtDateJour.TabIndex = 54;
-            // 
-            // lblDateJour
-            // 
-            this.lblDateJour.AutoSize = true;
-            this.lblDateJour.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateJour.Location = new System.Drawing.Point(592, 238);
-            this.lblDateJour.Name = "lblDateJour";
-            this.lblDateJour.Size = new System.Drawing.Size(44, 20);
-            this.lblDateJour.TabIndex = 53;
-            this.lblDateJour.Text = "Jour:";
-            // 
             // txtHeure
             // 
             this.txtHeure.Location = new System.Drawing.Point(497, 146);
@@ -228,11 +163,31 @@
             this.lblTitre.TabIndex = 50;
             this.lblTitre.Text = "Ajouter une représentation";
             // 
+            // dtpDate
+            // 
+            this.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDate.Location = new System.Drawing.Point(497, 204);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(383, 20);
+            this.dtpDate.TabIndex = 71;
+            // 
+            // lblDate
+            // 
+            this.lblDate.AutoSize = true;
+            this.lblDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDate.Location = new System.Drawing.Point(493, 181);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(193, 20);
+            this.lblDate.TabIndex = 70;
+            this.lblDate.Text = "Date de la représentation:";
+            // 
             // AjoutRepresentation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 517);
+            this.Controls.Add(this.dtpDate);
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnAjouter);
             this.Controls.Add(this.lblTarif);
@@ -243,18 +198,12 @@
             this.Controls.Add(this.lblPlace);
             this.Controls.Add(this.txtLieu);
             this.Controls.Add(this.lblLieu);
-            this.Controls.Add(this.lblDate);
-            this.Controls.Add(this.txtDateAnnee);
-            this.Controls.Add(this.lblDateAnnee);
-            this.Controls.Add(this.txtDateMois);
-            this.Controls.Add(this.lblDateMois);
-            this.Controls.Add(this.txtDateJour);
-            this.Controls.Add(this.lblDateJour);
             this.Controls.Add(this.txtHeure);
             this.Controls.Add(this.lblHeure);
             this.Controls.Add(this.lblTitre);
             this.Name = "AjoutRepresentation";
             this.Text = "AjoutRepresentation";
+            this.Load += new System.EventHandler(this.AjoutRepresentation_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -272,15 +221,10 @@
         private System.Windows.Forms.Label lblPlace;
         private System.Windows.Forms.TextBox txtLieu;
         private System.Windows.Forms.Label lblLieu;
-        private System.Windows.Forms.Label lblDate;
-        private System.Windows.Forms.TextBox txtDateAnnee;
-        private System.Windows.Forms.Label lblDateAnnee;
-        private System.Windows.Forms.TextBox txtDateMois;
-        private System.Windows.Forms.Label lblDateMois;
-        private System.Windows.Forms.TextBox txtDateJour;
-        private System.Windows.Forms.Label lblDateJour;
         private System.Windows.Forms.TextBox txtHeure;
         private System.Windows.Forms.Label lblHeure;
         private System.Windows.Forms.Label lblTitre;
+        private System.Windows.Forms.DateTimePicker dtpDate;
+        private System.Windows.Forms.Label lblDate;
     }
 }

@@ -25,8 +25,20 @@ namespace TheatreBO
         public RepresentationVue(Representation representation)
         {
             Id = representation.id;
-            Heure = representation.heure;
-            Date = representation.date;
+            string heure = representation.heure.Replace(":00", "");
+            if (heure.Count() == 1)
+            {
+                this.Heure = "0" + heure + ":00";
+            }
+            else if (heure.Count() == 2)
+            {
+                this.Heure = heure + ":00";
+            }
+            else
+            {
+                this.Heure = heure.Replace(":00", "");
+            }
+            Date = representation.date.Replace(" 00:00:00" , "");
             Lieu = representation.lieu;
             NbPlaceMax = representation.nbPlaceMax;
             Theatre = representation.theatre.nom;
@@ -36,8 +48,20 @@ namespace TheatreBO
         public RepresentationVue(int id, string heure, string date, string lieu, int nbPlaceMax, string theatre, string tarif)
         {
             Id = id;
-            Heure = heure;
-            Date = date;
+            heure = heure.Replace(":00", "");
+            if (heure.Count() == 1)
+            {
+                this.Heure = "0" + heure + ":00";
+            }
+            else if (heure.Count() == 2)
+            {
+                this.Heure = heure + ":00";
+            }
+            else
+            {
+                this.Heure = heure.Replace(":00", "");
+            }
+            Date = date.Replace(" 00:00:00", "");
             Lieu = lieu;
             NbPlaceMax = nbPlaceMax;
             Theatre = theatre;
