@@ -37,8 +37,6 @@
             this.txtPrixPieceDeTheatre = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblCompagnie = new System.Windows.Forms.Label();
-            this.txtNomAuteur = new System.Windows.Forms.TextBox();
-            this.lblNomAuteur = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnModifier = new System.Windows.Forms.Button();
@@ -124,28 +122,11 @@
             this.lblCompagnie.TabIndex = 9;
             this.lblCompagnie.Text = "Nom de la compagnie :";
             // 
-            // txtNomAuteur
-            // 
-            this.txtNomAuteur.Location = new System.Drawing.Point(198, 296);
-            this.txtNomAuteur.Name = "txtNomAuteur";
-            this.txtNomAuteur.Size = new System.Drawing.Size(297, 20);
-            this.txtNomAuteur.TabIndex = 14;
-            // 
-            // lblNomAuteur
-            // 
-            this.lblNomAuteur.AutoSize = true;
-            this.lblNomAuteur.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.lblNomAuteur.Location = new System.Drawing.Point(38, 294);
-            this.lblNomAuteur.Name = "lblNomAuteur";
-            this.lblNomAuteur.Size = new System.Drawing.Size(154, 24);
-            this.lblNomAuteur.TabIndex = 13;
-            this.lblNomAuteur.Text = "Nom de l\'auteur :";
-            // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(158, 348);
+            this.txtDescription.Location = new System.Drawing.Point(158, 294);
             this.txtDescription.Name = "txtDescription";
-            this.txtDescription.Size = new System.Drawing.Size(337, 71);
+            this.txtDescription.Size = new System.Drawing.Size(337, 125);
             this.txtDescription.TabIndex = 17;
             this.txtDescription.Text = "";
             // 
@@ -153,7 +134,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
-            this.label1.Location = new System.Drawing.Point(38, 348);
+            this.label1.Location = new System.Drawing.Point(38, 294);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(114, 24);
             this.label1.TabIndex = 18;
@@ -264,8 +245,6 @@
             this.Controls.Add(this.btnModifier);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.txtNomAuteur);
-            this.Controls.Add(this.lblNomAuteur);
             this.Controls.Add(this.lblCompagnie);
             this.Controls.Add(this.txtPrixPieceDeTheatre);
             this.Controls.Add(this.label2);
@@ -294,8 +273,6 @@
         private System.Windows.Forms.TextBox txtPrixPieceDeTheatre;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblCompagnie;
-        private System.Windows.Forms.TextBox txtNomAuteur;
-        private System.Windows.Forms.Label lblNomAuteur;
         private System.Windows.Forms.RichTextBox txtDescription;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnModifier;
