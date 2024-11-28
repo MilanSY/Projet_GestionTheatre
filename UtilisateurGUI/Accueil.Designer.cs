@@ -56,6 +56,7 @@
             this.btngestionrepre.TabIndex = 1;
             this.btngestionrepre.Text = "Gestion des représentations";
             this.btngestionrepre.UseVisualStyleBackColor = true;
+            this.btngestionrepre.Click += new System.EventHandler(this.btngestionrepre_Click);
             // 
             // btngestionpie
             // 

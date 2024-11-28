@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TheatreBO;
+using TheatreDAL;
 
 namespace UtilisateurBLL
 {
-    internal class GestoinReservation
+    public class GestionReservation
     {
     }
 }

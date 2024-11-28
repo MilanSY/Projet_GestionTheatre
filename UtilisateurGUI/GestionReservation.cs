@@ -16,10 +16,5 @@ namespace TheatreGUI
         {
             InitializeComponent();
         }
-
-        private void GestionReservation_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
