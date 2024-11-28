@@ -29,5 +29,10 @@ namespace TheatreBLL
         {
             return RepresentationDAO.ModifierRepresentation(repr);
         }
+
+        public static bool AjouterRepresentation(Representation repr) 
+        {
+            return RepresentationDAO.AjouterRepresentation(repr);
+        }
     }
 }
