@@ -19,6 +19,7 @@ namespace TheatreGUI
         {
             InitializeComponent();
             // Blocage de la génération automatique des colonnes
+            dgv.CellClick += dgv_CellClick ;
             dgv.AutoGenerateColumns = false;
 
             // Création d'une en-tête de colonne pour la colonne 1
