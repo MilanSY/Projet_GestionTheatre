@@ -1,4 +1,4 @@
-﻿namespace UtilisateurGUI
+﻿namespace TheatreGUI
 {
     partial class ModifierRepresentation
     {
@@ -226,6 +226,7 @@
             this.btnRetour.TabIndex = 49;
             this.btnRetour.Text = "Retour";
             this.btnRetour.UseVisualStyleBackColor = true;
+            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
             // ModifierRepresentation
             // 

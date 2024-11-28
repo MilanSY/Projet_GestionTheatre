@@ -54,7 +54,6 @@
             this.dgv.Name = "dgv";
             this.dgv.Size = new System.Drawing.Size(1063, 371);
             this.dgv.TabIndex = 1;
-            this.dgv.CellClick += dgv_CellClick;
             // 
             // btnRafraichir
             // 
@@ -76,6 +75,7 @@
             this.btnAjouter.TabIndex = 6;
             this.btnAjouter.Text = "Ajouter";
             this.btnAjouter.UseVisualStyleBackColor = true;
+            this.btnAjouter.Click += new System.EventHandler(this.btnAjouter_Click);
             // 
             // btnRetour
             // 

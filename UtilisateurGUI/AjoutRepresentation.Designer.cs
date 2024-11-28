@@ -1,4 +1,4 @@
-﻿namespace UtilisateurGUI
+﻿namespace TheatreGUI
 {
     partial class AjoutRepresentation
     {
@@ -58,6 +58,7 @@
             this.btnRetour.TabIndex = 69;
             this.btnRetour.Text = "Retour";
             this.btnRetour.UseVisualStyleBackColor = true;
+            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
             // btnAjouter
             // 

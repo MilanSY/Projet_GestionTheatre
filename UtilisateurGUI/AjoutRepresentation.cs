@@ -7,14 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheatreBLL;
+using TheatreBO;
 
-namespace UtilisateurGUI
+namespace TheatreGUI
 {
     public partial class AjoutRepresentation : Form
     {
         public AjoutRepresentation()
         {
             InitializeComponent();
+        }
+
+        private void btnRetour_Click(object sender, EventArgs e)
+        {
+            Utils.DisplayFormAtLoc(this, new GestionRepresentation());
         }
     }
 }
