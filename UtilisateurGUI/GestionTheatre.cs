@@ -214,5 +214,4 @@ namespace TheatreGUI
             Utils.DisplayFormAtLoc(this, new AjoutTheatre());
         }
     }
-
 }

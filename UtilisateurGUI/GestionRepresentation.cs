@@ -148,7 +148,7 @@ namespace TheatreGUI
 
         }
 
-        private void dgv_CellClick (object sender, DataGridViewCellEventArgs e)
+        private void dgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             // Vérifiez que l'événement ne provient pas de l'en-tête
             if (e.RowIndex < 0 || e.ColumnIndex < 0)
@@ -160,6 +160,35 @@ namespace TheatreGUI
                 Console.WriteLine(id);
                 ModifierRepresentation modifier = new ModifierRepresentation(id);
                 Utils.DisplayFormAtLoc(this, modifier);
+                return;
+            }
+            else if (dgv.Columns[e.ColumnIndex].Name == "Supprimer")
+            {
+
+                int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
+
+                // Confirmation de suppression
+                DialogResult result = MessageBox.Show(
+                    $"Êtes-vous sûr de vouloir supprimer la représentation N°{id}",
+                    "Confirmation de suppression",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    if (GestionRepresentations.SupprimerRepresentation(id) == true)
+                    {
+                        MessageBox.Show($"La représentation N°{id} a été supprimée avec succès !");
+                        // Rafraîchissement du DataGridView
+                        List<RepresentationVue> liste = GestionRepresentations.GetRepresentationsVue();
+                        dgv.DataSource = liste;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erreur : Impossible de supprimer la représentation à cause d'une dépendance.");
+                    }
+                }
                 return;
             }
         }
