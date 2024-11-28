@@ -45,5 +45,13 @@ namespace TheatreGUI
                 Application.Exit();
             }
         }
+
+        private void btngestionrepre_Click(object sender, EventArgs e)
+        {
+            // Fermeture du formulaire actuel et retour à l'acceuil
+            GestionRepresentation gestionrepresentation = new GestionRepresentation();
+            this.Close();
+            gestionrepresentation.Show();
+        }
     }
 }

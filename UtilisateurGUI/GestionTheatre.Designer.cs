@@ -61,7 +61,7 @@
             // btnRetour
             // 
             this.btnRetour.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRetour.Location = new System.Drawing.Point(47, 48);
+            this.btnRetour.Location = new System.Drawing.Point(29, 48);
             this.btnRetour.Name = "btnRetour";
             this.btnRetour.Size = new System.Drawing.Size(120, 32);
             this.btnRetour.TabIndex = 2;

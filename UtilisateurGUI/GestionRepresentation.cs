@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TheatreBLL;
+using TheatreBO;
 
 namespace TheatreGUI
 {
@@ -15,9 +18,137 @@ namespace TheatreGUI
         public GestionRepresentation()
         {
             InitializeComponent();
+            // Blocage de la génération automatique des colonnes
+            dgv.AutoGenerateColumns = false;
+            dgv.CellClick += dgv_CellClick;
+
+            // Création d'une en-tête de colonne pour la colonne 1
+            DataGridViewTextBoxColumn idColumn = new DataGridViewTextBoxColumn();
+            idColumn.DataPropertyName = "Id";
+            idColumn.HeaderText = "Identifiant";
+            idColumn.ReadOnly = true;
+
+            // Création d'une en-tête de colonne pour la colonne 2
+            DataGridViewTextBoxColumn heureColumn = new DataGridViewTextBoxColumn();
+            heureColumn.DataPropertyName = "Heure";
+            heureColumn.HeaderText = "Heure";
+            heureColumn.ReadOnly = true;
+
+            // Création d'une en-tête de colonne pour la colonne 3
+            DataGridViewTextBoxColumn dateColumn = new DataGridViewTextBoxColumn();
+            dateColumn.DataPropertyName = "Date";
+            dateColumn.HeaderText = "Date";
+            dateColumn.ReadOnly = true;
+
+            // Création d'une en-tête de colonne pour la colonne 4
+            DataGridViewTextBoxColumn placeColumn = new DataGridViewTextBoxColumn();
+            placeColumn.DataPropertyName = "Lieu";
+            placeColumn.HeaderText = "Lieu";
+            placeColumn.ReadOnly = true;
+
+
+            // Création d'une en-tête de colonne pour la colonne 5
+            DataGridViewTextBoxColumn lieuColumn = new DataGridViewTextBoxColumn();
+            lieuColumn.DataPropertyName = "NbPlaceMax";
+            lieuColumn.HeaderText = "Nombre de places";
+            lieuColumn.ReadOnly = true;
+
+            // Création d'une en-tête de colonne pour la colonne 6
+            DataGridViewTextBoxColumn pieceColumn = new DataGridViewTextBoxColumn();
+            pieceColumn.DataPropertyName = "Theatre";
+            pieceColumn.HeaderText = "Piece jouée";
+            pieceColumn.ReadOnly = true;
+
+            // Création d'une en-tête de colonne pour la colonne 7
+            DataGridViewTextBoxColumn tarifColumn = new DataGridViewTextBoxColumn();
+            tarifColumn.DataPropertyName = "Tarif";
+            tarifColumn.HeaderText = "Tarif";
+            tarifColumn.ReadOnly = true;
+
+            // Création d'une en-tête de colonne pour la colonne 8
+            DataGridViewButtonColumn modifBtnColumn = new DataGridViewButtonColumn();
+            modifBtnColumn.Name = "Modifier";
+            modifBtnColumn.Text = "Modifier";
+            modifBtnColumn.UseColumnTextForButtonValue = true;
+
+            // Création d'une en-tête de colonne pour la colonne 9
+            DataGridViewButtonColumn suppBtnColumn = new DataGridViewButtonColumn();
+            suppBtnColumn.Name = "Supprimer";
+            suppBtnColumn.Text = "Supprimer";
+            suppBtnColumn.UseColumnTextForButtonValue = true;
+
+
+            // Ajout des 11 en-têtes de colonne au datagridview
+            dgv.Columns.Add(idColumn);
+            dgv.Columns.Add(heureColumn);
+            dgv.Columns.Add(dateColumn);
+            dgv.Columns.Add(lieuColumn);
+            dgv.Columns.Add(placeColumn);
+            dgv.Columns.Add(pieceColumn);
+            dgv.Columns.Add(tarifColumn);
+            dgv.Columns.Add(modifBtnColumn);
+            dgv.Columns.Add(suppBtnColumn);
+
+            // Définition du style apporté au datagridview
+            dgv.ColumnHeadersVisible = true;
+            DataGridViewCellStyle columnHeaderStyle = new DataGridViewCellStyle();
+            columnHeaderStyle.BackColor = Color.Beige;
+            columnHeaderStyle.Font = new Font("Verdana", 10, FontStyle.Bold);
+            dgv.ColumnHeadersDefaultCellStyle = columnHeaderStyle;
+
+            // Récupération de chaîne de connexion à la BD à l'ouverture du formulaire
+            GestionTheatres.SetchaineConnexion(ConfigurationManager.ConnectionStrings["Utilisateur"]);
+
+            // Création d'un objet List d'Utilisateur à afficher dans le datagridview
+            List<RepresentationVue> liste = new List<RepresentationVue>();
+            liste = GestionRepresentations.GetRepresentationsVue();
+
+            // Rattachement de la List à la source de données du datagridview
+            dgv.DataSource = liste;
+
+            // Définit un style pour la bordure du formulaire
+            FormBorderStyle = FormBorderStyle.FixedToolWindow;
+
+            dgv.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv.Columns[6].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgv.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
+
+        private void btnRetour_Click(object sender, EventArgs e)
+        {
+            // Fermeture du formulaire actuel et retour à l'acceuil
+            Accueil accueil = new Accueil();
+            this.Close();
+            accueil.Show();
+
+        }
+
+        private void btnRafraichir_Click(object sender, EventArgs e)
+        {
+            // Création d'un objet List d'Utilisateur à afficher dans le datagridview
+            List<RepresentationVue> liste = GestionRepresentations.GetRepresentationsVue();
+
+            // Rattachement de la List à la source de données du datagridview
+            dgv.DataSource = liste;
         }
 
         private void GestionRepresentation_Load(object sender, EventArgs e)
+        {
+            // Création d'un objet List d'Utilisateur à afficher dans le datagridview
+            List<RepresentationVue> liste = GestionRepresentations.GetRepresentationsVue();
+
+            // Affichage de la liste au démarrage du formulaire
+            dgv.DataSource = liste;
+
+        }
+
+        private void dgv_CellClick (object sender, DataGridViewCellEventArgs e)
         {
 
         }

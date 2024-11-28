@@ -113,6 +113,9 @@
     <EmbeddedResource Include="AjoutRepresentation.resx">
       <DependentUpon>AjoutRepresentation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accueil.resx">
+      <DependentUpon>Accueil.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AjoutTheatre.resx">
       <DependentUpon>AjoutTheatre.cs</DependentUpon>
     </EmbeddedResource>
