@@ -88,9 +88,13 @@ namespace TheatreGUI
             checkIfEmpty();
             checkIfFormatValid();
 
-            if (checkIfEmpty() && checkIfFormatValid())
+            if (checkIfEmpty() == true)
             {
                 MessageBox.Show("Veuillez remplir tous les champs obligatoires.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (checkIfFormatValid() == true)
+            {
+                MessageBox.Show("Erreur, format des champs non valide", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -230,8 +234,15 @@ namespace TheatreGUI
             {
                 errorProvider.SetError(txtNomPieceDeTheatre, "Le nom ne doit pas dépasser 100 caractères.");
                 hasError = true;
+                
             }
-            else
+            else if (txtNomPieceDeTheatre.Text.Any(char.IsDigit) == true)
+            {
+                errorProvider.SetError(txtNomPieceDeTheatre, "Le nom ne doit pas contenir de chiffre");
+                hasError = true;
+
+            }
+            else 
             {
                 errorProvider.SetError(txtNomPieceDeTheatre, "");
             }
