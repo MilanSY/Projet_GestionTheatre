@@ -8,22 +8,19 @@ namespace TheatreBO
 {
     public class RepresentationVue
     {
-
-        public Representation Representation { get; set; }
-
         public int Id { get; set; }
 
-        public int Heure { get; set; }
+        public string Heure { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public string Lieu { get; set; }
 
         public int NbPlaceMax { get; set; }
 
-        public int IdTheatre { get; set; }
+        public string Theatre { get; set; }
 
-        public int Tarif { get; set; }
+        public string Tarif { get; set; }
 
         public RepresentationVue(Representation representation)
         {
@@ -32,8 +29,19 @@ namespace TheatreBO
             Date = representation.date;
             Lieu = representation.lieu;
             NbPlaceMax = representation.nbPlaceMax;
-            IdTheatre = representation.theatre.id;
-            Tarif = representation.tarif;
+            Theatre = representation.theatre.nom;
+            Tarif = representation.tarif.libelle;
+        }
+
+        public RepresentationVue(int id, string heure, string date, string lieu, int nbPlaceMax, string theatre, string tarif)
+        {
+            Id = id;
+            Heure = heure;
+            Date = date;
+            Lieu = lieu;
+            NbPlaceMax = nbPlaceMax;
+            Theatre = theatre;
+            Tarif = tarif;
         }
     }
 }

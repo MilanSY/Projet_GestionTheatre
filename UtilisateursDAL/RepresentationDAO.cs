@@ -10,11 +10,10 @@ namespace TheatreDAL
 {
     public class RepresentationDAO
     {
-        public static List<RepresentationVue> GetRepresentationsView(Representation unRepresentation)
+        public static List<RepresentationVue> GetRepresentationsVue()
         {
-            int id, heure, nbPlaceMax, tarif;
-            DateTime date;
-            string lieu;
+            int id, nbPlaceMax;
+            string lieu, heure, tarif, date, theatre;
 
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
             SqlConnection connection = new SqlConnection(connectionString);
@@ -30,10 +29,12 @@ namespace TheatreDAL
                     r.rep_lieu,
                     r.rep_nb_place_max,
                     r.rep_pie,
-                    r.rep_tar AS tarifRep
+                    p.pie_nom AS pieceNom,
+                    r.rep_tar,
+                    t.tar_lib AS tarifRep
                 FROM Representation r 
                 LEFT JOIN Pieces p ON r.rep_pie = p.pie_id 
-                LEFT JOIN Tarif t a ON r.rep_tar = t.tar_id;";
+                LEFT JOIN Tarif t ON r.rep_tar = t.tar_id;";
             connection.Open();
 
             SqlDataReader monReader = cmd.ExecuteReader();
@@ -42,25 +43,28 @@ namespace TheatreDAL
             while (monReader.Read())
             {
                 id = Int32.Parse(monReader["rep_id"].ToString());
-                heure = Int32.Parse(monReader["rep_heure"].ToString());
-                date = DateTime.Parse(monReader["rep_date"].ToString());
-                lieu = monReader["rep_lieu"] == DBNull.Value ? default(string) : monReader["rep_lieu"].ToString();
-                nbPlaceMax = monReader["rep_nb_place_max"] == DBNull.Value ? default(int) : Int32.Parse(monReader["rep_nb_place_max"].ToString());
-                tarif = monReader["tarifRep"] == DBNull.Value ? default(int) : Int32.Parse(monReader["tarifRep"].ToString());
+                heure = monReader["rep_heure"].ToString();
+                date = monReader["rep_date"].ToString();
+                lieu = monReader["rep_lieu"].ToString();
+                nbPlaceMax = Int32.Parse(monReader["rep_nb_place_max"].ToString());
+                tarif = monReader["tarifRep"].ToString();
+                theatre = monReader["pieceNom"].ToString();
 
                 // Création d'un objet Representation
-                Representation uneRepresentation = new Representation
-                {
-                    id = id,
-                    heure = heure,
-                    date = date,
-                    lieu = lieu,
-                    nbPlaceMax = nbPlaceMax,
-                    tarif = tarif
-                };
-                RepresentationVue vue = new RepresentationVue(uneRepresentation);
+                RepresentationVue uneRepresentation = new RepresentationVue
+                (
+                    id,
+                    heure,
+                    date,
+                    lieu,
+                    nbPlaceMax,
+                    theatre,
+                    tarif
+                    
+                );
+
                 // Ajout à la liste
-                listRepresentation.Add(vue);
+                listRepresentation.Add(uneRepresentation);
             }
 
             // Fermeture de la connexion

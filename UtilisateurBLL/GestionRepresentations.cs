@@ -10,9 +10,9 @@ namespace TheatreBLL
 {
     public class GestionRepresentations
     {
-        public static List<RepresentationVue> GetRepresentationsView(Representation uneRepresentation)
+        public static List<RepresentationVue> GetRepresentationsVue()
         {
-            return RepresentationDAO.GetRepresentationsView(uneRepresentation);
+            return RepresentationDAO.GetRepresentationsVue();
         }
 
     }

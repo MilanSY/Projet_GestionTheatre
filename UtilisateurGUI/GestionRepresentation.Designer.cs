@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.lblTitleRepresentation = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv = new System.Windows.Forms.DataGridView();
             this.btnRafraichir = new System.Windows.Forms.Button();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitleRepresentation
@@ -46,14 +46,15 @@
             this.lblTitleRepresentation.TabIndex = 0;
             this.lblTitleRepresentation.Text = "Liste des représentations des pièces de théâtres";
             // 
-            // dataGridView1
+            // dgv
             // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(25, 130);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1063, 371);
-            this.dataGridView1.TabIndex = 1;
+            this.dgv.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Location = new System.Drawing.Point(25, 130);
+            this.dgv.Name = "dgv";
+            this.dgv.Size = new System.Drawing.Size(1063, 371);
+            this.dgv.TabIndex = 1;
+            this.dgv.CellClick += dgv_CellClick;
             // 
             // btnRafraichir
             // 
@@ -95,12 +96,13 @@
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnAjouter);
             this.Controls.Add(this.btnRafraichir);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv);
             this.Controls.Add(this.lblTitleRepresentation);
             this.Name = "GestionRepresentation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "GestionRepresentation";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Load += new System.EventHandler(this.GestionRepresentation_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -109,7 +111,7 @@
         #endregion
 
         private System.Windows.Forms.Label lblTitleRepresentation;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv;
         private System.Windows.Forms.Button btnRafraichir;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnRetour;
