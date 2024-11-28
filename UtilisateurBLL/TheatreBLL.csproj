@@ -45,8 +45,8 @@
     <Compile Include="GestionFestival.cs" />
     <Compile Include="GestionTheatres.cs" />
     <Compile Include="GestionUtilisateur.cs" />
-    <Compile Include="GestoinRepresentation.cs" />
-    <Compile Include="GestoinReservation.cs" />
+    <Compile Include="GestionRepresentations.cs" />
+    <Compile Include="GestionReservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

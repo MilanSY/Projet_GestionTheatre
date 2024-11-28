@@ -31,10 +31,11 @@ namespace TheatreGUI
         private void btnRafraichir_Click(object sender, EventArgs e)
         {
             // Création d'un objet List d'Utilisateur à afficher dans le datagridview
-            List<RepresentationVue> liste = GestionRepresentation.GetRepresentations();
+            List<RepresentationVue> liste = GestionRepresentations.GetRepresentationsView(new Representation());
 
             // Rattachement de la List à la source de données du datagridview
-            dgv.DataSource = liste;
+            dataGridView1.DataSource = liste;
         }
+
     }
 }
