@@ -95,7 +95,6 @@ namespace TheatreDAL
 
             SqlDataReader monReader = cmd.ExecuteReader();
 
-
             // Remplissage de la liste
             while (monReader.Read())
             {
@@ -114,6 +113,79 @@ namespace TheatreDAL
                 TheatreVue vue = new TheatreBO.TheatreVue(unTheatre);
                 // Ajout à la liste
                 listTheatres.Add(vue);
+            }
+
+            // Fermeture de la connexion
+            connection.Close();
+
+            return listTheatres;
+        }
+
+
+        public static List<Theatre> GetTheatresObject()
+        {
+            int id;
+            string nom, description;
+            Compagnie compagnie;
+            Publics publicCateg;
+            Theme theme;
+            Auteur auteur;
+            float prix;
+            int? duree;
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+
+
+            // Création d'une liste vide d'objets Theatre
+            List<Theatre> listTheatres = new List<Theatre>();
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = @"
+                SELECT p.pie_id,
+                    p.pie_nom,
+                    p.pie_prix,
+                    p.pie_descrip,
+                    p.pie_duree,
+                    p.pie_comp,
+                    p.pie_pub,
+                    p.pie_the,
+                    p.pie_aut,
+                    c.comp_nom AS compagnieNom,
+                    c.comp_ville AS compagnieVille,
+                    c.comp_directeur AS compagnieDirecteur,
+                    pu.pub_categ AS publicCateg, 
+                    t.the_nom AS theme,
+                    a.aut_prenom AS auteurPrenom,
+                    a.aut_nom AS auteurNom 
+                FROM Pieces p 
+                LEFT JOIN Compagnies c ON p.pie_comp = c.comp_id 
+                LEFT JOIN Publics pu ON p.pie_pub = pu.pub_id 
+                LEFT JOIN Theme t ON p.pie_the = t.the_id 
+                LEFT JOIN Auteur a ON p.pie_aut = a.aut_id;";
+            connection.Open();
+
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+
+            // Remplissage de la liste
+            while (monReader.Read())
+            {
+                id = Int32.Parse(monReader["pie_id"].ToString());
+                nom = monReader["pie_nom"].ToString();
+                prix = float.Parse(monReader["pie_prix"].ToString());
+                description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
+                duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
+                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
+                publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
+                theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
+                auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
+
+                // Création d'un objet Theatre
+                Theatre unTheatre = new Theatre(id, nom, prix, description, duree, compagnie, publicCateg, theme, auteur);
+                // Ajout à la liste
+                listTheatres.Add(unTheatre);
             }
 
             // Fermeture de la connexion
@@ -220,6 +292,87 @@ namespace TheatreDAL
                 connection.Close();
             }
         }
+
+        public static bool AjoutTheatre(Theatre unTheatre)
+        {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            string query = @"
+                INSERT INTO Pieces(pie_nom, pie_prix, pie_descrip, pie_duree, pie_comp, pie_pub, pie_the, pie_aut) 
+                VALUES
+                (@nom,
+                 @prix,
+                 @description,
+                 @duree,
+                 @compagnieId,
+                 @publicId,
+                 @themeId,
+                 @auteurId)";
+            SqlCommand command = new SqlCommand(query, connection);
+            unTheatre.auteur.id = GetAuteurIdByName(unTheatre.auteur);
+            unTheatre.compagnie.id = GetCompagnieIdByName(unTheatre.compagnie.nom);
+            unTheatre.publicCateg.id = GetPublicIdByName(unTheatre.publicCateg.categ);
+            unTheatre.theme.id = GetThemeByIdByName(unTheatre.theme.nom);
+            command.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = unTheatre.id });
+            command.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = unTheatre.nom });
+            command.Parameters.Add(new SqlParameter("@prix", System.Data.SqlDbType.Float) { Value = unTheatre.prix });
+            command.Parameters.Add(new SqlParameter("@description", System.Data.SqlDbType.NVarChar) { Value = unTheatre.description ?? (object)DBNull.Value });
+            command.Parameters.Add(new SqlParameter("@duree", System.Data.SqlDbType.Int) { Value = unTheatre.duree ?? (object)DBNull.Value });
+            command.Parameters.Add(new SqlParameter("@compagnieId", System.Data.SqlDbType.Int) { Value = unTheatre.compagnie.id });
+            command.Parameters.Add(new SqlParameter("@publicId", System.Data.SqlDbType.Int) { Value = unTheatre.publicCateg.id });
+            command.Parameters.Add(new SqlParameter("@themeId", System.Data.SqlDbType.Int) { Value = unTheatre.theme.id });
+            command.Parameters.Add(new SqlParameter("@auteurId", System.Data.SqlDbType.Int) { Value = unTheatre.auteur.id });
+
+            connection.Open();
+            // Exécution de la commande
+            command.ExecuteNonQuery();
+
+            connection.Close();
+
+
+
+            return true;
+        }
+
+        public static List<Auteur> GetAuteurs()
+        {
+            int id;
+            string nom;
+            string prenom;
+            List<Auteur> listAuteur = new List<Auteur>() ;
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "SELECT * FROM Auteur";
+
+            connection.Open();
+
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+            // Remplissage de la liste
+            while (monReader.Read())
+            {
+                id = Int32.Parse(monReader["aut_id"].ToString());
+                nom = monReader["aut_nom"].ToString();
+                prenom = monReader["aut_prenom"].ToString();
+                Auteur unAuteur = new Auteur(id, nom, prenom);
+
+                // Ajout à la liste
+                listAuteur.Add(unAuteur);
+            }
+
+            // Fermeture de la connexion
+            connection.Close();
+
+            Console.WriteLine(listAuteur.Count);
+
+            return listAuteur;
+        }
+
         public static int GetAuteurIdByName(Auteur auteur)
         {
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
@@ -242,6 +395,44 @@ namespace TheatreDAL
                 throw new Exception("Auteur not found");
             }
         }
+
+        public static List<Compagnie> GetCompagnies()
+        {
+            int id;
+            string nom;
+            string ville;
+            string directeur;
+            List<Compagnie> listCompagnie = new List<Compagnie>();
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string query = "SELECT * FROM Compagnies";
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+
+            // Remplissage de la liste
+            while (monReader.Read())
+            {
+                id = Int32.Parse(monReader["comp_id"].ToString());
+                nom = monReader["comp_nom"].ToString();
+                ville = monReader["comp_ville"].ToString();
+                directeur = monReader["comp_directeur"].ToString();
+                Compagnie uneCompagnie = new Compagnie(id, nom, ville, directeur);
+
+                // Ajout à la liste
+                listCompagnie.Add(uneCompagnie);
+            }
+
+            // Fermeture de la connexion
+            connection.Close();
+
+            return listCompagnie;
+        }
+
         public static int GetCompagnieIdByName(string nom)
         {
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
@@ -256,6 +447,39 @@ namespace TheatreDAL
             connection.Close();
 
             return compagnieId;
+        }
+
+        public static List<Publics> GetPublics()
+        {
+            int id;
+            string categ;
+            List<Publics> listPublic = new List<Publics>();
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string query = "SELECT * FROM Publics";
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+
+            // Remplissage de la liste
+            while (monReader.Read())
+            {
+                id = Int32.Parse(monReader["pub_id"].ToString());
+                categ = monReader["pub_categ"].ToString();
+                Publics unPublic = new Publics(id, categ);
+
+                // Ajout à la liste
+                listPublic.Add(unPublic);
+            }
+
+            // Fermeture de la connexion
+            connection.Close();
+
+            return listPublic;
         }
 
         public static int GetPublicIdByName(string categ)
@@ -274,6 +498,39 @@ namespace TheatreDAL
             return publicId;
         }
 
+        public static List<Theme> GetThemes()
+        {
+            int id;
+            string nom;
+            List<Theme> listTheme = new List<Theme>();
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string query = "SELECT * FROM Theme";
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+
+            // Remplissage de la liste
+            while (monReader.Read())
+            {
+                id = Int32.Parse(monReader["the_id"].ToString());
+                nom = monReader["the_nom"].ToString();
+                Theme unTheme = new Theme(id, nom);
+
+                // Ajout à la liste
+                listTheme.Add(unTheme);
+            }
+
+            // Fermeture de la connexion
+            connection.Close();
+
+            return listTheme;
+        }
+
         public static int GetThemeByIdByName(string theme)
         {
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
@@ -289,7 +546,5 @@ namespace TheatreDAL
 
             return themeId;
         }
-
-
     }
 }
