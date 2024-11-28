@@ -121,7 +121,6 @@ namespace TheatreDAL
             return listTheatres;
         }
 
-
         public static List<Theatre> GetTheatresObject()
         {
             int id;
@@ -194,8 +193,6 @@ namespace TheatreDAL
             return listTheatres;
         }
 
-
-
         // Prend en paramètre un id et renvoie la piece de théâtre avec cet identifiant, et null si l'identifiant équivaut à rien
         public static Theatre GetTheatreById(int id)
         {
@@ -261,6 +258,38 @@ namespace TheatreDAL
             connection.Close();
             
             return null;
+        }
+
+        public static int GetTheatreIdByName(string nom)
+        {
+            int id;
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            string query = @"
+                SELECT p.pie_id
+                FROM Pieces p 
+                WHERE p.pie_nom = @nom;";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            cmd.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = nom });
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+
+            if (monReader.Read())
+            {
+                Int32.TryParse(monReader["pie_id"].ToString(), out id);
+
+                connection.Close();
+
+                return id;
+            }
+
+            connection.Close();
+
+            return -1;
         }
 
         public static bool SupprimerTheatre(int id)
@@ -330,8 +359,6 @@ namespace TheatreDAL
 
             connection.Close();
 
-
-
             return true;
         }
 
@@ -367,8 +394,6 @@ namespace TheatreDAL
 
             // Fermeture de la connexion
             connection.Close();
-
-            Console.WriteLine(listAuteur.Count);
 
             return listAuteur;
         }

@@ -150,10 +150,21 @@ namespace TheatreGUI
 
         private void dgv_CellClick (object sender, DataGridViewCellEventArgs e)
         {
+            // Vérifiez que l'événement ne provient pas de l'en-tête
+            if (e.RowIndex < 0 || e.ColumnIndex < 0)
+                return;
 
+            if (dgv.Columns[e.ColumnIndex].Name == "Modifier")
+            {
+                int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
+                Console.WriteLine(id);
+                ModifierRepresentation modifier = new ModifierRepresentation(id);
+                Utils.DisplayFormAtLoc(this, modifier);
+                return;
+            }
         }
 
-        private void btnAjouter_Click(object sender, EventArgs e)
+        private void btnAjouter_Click(object sender, EventArgs negro)
         {
             Utils.DisplayFormAtLoc(this, new AjoutRepresentation());
         }

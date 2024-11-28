@@ -11,7 +11,18 @@ namespace TheatreBO
         public Representation(int id, string heure, string date, string lieu, int nbPlaceMax, Theatre theatre, Tarif tarif)
         {
             this.id = id;
-            this.heure = heure;
+            if (heure.Count() == 1)
+                {
+                    this.heure = "0" + heure + ":00";
+                }
+            else if (heure.Count() == 2)
+                {
+                     this.heure = heure + ":00";
+                }
+            else
+                {
+                    this.heure = heure;
+                }
             this.date = date;
             this.lieu = lieu;
             this.nbPlaceMax = nbPlaceMax;
