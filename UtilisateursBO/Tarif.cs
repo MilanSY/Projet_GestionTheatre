@@ -21,5 +21,7 @@ namespace TheatreBO
             this.libelle = libelle;
             this.variation = variation;
         }
+
+        public Tarif() { }
     }
 }
