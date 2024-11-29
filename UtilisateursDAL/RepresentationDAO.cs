@@ -379,12 +379,25 @@ namespace TheatreDAL
                     t.tar_lib AS tarifRep
                 FROM Representation r 
                 LEFT JOIN Pieces p ON r.rep_pie = p.pie_id 
-                LEFT JOIN Tarif t ON r.rep_tar = t.tar_id
-                WHERE p.pie_nom = @nom;";
+                LEFT JOIN Tarif t ON r.rep_tar = t.tar_id";
             connection.Open();
 
+            if (nomTheatre != "")
+            {
+                query += " WHERE p.pie_nom = @nom;";
+            }
+            else
+            {
+                query += ";";
+            }
+
             SqlCommand cmd = new SqlCommand(query, connection);
-            cmd.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = nomTheatre });
+
+
+            if (nomTheatre != "")
+            {
+                cmd.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = nomTheatre });
+            }
 
             SqlDataReader monReader = cmd.ExecuteReader();
 

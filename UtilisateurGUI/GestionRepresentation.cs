@@ -21,11 +21,11 @@ namespace TheatreGUI
 
             //remplissage des combo box
             List<TheatreVue> listTheatre = GestionTheatres.GetTheatres();
+            cboPiece.Items.Add("");
             foreach (TheatreVue theatre in listTheatre)
             {
                 cboPiece.Items.Add(theatre.Nom);
             }
-            cboPiece.Items.Add("");
 
             // Blocage de la génération automatique des colonnes
             dgv.AutoGenerateColumns = false;
