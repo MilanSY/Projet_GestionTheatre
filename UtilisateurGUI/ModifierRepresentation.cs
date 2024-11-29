@@ -143,9 +143,21 @@ namespace TheatreGUI
 
             //controle de saisie de l'heure
             // Vérifier si le texte correspond au pattern
-            if (Regex.IsMatch(txtHeure.Text, timeFormat) == false)
+            if (txtHeure.Text.Count() < 3)
             {
-                errorProvider.SetError(txtHeure, "L'heure doit être valide. mm:hh");
+                if (!int.TryParse(txtPlace.Text.Trim(), out _))
+                {
+                    errorProvider.SetError(txtHeure, "L'heure doit être valide. HH:mm ou HH:");
+                    hasError = true; // Format invalide
+                }
+                else
+                {
+                    errorProvider.SetError(txtHeure, "");
+                }
+            }
+            else if (Regex.IsMatch(txtHeure.Text, timeFormat) == false)
+            {
+                errorProvider.SetError(txtHeure, "L'heure doit être valide. HH:mm ou HH");
                 hasError = true; // Format invalide
             }
             else
@@ -158,8 +170,8 @@ namespace TheatreGUI
         }
 
 
-            private void btnModifier_Click(object sender, EventArgs e)
-            {
+        private void btnModifier_Click(object sender, EventArgs e)
+        {
 
             if (checkIfEmpty() == true)
             {
