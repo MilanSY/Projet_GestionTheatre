@@ -85,8 +85,6 @@ namespace TheatreGUI
 
         private void btnModifier_Click(object sender, EventArgs e)
         {
-            checkIfEmpty();
-            checkIfFormatValid();
 
             if (checkIfEmpty() == true)
             {
