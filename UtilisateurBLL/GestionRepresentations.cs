@@ -39,5 +39,14 @@ namespace TheatreBLL
         {
             return RepresentationDAO.AjouterRepresentation(repr);
         }
+
+        public static List<RepresentationVue> SearchRepresentation(string nom)
+        { 
+            return RepresentationDAO.SearchRepresentation(nom);
+        }
+        public static List<RepresentationVue> SearchRepresentation(string nom, string date1, string date2)
+        {
+            return RepresentationDAO.SearchRepresentation(nom, date1, date2);
+        }
     }
 }

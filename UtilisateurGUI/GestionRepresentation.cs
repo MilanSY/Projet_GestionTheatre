@@ -18,6 +18,15 @@ namespace TheatreGUI
         public GestionRepresentation()
         {
             InitializeComponent();
+
+            //remplissage des combo box
+            List<TheatreVue> listTheatre = GestionTheatres.GetTheatres();
+            foreach (TheatreVue theatre in listTheatre)
+            {
+                cboPiece.Items.Add(theatre.Nom);
+            }
+            cboPiece.Items.Add("");
+
             // Blocage de la génération automatique des colonnes
             dgv.AutoGenerateColumns = false;
             dgv.CellClick += dgv_CellClick;
@@ -196,6 +205,26 @@ namespace TheatreGUI
         private void btnAjouter_Click(object sender, EventArgs negro)
         {
             Utils.DisplayFormAtLoc(this, new AjoutRepresentation());
+        }
+
+        private void btnRechercher_Click(object sender, EventArgs e)
+        {
+            if (ckbDates.Checked == true)
+            {
+                // Création d'un objet List avec le filtre appliqué à afficher dans le datagridview
+                List<RepresentationVue> liste = GestionRepresentations.SearchRepresentation(cboPiece.Text);
+
+                // Rattachement de la List à la source de données du datagridview
+                dgv.DataSource = liste;
+            }
+            else
+            {
+                // Création d'un objet List avec le filtre appliqué à afficher dans le datagridview
+                List<RepresentationVue> liste = GestionRepresentations.SearchRepresentation(cboPiece.Text, dtpDate1.Text, dtpDate2.Text);
+
+                // Rattachement de la List à la source de données du datagridview
+                dgv.DataSource = liste;
+            }
         }
     }
 }
