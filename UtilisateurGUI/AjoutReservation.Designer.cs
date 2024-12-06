@@ -47,6 +47,9 @@
             this.lblPieceDeTheatre = new System.Windows.Forms.Label();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
+            this.PrixPersonneAffichage = new System.Windows.Forms.Label();
+            this.PrixTotalAffichage = new System.Windows.Forms.Label();
+            this.btnCalculer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitreForm
@@ -176,7 +179,7 @@
             // 
             this.lblTarifTotal.AutoSize = true;
             this.lblTarifTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblTarifTotal.Location = new System.Drawing.Point(66, 336);
+            this.lblTarifTotal.Location = new System.Drawing.Point(66, 328);
             this.lblTarifTotal.Name = "lblTarifTotal";
             this.lblTarifTotal.Size = new System.Drawing.Size(83, 20);
             this.lblTarifTotal.TabIndex = 14;
@@ -220,11 +223,44 @@
             this.btnRetour.Text = "Retour";
             this.btnRetour.UseVisualStyleBackColor = true;
             // 
+            // PrixPersonneAffichage
+            // 
+            this.PrixPersonneAffichage.AutoSize = true;
+            this.PrixPersonneAffichage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.PrixPersonneAffichage.Location = new System.Drawing.Point(218, 294);
+            this.PrixPersonneAffichage.Name = "PrixPersonneAffichage";
+            this.PrixPersonneAffichage.Size = new System.Drawing.Size(56, 20);
+            this.PrixPersonneAffichage.TabIndex = 19;
+            this.PrixPersonneAffichage.Text = "0 euro";
+            // 
+            // PrixTotalAffichage
+            // 
+            this.PrixTotalAffichage.AutoSize = true;
+            this.PrixTotalAffichage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.PrixTotalAffichage.Location = new System.Drawing.Point(156, 328);
+            this.PrixTotalAffichage.Name = "PrixTotalAffichage";
+            this.PrixTotalAffichage.Size = new System.Drawing.Size(56, 20);
+            this.PrixTotalAffichage.TabIndex = 20;
+            this.PrixTotalAffichage.Text = "0 euro";
+            // 
+            // btnCalculer
+            // 
+            this.btnCalculer.Location = new System.Drawing.Point(70, 360);
+            this.btnCalculer.Name = "btnCalculer";
+            this.btnCalculer.Size = new System.Drawing.Size(142, 29);
+            this.btnCalculer.TabIndex = 21;
+            this.btnCalculer.Text = "Calculer";
+            this.btnCalculer.UseVisualStyleBackColor = true;
+            this.btnCalculer.Click += new System.EventHandler(this.btnCalculer_Click);
+            // 
             // AjoutReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 517);
+            this.Controls.Add(this.btnCalculer);
+            this.Controls.Add(this.PrixTotalAffichage);
+            this.Controls.Add(this.PrixPersonneAffichage);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnAjouter);
             this.Controls.Add(this.cboPieceDeTheatre);
@@ -272,5 +308,8 @@
         private System.Windows.Forms.Label lblPieceDeTheatre;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnRetour;
+        private System.Windows.Forms.Label PrixPersonneAffichage;
+        private System.Windows.Forms.Label PrixTotalAffichage;
+        private System.Windows.Forms.Button btnCalculer;
     }
 }
