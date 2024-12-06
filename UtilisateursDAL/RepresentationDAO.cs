@@ -95,7 +95,7 @@ namespace TheatreDAL
                     if (ex.Number == 547) // Foreign key constraint violation
                     {
                         // Handle the foreign key constraint violation
-                        Console.WriteLine("Cannot delete the representation because it is referenced by other records.");
+                        Console.WriteLine("Impossible de supprimer la représentation car elle liée à une contrainte de clé étrangère");
                         return false;
                     }
                     else
