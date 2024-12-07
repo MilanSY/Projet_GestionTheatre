@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 using TheatreBO;
 using TheatreDAL;
 
@@ -10,29 +11,23 @@ namespace TheatreBLL
 {
     public class GestionReservation
     {
-        public static List<Reservation> GetReservations()
+        private ReservationDAO reservationDAO;
+
+        public GestionReservation()
         {
-            return ReservationDAO.GetReservations();
+            reservationDAO = new ReservationDAO();
         }
 
-        public static Reservation GetReservation(int id)
+        public int GetNbReservations(Representation representation)
         {
-            return ReservationDAO.GetReservation(id);
+            return reservationDAO.GetNbReservations(representation);
         }
 
-        public static void AddReservation(Reservation reservation)
+        public bool AjoutReservation(Reservation reservation)
         {
-            ReservationDAO.AddReservation(reservation);
+            reservationDAO.AjouterReservation(reservation);
+            return true;
         }
 
-        public static void UpdateReservation(Reservation reservation)
-        {
-            ReservationDAO.UpdateReservation(reservation);
-        }
-
-        public static void SupprimerReservation(int id)
-        {
-            ReservationDAO.SupprimerReservation(id);
-        }
     }
 }

@@ -12,9 +12,28 @@ namespace TheatreDAL
     {
         private string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
 
+        // Récupère le nombre de réservations d'une représentation
+        public int GetNbReservations(Representation representation)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Reservations WHERE res_rep = @res_rep";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@res_rep", representation.id);
+                connection.Open();
+                return (int)command.ExecuteScalar();
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        // Permet d'ajouter une réservation
         public void AjouterReservation(Reservation reservation)
         {
-            if (reservation.NbPlace > reservation.Representation.nbPlaceMax)
+            if (reservation.NbPlace > reservation.Representation.nbPlaceMax || GetNbReservations(reservation.Representation) + reservation.NbPlace > reservation.Representation.nbPlaceMax)
             {
                 throw new InvalidOperationException("Le nombre de places réservées dépasse le nombre de places disponibles.");
             }
@@ -69,5 +88,6 @@ namespace TheatreDAL
                 connection.Close();
             }
         }
+        
     }
 }

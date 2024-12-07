@@ -54,7 +54,6 @@ namespace TheatreBLL
             return TheatreDAO.GetAuteurs();
         }
 
-
         public static List<Publics> GetPublics()
         {
             return TheatreDAO.GetPublics();

@@ -566,10 +566,17 @@ namespace TheatreDAL
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = theme });
 
-            int themeId = (int)command.ExecuteScalar();
+            object result = command.ExecuteScalar();
             connection.Close();
 
-            return themeId;
+            if (result != null)
+            {
+                return (int)result;
+            }
+            else
+            {
+                throw new Exception("Theme not found");
+            }
         }
     }
 }

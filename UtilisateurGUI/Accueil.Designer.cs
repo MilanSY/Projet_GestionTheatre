@@ -78,6 +78,7 @@
             this.btngestionresa.TabIndex = 3;
             this.btngestionresa.Text = "Gestion des réservations";
             this.btngestionresa.UseVisualStyleBackColor = true;
+            this.btngestionresa.Click += new System.EventHandler(this.btngestionresa_Click);
             // 
             // btngestionfesti
             // 

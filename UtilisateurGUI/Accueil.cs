@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UtilisateurGUI;
 
 namespace TheatreGUI
 {
@@ -52,6 +53,14 @@ namespace TheatreGUI
             GestionRepresentation gestionrepresentation = new GestionRepresentation();
             this.Close();
             gestionrepresentation.Show();
+        }
+
+        private void btngestionresa_Click(object sender, EventArgs e)
+        {
+            // Afficher le formulaire ajoutRESERVATION
+            AjoutReservation ajoutReservations = new AjoutReservation();
+            this.Close();
+            ajoutReservations.Show();
         }
     }
 }

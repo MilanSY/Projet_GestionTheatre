@@ -48,5 +48,17 @@ namespace TheatreBLL
         {
             return RepresentationDAO.SearchRepresentation(nom, date1, date2);
         }
+
+        public static int GetIdRepresentationByLieuDateHours(string nom, string date, string heure)
+        {
+            return RepresentationDAO.GetIdRepresentationByLieuDateHours(nom, date, heure);
+        }
+
+        public static Tarif GetTarifById(int id)
+        {
+            return RepresentationDAO.GetTarifById(id);
+        }
+
+
     }
 }

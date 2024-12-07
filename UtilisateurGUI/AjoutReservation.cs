@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheatreBLL;
 using TheatreBO;
+using TheatreGUI;
 
 namespace UtilisateurGUI
 {
@@ -27,7 +28,7 @@ namespace UtilisateurGUI
             List<RepresentationVue> listRepresentation = GestionRepresentations.GetRepresentationsVue();
             foreach (RepresentationVue representation in listRepresentation)
             {
-                cboRepresentation.Items.Add($"{representation.Lieu} - {representation.Date}");
+                cboRepresentation.Items.Add($"{representation.Lieu} - {representation.Date} - {representation.Heure}");
             }
         }
 
@@ -199,26 +200,37 @@ namespace UtilisateurGUI
             this.Close();
         }
 
-        private bool checkIfPlaceAvailable()
-        {
-            int nbPlaceSaisie = int.Parse(txtNbPlace.Text.Trim());
-            int nbPlaceRestante = GestionRepresentations.GetNbPlaceRestante(cboRepresentation.Text);
-
-            if (nbPlaceSaisie > nbPlaceRestante)
-            {
-                errorProvider.SetError(txtNbPlace, "Le nombre de places saisies est supérieur au nombre de places restantes.");
-                return false;
-            }
-            else
-            {
-                errorProvider.SetError(txtNbPlace, "");
-                return true;
-            }
-        }
-
         private void btnCalculer_Click(object sender, EventArgs e)
         {
-            checkIfPlaceAvailable();
+            // cboRepresentation.SelectedItem renvoit excatement ce qu'il y a d'afficher dans la combo box
+            if (cboRepresentation.SelectedItem == null)
+            {
+                MessageBox.Show("Veuillez sélectionner une représentation.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string selectedRepresentation = cboRepresentation.SelectedItem.ToString();
+            string lieuRepresentation = selectedRepresentation.Split('-')[0].Trim();
+            string dateRepresentation = selectedRepresentation.Split('-')[1].Trim();
+            string heureRepresentation = selectedRepresentation.Split('-')[2] + ":00.0000000".Trim();
+
+
+            if (selectedRepresentation == null)
+            {
+                MessageBox.Show("Représentation non trouvée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int id = GestionRepresentations.GetIdRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
+            Tarif tarif = GestionRepresentations.GetTarifById(id);
+
+            if (tarif == null)
+            {
+                MessageBox.Show("Veuillez renseigné correctement la pièce de théâtre lié à une représentation. Tarif non trouvé", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show($"Le tarif par personne est de {tarif.variation} euros.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information); 
         }
     }
 }

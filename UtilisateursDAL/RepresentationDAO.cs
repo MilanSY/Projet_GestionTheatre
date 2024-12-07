@@ -77,37 +77,35 @@ namespace TheatreDAL
         public static bool SupprimerRepresentation(int id)
         {
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand cmd = new SqlCommand();
-                cmd.Connection = connection;
-                cmd.CommandText = "DELETE FROM Representation WHERE rep_id = @id";
-                cmd.Parameters.AddWithValue("@id", id);
+            SqlConnection connection = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = connection;
+            cmd.CommandText = "DELETE FROM Representation WHERE rep_id = @id";
+            cmd.Parameters.AddWithValue("@id", id);
 
-                try
+            try
+            {
+                connection.Open();
+                int nbLignes = cmd.ExecuteNonQuery();
+                return nbLignes == 1;
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 547) // Foreign key constraint violation
                 {
-                    connection.Open();
-                    int nbLignes = cmd.ExecuteNonQuery();
-                    return nbLignes == 1;
+                    // Handle the foreign key constraint violation
+                    Console.WriteLine("Impossible de supprimer la représentation car elle liée à une contrainte de clé étrangère");
+                    return false;
                 }
-                catch (SqlException ex)
+                else
                 {
-                    if (ex.Number == 547) // Foreign key constraint violation
-                    {
-                        // Handle the foreign key constraint violation
-                        Console.WriteLine("Impossible de supprimer la représentation car elle liée à une contrainte de clé étrangère");
-                        return false;
-                    }
-                    else
-                    {
-                        // Re-throw the exception if it's not a foreign key constraint violation
-                        throw;
-                    }
+                    // Re-throw the exception if it's not a foreign key constraint violation
+                    throw;
                 }
-                finally
-                {
-                    connection.Close();
-                }
+            }
+            finally
+            {
+                connection.Close();
             }
         }
 
@@ -277,6 +275,37 @@ namespace TheatreDAL
             connection.Close();
 
             return -1;
+        }
+
+        public static Tarif GetTarifById(int id)
+        {
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                string query = "SELECT * FROM Tarif WHERE tar_id = @id";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
+                connection.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    return new Tarif
+                    {
+                        id = reader["tar_id"] != DBNull.Value ? Convert.ToInt32(reader["tar_id"]) : 0,
+                        libelle = reader["tar_lib"] != DBNull.Value ? reader["tar_lib"].ToString() : string.Empty,
+                        variation = reader["tar_var"] != DBNull.Value ? Convert.ToInt32(reader["tar_var"]) : 0
+                    };
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
         public static bool ModifierRepresentation(Representation representation)
@@ -510,6 +539,35 @@ namespace TheatreDAL
 
             return listRepresentation;
         }
+        public static int GetIdRepresentationByLieuDateHours(string lieu, string date, string heure)
+        {
+            int tarifId;
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
 
+            string query = @"
+                SELECT r.rep_tar
+                FROM Representation r
+                WHERE r.rep_lieu = @lieu AND r.rep_date = @date AND r.rep_heure = @heure";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.Add(new SqlParameter("@lieu", System.Data.SqlDbType.NVarChar) { Value = lieu });
+            cmd.Parameters.Add(new SqlParameter("@date", System.Data.SqlDbType.Date) { Value = date });
+            cmd.Parameters.Add(new SqlParameter("@heure", System.Data.SqlDbType.Time) { Value = heure });
+
+            connection.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            if (reader.Read())
+            {
+                tarifId = Int32.Parse(reader["rep_tar"].ToString());
+                connection.Close();
+                return tarifId;
+            }
+
+            connection.Close();
+            return -1;
+        }
     }
 }
