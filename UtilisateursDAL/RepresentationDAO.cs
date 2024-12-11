@@ -539,7 +539,7 @@ namespace TheatreDAL
 
             return listRepresentation;
         }
-        public static int GetIdRepresentationByLieuDateHours(string lieu, string date, string heure)
+        public static int GetIdTarifRepresentationByLieuDateHours(string lieu, string date, string heure)
         {
             int tarifId;
             string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
@@ -569,5 +569,107 @@ namespace TheatreDAL
             connection.Close();
             return -1;
         }
+        public static Representation GetRepresentationByLieuDateHours(string lieuRepresentation, string dateRepresentation, string heureRepresentation)
+        {
+            string date, heure, lieu;
+            int nbPlace;
+            Theatre theatre;
+
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+
+            string query = @"SELECT r.rep_id,
+                    r.rep_date,
+                    r.rep_heure,
+                    r.rep_lieu,
+                    r.rep_nb_place_max,
+                    ta.tar_var AS tarifPrix,
+                    ta.tar_lib AS tarifNom,
+                    ta.tar_id AS tarifId,
+                    p.pie_id AS pieceId,
+                    p.pie_nom AS pieceNom,
+                    p.pie_prix AS piecePrix,
+                    p.pie_duree AS pieceDuree,
+                    p.pie_descrip AS pieceDescription,
+                    c.comp_id AS compagnieId,
+                    c.comp_nom AS compagnieNom,
+                    t.the_id AS themeId,
+                    t.the_nom AS themeNom,
+                    pu.pub_id AS publicId,
+                    pu.pub_categ AS publicCateg,
+                    a.aut_id AS auteurId,
+                    a.aut_prenom AS auteurPrenom,
+                    a.aut_nom AS auteurNom
+                FROM Representation r
+                LEFT JOIN Pieces p ON r.rep_pie = p.pie_id
+                LEFT JOIN Compagnies c ON p.pie_comp = c.comp_id
+                LEFT JOIN Theme t ON p.pie_the = t.the_id
+                LEFT JOIN Publics pu ON p.pie_pub = pu.pub_id
+                LEFT JOIN Auteur a ON p.pie_aut = a.aut_id
+                LEFT JOIN Tarif ta ON r.rep_tar = ta.tar_id
+                WHERE r.rep_lieu = @lieu AND r.rep_date = @date AND r.rep_heure = @heure;";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.Add(new SqlParameter("@lieu", System.Data.SqlDbType.NVarChar) { Value = lieuRepresentation });
+            cmd.Parameters.Add(new SqlParameter("@date", System.Data.SqlDbType.Date) { Value = dateRepresentation });
+            cmd.Parameters.Add(new SqlParameter("@heure", System.Data.SqlDbType.Time) { Value = heureRepresentation });
+
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+            if (monReader.Read())
+            {
+                // Lecture des données de la représentation
+                date = monReader["rep_date"].ToString();
+                heure = monReader["rep_heure"].ToString();
+                lieu = monReader["rep_lieu"].ToString();
+                nbPlace = monReader["rep_nb_place_max"] == DBNull.Value ? 0 : Int32.Parse(monReader["rep_nb_place_max"].ToString());
+
+                // Lecture des données de la pièce associée
+                int pieceId = Int32.Parse(monReader["pieceId"].ToString());
+                string pieceNom = monReader["pieceNom"].ToString();
+                float piecePrix = float.Parse(monReader["piecePrix"].ToString());
+                string pieceDescription = monReader["pieceDescription"] == DBNull.Value ? null : monReader["pieceDescription"].ToString();
+                int? pieceDuree = monReader["pieceDuree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pieceDuree"].ToString());
+
+                // Création des objets liés
+                Tarif tarif = monReader["tarifId"] == DBNull.Value
+                    ? null
+                    : new Tarif(
+                        Int32.Parse(monReader["tarifId"].ToString()),
+                        monReader["tarifNom"].ToString(),
+                        int.Parse(monReader["tarifPrix"].ToString()));
+                Compagnie compagnie = monReader["compagnieId"] == DBNull.Value
+                    ? new Compagnie()
+                    : new Compagnie(Int32.Parse(monReader["compagnieId"].ToString()), monReader["compagnieNom"].ToString(), "", "");
+
+                Publics publicCateg = monReader["publicId"] == DBNull.Value
+                    ? new Publics()
+                    : new Publics(Int32.Parse(monReader["publicId"].ToString()), monReader["publicCateg"].ToString());
+
+                Theme theme = monReader["themeId"] == DBNull.Value
+                    ? new Theme()
+                    : new Theme(Int32.Parse(monReader["themeId"].ToString()), monReader["themeNom"].ToString());
+
+                Auteur auteur = monReader["auteurId"] == DBNull.Value
+                    ? new Auteur()
+                    : new Auteur(Int32.Parse(monReader["auteurId"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
+
+                // Création de l'objet Theatre
+                theatre = new Theatre(pieceId, pieceNom, piecePrix, pieceDescription, pieceDuree, compagnie, publicCateg, theme, auteur);
+
+                // Création de l'objet Representation
+                Representation representation = new Representation(Int32.Parse(monReader["rep_id"].ToString()), heure, date, lieu, nbPlace, theatre, tarif);
+
+                connection.Close();
+
+                return representation;
+            }
+
+            connection.Close();
+            return null;
+        }
     }
+
+
 }

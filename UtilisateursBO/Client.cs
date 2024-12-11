@@ -12,9 +12,9 @@ namespace TheatreBO
         public string nom { get; set; }
         public string prenom { get; set; }
         public string email { get; set; }
-        public string telephone { get; set; }
+        public int telephone { get; set; }
 
-        public Client(int id, string nom, string prenom, string email, string telephone)
+        public Client(int id, string nom, string prenom, string email, int telephone)
         {
             this.id = id;
             this.nom = nom;

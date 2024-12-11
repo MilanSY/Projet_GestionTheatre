@@ -5,11 +5,13 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheatreBLL;
 using TheatreBO;
 using TheatreGUI;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace UtilisateurGUI
 {
@@ -19,12 +21,14 @@ namespace UtilisateurGUI
         public AjoutReservation()
         {
             InitializeComponent();
-            // Remplissage des combos boxs
-            List<TheatreVue> listTheatre = GestionTheatres.GetTheatres();
-            foreach (TheatreVue theatre in listTheatre)
-            {
-                cboPieceDeTheatre.Items.Add(theatre.Nom);
-            }
+            errorProvider = new ErrorProvider();
+            RemplirComboBoxRepresentation();
+            cboRepresentation.SelectedIndexChanged += cboRepresentation_SelectedIndexChanged;
+            txtPieceDeTheatre.ReadOnly = true;
+        }
+
+        private void RemplirComboBoxRepresentation()
+        {
             List<RepresentationVue> listRepresentation = GestionRepresentations.GetRepresentationsVue();
             foreach (RepresentationVue representation in listRepresentation)
             {
@@ -32,31 +36,26 @@ namespace UtilisateurGUI
             }
         }
 
-        private void btnAjouter_Click(object sender, EventArgs e)
+        private void cboRepresentation_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cboRepresentation.SelectedItem != null)
+            {
+                string selectedRepresentation = cboRepresentation.SelectedItem.ToString();
+                string lieuRepresentation = selectedRepresentation.Split('-')[0].Trim();
+                string dateRepresentation = selectedRepresentation.Split('-')[1].Trim();
+                string heureRepresentation = selectedRepresentation.Split('-')[2].Trim();
 
-            if (checkIfEmpty() == true)
-            {
-                MessageBox.Show("Veuillez remplir tous les champs obligatoires.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if (checkIfFormatValid() == true)
-            {
-                MessageBox.Show("Erreur, format des champs non valide", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                /* Reservation reservation = new Reservation(
-                        -1,
-                        txtHeure.Text.Trim(),
-                        dtpDate.Text.Trim(),
-                        txtLieu.Text.Trim(),
-                        Int32.Parse(txtPlace.Text.Trim()),
-                        new Theatre { nom = cboPiece.Text.Trim() },
-                        new Tarif { libelle = cboTarif.Text.Trim() }
-                    );
-
-                GestionRepresentations.AjouterRepresentation(repr);
-                MessageBox.Show("Le théâtre a été ajouté avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information); */
+                List<TheatreVue> listTheatre = GestionTheatres.GetTheatresByRepresentation(lieuRepresentation, dateRepresentation, heureRepresentation);
+                if (listTheatre.Count > 0)
+                {
+                    TheatreVue leTheatre = listTheatre[0];
+                    txtPieceDeTheatre.Text = leTheatre.Nom;
+                }
+                else
+                {
+                    txtPieceDeTheatre.Text = "Erreur aucune pièce trouvé";
+                    txtPieceDeTheatre.Focus();
+                }
             }
         }
 
@@ -65,14 +64,14 @@ namespace UtilisateurGUI
         {
             bool hasError = false;
 
-            if (string.IsNullOrWhiteSpace(cboPieceDeTheatre.Text))
+            if (string.IsNullOrWhiteSpace(txtPieceDeTheatre.Text))
             {
-                errorProvider.SetError(cboPieceDeTheatre, "Veuillez remplir ce champ");
+                errorProvider.SetError(txtPieceDeTheatre, "Veuillez remplir ce champ");
                 hasError = true;
             }
             else
             {
-                errorProvider.SetError(cboPieceDeTheatre, "");
+                errorProvider.SetError(txtPieceDeTheatre, "");
             }
 
             if (string.IsNullOrWhiteSpace(cboRepresentation.Text))
@@ -88,6 +87,16 @@ namespace UtilisateurGUI
             if (string.IsNullOrWhiteSpace(txtNbPlace.Text))
             {
                 errorProvider.SetError(txtNbPlace, "Veuillez remplir ce champ");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtNbPlace, "");
+            }
+
+            if (txtNbPlace.Text == "0")
+            {
+                errorProvider.SetError(txtNbPlace, "Le champ ne peut pas être égal à 0");
                 hasError = true;
             }
             else
@@ -141,6 +150,7 @@ namespace UtilisateurGUI
         private bool checkIfFormatValid()
         {
             bool hasError = false;
+            string regexEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
 
             if (!int.TryParse(txtNbPlace.Text.Trim(), out _))
             {
@@ -162,14 +172,14 @@ namespace UtilisateurGUI
                 errorProvider.SetError(txtTelClient, "");
             }
 
-            if (cboPieceDeTheatre.Text.Length > 100)
+            if (txtPieceDeTheatre.Text.Length > 100)
             {
-                errorProvider.SetError(cboPieceDeTheatre, "Le nom ne doit pas dépasser 100 caractères.");
+                errorProvider.SetError(txtPieceDeTheatre, "Le nom ne doit pas dépasser 100 caractères.");
                 hasError = true;
             }
             else
             {
-                errorProvider.SetError(cboPieceDeTheatre, "");
+                errorProvider.SetError(txtPieceDeTheatre, "");
             }
 
             if (txtNomClient.Text.Any(char.IsDigit) == true)
@@ -192,17 +202,32 @@ namespace UtilisateurGUI
                 errorProvider.SetError(txtPrenomClient, "");
             }
 
-            return hasError;
-        }
+            if (GestionReservations.VerifierEmail(txtEmailClient.Text))
+            {
+                errorProvider.SetError(txtEmailClient, "L'email existe déjà, le client existe en base de donnée");
+                hasError = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtEmailClient, "");
+            }
 
-        private void btnAnnuler_Click(object sender, EventArgs e)
-        {
-            this.Close();
+            // Vérification du format de l'email
+            if (Regex.IsMatch(txtEmailClient.Text, regexEmail))
+            {
+                errorProvider.SetError(txtPrenomClient, "");
+            }
+            else
+            {
+                errorProvider.SetError(txtEmailClient, "Veuillez écrire l'email dans le bon format");
+                hasError = true;
+            }
+
+            return hasError;
         }
 
         private void btnCalculer_Click(object sender, EventArgs e)
         {
-            // cboRepresentation.SelectedItem renvoit excatement ce qu'il y a d'afficher dans la combo box
             if (cboRepresentation.SelectedItem == null)
             {
                 MessageBox.Show("Veuillez sélectionner une représentation.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -214,14 +239,13 @@ namespace UtilisateurGUI
             string dateRepresentation = selectedRepresentation.Split('-')[1].Trim();
             string heureRepresentation = selectedRepresentation.Split('-')[2] + ":00.0000000".Trim();
 
-
             if (selectedRepresentation == null)
             {
                 MessageBox.Show("Représentation non trouvée.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            int id = GestionRepresentations.GetIdRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
+            int id = GestionRepresentations.GetIdTarifRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
             Tarif tarif = GestionRepresentations.GetTarifById(id);
 
             if (tarif == null)
@@ -230,7 +254,79 @@ namespace UtilisateurGUI
                 return;
             }
 
-            MessageBox.Show($"Le tarif par personne est de {tarif.variation} euros.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+            double prixParPersonne = GestionTheatres.GetPrixPieceDeTheatre(id);
+            double tar_var = tarif.variation; 
+            double prixFinal = prixParPersonne + (prixParPersonne * tar_var / 100);
+
+            if (!int.TryParse(txtNbPlace.Text.Trim(), out int nbPlaces))
+            {
+                MessageBox.Show("Le nombre de places doit être un nombre entier valide.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            double prixTotal = prixFinal * nbPlaces;
+
+            lblPrixPersonneAffichage.Text = prixParPersonne.ToString() + " euros ";
+            lblPrixTotalAffichage.Text = prixTotal.ToString() + " euros ";
+
+        }
+
+        private void btnRetour_Click(object sender, EventArgs e)
+        {
+            Utils.DisplayFormAtLoc(this, new TheatreGUI.GestionReservation());
+        }
+
+        // Code du bouton ajouter
+        private void btnAjouter_Click_1(object sender, EventArgs e)
+        {
+            if (checkIfEmpty() == true)
+            {
+                MessageBox.Show("Veuillez remplir tous les champs obligatoires.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (checkIfFormatValid() == true)
+            {
+                MessageBox.Show("Erreur, vérifier les erreurs en passant le curseur sur les icones clignotante","Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                // Code pour ajouter ou vérifier si un client est dans la base de donnée
+                Client client = new Client(
+                    -1,
+                    txtNomClient.Text.Trim(),
+                    txtPrenomClient.Text.Trim(),
+                    txtEmailClient.Text.Trim(),
+                    int.Parse(txtTelClient.Text.Trim())
+                );
+
+                // On vérifie si le client existe déjà dans la base de données
+                client.id = GestionReservations.AjouterOuVerifierClient(client);
+
+                // Récupérer les informations de la représentation sélectionnée
+                string selectedRepresentation = cboRepresentation.SelectedItem.ToString();
+                string lieuRepresentation = selectedRepresentation.Split('-')[0].Trim();
+                string dateRepresentation = selectedRepresentation.Split('-')[1].Trim();
+                string heureRepresentation = selectedRepresentation.Split('-')[2].Trim() + ":00.0000000";
+
+                Representation representation = GestionRepresentations.GetRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
+
+                // Récupérer les informations du théâtre sélectionné
+                string nomTheatre = txtPieceDeTheatre.Text;
+                int idTheatre = GestionTheatres.GetTheatreIdByName(nomTheatre);
+                Theatre theatre = GestionTheatres.GetTheatreById(idTheatre);
+
+                // Créer l'objet réservation
+                Reservation reservation = new Reservation(
+                    representation,
+                    client,
+                    int.Parse(txtNbPlace.Text.Trim())
+                );
+
+                // Ajouter la réservation
+                GestionReservations.AjoutReservation(reservation);
+
+                // Message en cas de succès
+                MessageBox.Show("Réservation ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

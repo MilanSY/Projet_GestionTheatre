@@ -43,13 +43,13 @@
             this.txtTelClient = new System.Windows.Forms.TextBox();
             this.lblTarifPersonne = new System.Windows.Forms.Label();
             this.lblTarifTotal = new System.Windows.Forms.Label();
-            this.cboPieceDeTheatre = new System.Windows.Forms.ComboBox();
             this.lblPieceDeTheatre = new System.Windows.Forms.Label();
             this.btnAjouter = new System.Windows.Forms.Button();
             this.btnRetour = new System.Windows.Forms.Button();
-            this.PrixPersonneAffichage = new System.Windows.Forms.Label();
-            this.PrixTotalAffichage = new System.Windows.Forms.Label();
+            this.lblPrixPersonneAffichage = new System.Windows.Forms.Label();
+            this.lblPrixTotalAffichage = new System.Windows.Forms.Label();
             this.btnCalculer = new System.Windows.Forms.Button();
+            this.txtPieceDeTheatre = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // lblTitreForm
@@ -185,14 +185,6 @@
             this.lblTarifTotal.TabIndex = 14;
             this.lblTarifTotal.Text = "Tarif total :";
             // 
-            // cboPieceDeTheatre
-            // 
-            this.cboPieceDeTheatre.FormattingEnabled = true;
-            this.cboPieceDeTheatre.Location = new System.Drawing.Point(199, 176);
-            this.cboPieceDeTheatre.Name = "cboPieceDeTheatre";
-            this.cboPieceDeTheatre.Size = new System.Drawing.Size(269, 21);
-            this.cboPieceDeTheatre.TabIndex = 16;
-            // 
             // lblPieceDeTheatre
             // 
             this.lblPieceDeTheatre.AutoSize = true;
@@ -212,6 +204,7 @@
             this.btnAjouter.TabIndex = 17;
             this.btnAjouter.Text = "Ajouter";
             this.btnAjouter.UseVisualStyleBackColor = true;
+            this.btnAjouter.Click += new System.EventHandler(this.btnAjouter_Click_1);
             // 
             // btnRetour
             // 
@@ -222,26 +215,27 @@
             this.btnRetour.TabIndex = 18;
             this.btnRetour.Text = "Retour";
             this.btnRetour.UseVisualStyleBackColor = true;
+            this.btnRetour.Click += new System.EventHandler(this.btnRetour_Click);
             // 
-            // PrixPersonneAffichage
+            // lblPrixPersonneAffichage
             // 
-            this.PrixPersonneAffichage.AutoSize = true;
-            this.PrixPersonneAffichage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.PrixPersonneAffichage.Location = new System.Drawing.Point(218, 294);
-            this.PrixPersonneAffichage.Name = "PrixPersonneAffichage";
-            this.PrixPersonneAffichage.Size = new System.Drawing.Size(56, 20);
-            this.PrixPersonneAffichage.TabIndex = 19;
-            this.PrixPersonneAffichage.Text = "0 euro";
+            this.lblPrixPersonneAffichage.AutoSize = true;
+            this.lblPrixPersonneAffichage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.lblPrixPersonneAffichage.Location = new System.Drawing.Point(218, 294);
+            this.lblPrixPersonneAffichage.Name = "lblPrixPersonneAffichage";
+            this.lblPrixPersonneAffichage.Size = new System.Drawing.Size(56, 20);
+            this.lblPrixPersonneAffichage.TabIndex = 19;
+            this.lblPrixPersonneAffichage.Text = "0 euro";
             // 
-            // PrixTotalAffichage
+            // lblPrixTotalAffichage
             // 
-            this.PrixTotalAffichage.AutoSize = true;
-            this.PrixTotalAffichage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.PrixTotalAffichage.Location = new System.Drawing.Point(156, 328);
-            this.PrixTotalAffichage.Name = "PrixTotalAffichage";
-            this.PrixTotalAffichage.Size = new System.Drawing.Size(56, 20);
-            this.PrixTotalAffichage.TabIndex = 20;
-            this.PrixTotalAffichage.Text = "0 euro";
+            this.lblPrixTotalAffichage.AutoSize = true;
+            this.lblPrixTotalAffichage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
+            this.lblPrixTotalAffichage.Location = new System.Drawing.Point(156, 328);
+            this.lblPrixTotalAffichage.Name = "lblPrixTotalAffichage";
+            this.lblPrixTotalAffichage.Size = new System.Drawing.Size(56, 20);
+            this.lblPrixTotalAffichage.TabIndex = 20;
+            this.lblPrixTotalAffichage.Text = "0 euro";
             // 
             // btnCalculer
             // 
@@ -253,17 +247,24 @@
             this.btnCalculer.UseVisualStyleBackColor = true;
             this.btnCalculer.Click += new System.EventHandler(this.btnCalculer_Click);
             // 
+            // txtPieceDeTheatre
+            // 
+            this.txtPieceDeTheatre.Location = new System.Drawing.Point(199, 174);
+            this.txtPieceDeTheatre.Name = "txtPieceDeTheatre";
+            this.txtPieceDeTheatre.Size = new System.Drawing.Size(269, 20);
+            this.txtPieceDeTheatre.TabIndex = 22;
+            // 
             // AjoutReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 517);
+            this.Controls.Add(this.txtPieceDeTheatre);
             this.Controls.Add(this.btnCalculer);
-            this.Controls.Add(this.PrixTotalAffichage);
-            this.Controls.Add(this.PrixPersonneAffichage);
+            this.Controls.Add(this.lblPrixTotalAffichage);
+            this.Controls.Add(this.lblPrixPersonneAffichage);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnAjouter);
-            this.Controls.Add(this.cboPieceDeTheatre);
             this.Controls.Add(this.lblPieceDeTheatre);
             this.Controls.Add(this.lblTarifTotal);
             this.Controls.Add(this.lblTarifPersonne);
@@ -304,12 +305,12 @@
         private System.Windows.Forms.TextBox txtTelClient;
         private System.Windows.Forms.Label lblTarifPersonne;
         private System.Windows.Forms.Label lblTarifTotal;
-        private System.Windows.Forms.ComboBox cboPieceDeTheatre;
         private System.Windows.Forms.Label lblPieceDeTheatre;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnRetour;
-        private System.Windows.Forms.Label PrixPersonneAffichage;
-        private System.Windows.Forms.Label PrixTotalAffichage;
+        private System.Windows.Forms.Label lblPrixPersonneAffichage;
+        private System.Windows.Forms.Label lblPrixTotalAffichage;
         private System.Windows.Forms.Button btnCalculer;
+        private System.Windows.Forms.TextBox txtPieceDeTheatre;
     }
 }

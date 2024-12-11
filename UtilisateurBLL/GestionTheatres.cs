@@ -66,7 +66,21 @@ namespace TheatreBLL
 
         public static int GetTheatreIdByName(string name)
         {
-            return TheatreDAO.GetThemeByIdByName(name);
+            return TheatreDAO.GetTheatreIdByName(name);
         }
+        public static List<TheatreVue> GetTheatresByRepresentation(string lieuRepresentation, string dateRepresentation, string heureRepresentation)
+        {
+            return TheatreDAO.GetTheatresByRepresentation(lieuRepresentation, dateRepresentation, heureRepresentation);
+        }
+
+        public static double GetPrixPieceDeTheatre(int id)
+        {
+            return TheatreDAO.GetPrixPieceDeTheatre(id);
+        }
+        public static int GetThemeIdByName(string name)
+        {
+            return TheatreDAO.GetThemeIdByName(name);
+        }
+
     }
 }

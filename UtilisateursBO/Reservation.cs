@@ -8,19 +8,15 @@ namespace TheatreBO
 {
     public class Reservation
     {
-        public int Id { get; set; }
         public Representation Representation { get; set; }
         public Client Client { get; set; }
         public int NbPlace { get; set; }
-        public Theatre Theatre { get; set; }
 
-        public Reservation(int id, Representation representation, Client client, int nbPlace, Theatre theatre)
+        public Reservation(Representation representation, Client client, int nbPlace)
         {
-            Id = id;
             Representation = representation;
             Client = client;
             NbPlace = nbPlace;
-            Theatre = theatre;
         }
     }
 }
