@@ -63,7 +63,5 @@ namespace TheatreBLL
         {
             return RepresentationDAO.GetRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
         }
-
-
     }
 }

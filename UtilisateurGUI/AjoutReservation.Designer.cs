@@ -50,6 +50,8 @@
             this.lblPrixTotalAffichage = new System.Windows.Forms.Label();
             this.btnCalculer = new System.Windows.Forms.Button();
             this.txtPieceDeTheatre = new System.Windows.Forms.TextBox();
+            this.lblClientEnregistrer = new System.Windows.Forms.Label();
+            this.cboClientEnregistrer = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // lblTitreForm
@@ -157,6 +159,7 @@
             this.txtEmailClient.Name = "txtEmailClient";
             this.txtEmailClient.Size = new System.Drawing.Size(261, 20);
             this.txtEmailClient.TabIndex = 11;
+            this.txtEmailClient.TextChanged += new System.EventHandler(this.txtEmailClient_TextChanged);
             // 
             // txtTelClient
             // 
@@ -254,11 +257,31 @@
             this.txtPieceDeTheatre.Size = new System.Drawing.Size(269, 20);
             this.txtPieceDeTheatre.TabIndex = 22;
             // 
+            // lblClientEnregistrer
+            // 
+            this.lblClientEnregistrer.AutoSize = true;
+            this.lblClientEnregistrer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.lblClientEnregistrer.Location = new System.Drawing.Point(430, 328);
+            this.lblClientEnregistrer.Name = "lblClientEnregistrer";
+            this.lblClientEnregistrer.Size = new System.Drawing.Size(205, 20);
+            this.lblClientEnregistrer.TabIndex = 23;
+            this.lblClientEnregistrer.Text = "Liste des clients enregistré :";
+            // 
+            // cboClientEnregistrer
+            // 
+            this.cboClientEnregistrer.FormattingEnabled = true;
+            this.cboClientEnregistrer.Location = new System.Drawing.Point(641, 330);
+            this.cboClientEnregistrer.Name = "cboClientEnregistrer";
+            this.cboClientEnregistrer.Size = new System.Drawing.Size(260, 21);
+            this.cboClientEnregistrer.TabIndex = 24;
+            // 
             // AjoutReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(933, 517);
+            this.Controls.Add(this.cboClientEnregistrer);
+            this.Controls.Add(this.lblClientEnregistrer);
             this.Controls.Add(this.txtPieceDeTheatre);
             this.Controls.Add(this.btnCalculer);
             this.Controls.Add(this.lblPrixTotalAffichage);
@@ -312,5 +335,7 @@
         private System.Windows.Forms.Label lblPrixTotalAffichage;
         private System.Windows.Forms.Button btnCalculer;
         private System.Windows.Forms.TextBox txtPieceDeTheatre;
+        private System.Windows.Forms.Label lblClientEnregistrer;
+        private System.Windows.Forms.ComboBox cboClientEnregistrer;
     }
 }
