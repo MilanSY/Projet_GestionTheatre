@@ -214,7 +214,6 @@
         private System.Windows.Forms.Button btnRafraichir;
         private System.Windows.Forms.Button btnAjouter;
         private System.Windows.Forms.Button btnRetour;
-        private System.Windows.Forms.Label lblResultat;
         private System.Windows.Forms.GroupBox gboFiltres;
         private System.Windows.Forms.Label lblDates;
         private System.Windows.Forms.Label lblAu;

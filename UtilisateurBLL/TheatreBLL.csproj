@@ -46,7 +46,7 @@
     <Compile Include="GestionTheatres.cs" />
     <Compile Include="GestionUtilisateur.cs" />
     <Compile Include="GestionRepresentations.cs" />
-    <Compile Include="GestionReservation.cs" />
+    <Compile Include="GestionReservations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -59,6 +59,12 @@
     <Compile Include="AjoutRepresentation.Designer.cs">
       <DependentUpon>AjoutRepresentation.cs</DependentUpon>
     </Compile>
+    <Compile Include="AjoutReservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AjoutReservation.Designer.cs">
+      <DependentUpon>AjoutReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="AjoutTheatre.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accueil.resx">
       <DependentUpon>Accueil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AjoutReservation.resx">
+      <DependentUpon>AjoutReservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AjoutTheatre.resx">
       <DependentUpon>AjoutTheatre.cs</DependentUpon>
