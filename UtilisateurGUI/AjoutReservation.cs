@@ -95,19 +95,9 @@ namespace UtilisateurGUI
                 errorProvider.SetError(cboRepresentation, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtNbPlace.Text))
+            if (txtNbPlace.Text == "0" || string.IsNullOrWhiteSpace(txtNbPlace.Text))
             {
-                errorProvider.SetError(txtNbPlace, "Veuillez remplir ce champ");
-                hasError = true;
-            }
-            else
-            {
-                errorProvider.SetError(txtNbPlace, "");
-            }
-
-            if (txtNbPlace.Text == "0")
-            {
-                errorProvider.SetError(txtNbPlace, "Le champ ne peut pas être égal à 0");
+                errorProvider.SetError(txtNbPlace, "Le champ ne peut pas être égal à 0 ou vide");
                 hasError = true;
             }
             else
