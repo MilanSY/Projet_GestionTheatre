@@ -87,7 +87,7 @@ namespace TheatreGUI
             suppBtnColumn.UseColumnTextForButtonValue = true;
 
 
-            // Ajout des 11 en-têtes de colonne au datagridview
+            // Ajout des 9 en-têtes de colonne au datagridview
             dgv.Columns.Add(idColumn);
             dgv.Columns.Add(heureColumn);
             dgv.Columns.Add(dateColumn);
@@ -108,7 +108,7 @@ namespace TheatreGUI
             // Récupération de chaîne de connexion à la BD à l'ouverture du formulaire
             GestionTheatres.SetchaineConnexion(ConfigurationManager.ConnectionStrings["Utilisateur"]);
 
-            // Création d'un objet List d'Utilisateur à afficher dans le datagridview
+            // Création d'un objet List à afficher dans le datagridview
             List<RepresentationVue> liste = new List<RepresentationVue>();
             liste = GestionRepresentations.GetRepresentationsVue();
 
@@ -140,7 +140,7 @@ namespace TheatreGUI
 
         private void btnRafraichir_Click(object sender, EventArgs e)
         {
-            // Création d'un objet List d'Utilisateur à afficher dans le datagridview
+            // Création d'un objet List à afficher dans le datagridview
             List<RepresentationVue> liste = GestionRepresentations.GetRepresentationsVue();
 
             // Rattachement de la List à la source de données du datagridview

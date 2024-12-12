@@ -10,10 +10,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheatreBLL;
 using TheatreBO;
-using TheatreGUI;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
-namespace UtilisateurGUI
+namespace TheatreGUI
 {
     public partial class AjoutReservation : Form
     {
@@ -295,7 +294,7 @@ namespace UtilisateurGUI
                     txtNomClient.Text.Trim(),
                     txtPrenomClient.Text.Trim(),
                     txtEmailClient.Text.Trim(),
-                    int.Parse(txtTelClient.Text.Trim())
+                    txtTelClient.Text.Trim()
                 );
 
                 // On vérifie si le client existe déjà dans la base de données

@@ -3,28 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TheatreBO;
 
-namespace TheatresBO
+namespace TheatreBO
 {
-    class ReservationVue
+    public class ReservationVue
     {
-        public Representation Representation { get; set; }
-        public Client Client { get; set; }
+        public string RepresentationText { get; set; }
+        public string EmailClient { get; set; }
         public int NbPlace { get; set; }
 
         public ReservationVue(Reservation reservation)
         {
-            Representation = reservation.Representation;
-            Client = reservation.Client;
+            RepresentationVue res = new RepresentationVue (reservation.Representation);
+            RepresentationText = $"{reservation.Representation.id} {res.Theatre} - {res.Lieu} - {res.Date} - {res.Heure}";
+            EmailClient = reservation.Client.email;
             NbPlace = reservation.NbPlace;
         }
 
-        public ReservationVue(int id, Representation representation, Client client, int nbPlace, Theatre theatre)
+        public ReservationVue(int id, string representation, string client, int nbPlace)
         {
-            Representation = representation;
-            Client = client;
+            RepresentationText = representation;
+            EmailClient = client;
             NbPlace = nbPlace;
         }
+
+        public ReservationVue() { }
     }
 }

@@ -194,7 +194,7 @@ namespace TheatreGUI
                 );
 
                 GestionRepresentations.ModifierRepresentation(repr);
-                MessageBox.Show("Le théâtre a été modifié avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("La représentation a été modifié avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

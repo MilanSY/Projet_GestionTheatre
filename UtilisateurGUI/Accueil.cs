@@ -58,9 +58,7 @@ namespace TheatreGUI
         private void btngestionresa_Click(object sender, EventArgs e)
         {
             // Afficher le formulaire ajoutRESERVATION
-            AjoutReservation ajoutReservations = new AjoutReservation();
-            this.Close();
-            ajoutReservations.Show();
+            Utils.DisplayFormAtLoc(this, new GestionReservation());
         }
     }
 }
