@@ -30,6 +30,7 @@ namespace TheatreDAL
             }
         }
 
+        // Vérifie si l'email du client existe en bd
         public static bool VerifierEmail(string email)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -50,11 +51,6 @@ namespace TheatreDAL
         // Permet d'ajouter une réservation à la base de données
         public static bool AjouterReservation(Reservation reservation)
         {
-            /* if (reservation.NbPlace > GetNbReservations(reservation))
-            {
-                throw new InvalidOperationException("Le nombre de places réservées dépasse le nombre de places disponibles.");
-            } */
-
             SqlConnection connection = new SqlConnection(connectionString);
             try
             {
@@ -216,7 +212,7 @@ namespace TheatreDAL
                 Console.WriteLine(e.Message);
             }
             finally
-            { 
+            {
                 connection.Close();
             }
 
@@ -312,7 +308,7 @@ namespace TheatreDAL
         public static List<Reservation> GetReservations()
         {
             int nbPlace, idClient, idRepr;
-            
+
 
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -341,7 +337,7 @@ namespace TheatreDAL
                 Representation uneRepresentation = RepresentationDAO.GetRepresentationById(idRepr);
 
                 // Création d'un objet Reservation
-                Reservation uneReservation = new Reservation(uneRepresentation ,unClient, nbPlace);
+                Reservation uneReservation = new Reservation(uneRepresentation, unClient, nbPlace);
 
                 // Ajout à la liste
                 listReservation.Add(uneReservation);
@@ -366,6 +362,7 @@ namespace TheatreDAL
             return listVue;
         }
 
+        // Permet de supprimer une réservation
         public static bool SupprimerReservation(int idCli, int idRep)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -383,15 +380,15 @@ namespace TheatreDAL
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 547) // Foreign key constraint violation
+                if (ex.Number == 547) // Contrainte de clé étrangère
                 {
-                    // Handle the foreign key constraint violation
+                    // Erreur s'il y a une contrainte de clé étrangère
                     Console.WriteLine("Impossible de supprimer la représentation car elle liée à une contrainte de clé étrangère");
                     return false;
                 }
                 else
                 {
-                    // Re-throw the exception if it's not a foreign key constraint violation
+                    // Autre erreurs
                     throw;
                 }
             }
@@ -401,6 +398,7 @@ namespace TheatreDAL
             }
         }
 
+        // Permet de supprimer une réservation
         public static bool SupprimerReservation(Reservation uneRes)
         {
             SqlConnection connection = new SqlConnection(connectionString);
@@ -418,16 +416,43 @@ namespace TheatreDAL
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 547) // Foreign key constraint violation
+                if (ex.Number == 547) // Contrainte de clé étrangère
                 {
-                    // Handle the foreign key constraint violation
+                    // Erreur s'il y a une contrainte de clé étrangère
                     Console.WriteLine("Impossible de supprimer la représentation car elle liée à une contrainte de clé étrangère");
                     return false;
                 }
                 else
                 {
-                    // Re-throw the exception if it's not a foreign key constraint violation
+                    // Autre erreurs
                     throw;
+                }
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        public static int GetNbplaceRestante(Representation representation)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                string query = "SELECT SUM(res_nb_place) FROM Reservation WHERE res_rep = @res_rep";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@res_rep", representation.id);
+                connection.Open();
+                var nbPlace = command.ExecuteScalar();
+                Console.WriteLine(nbPlace);
+                if (nbPlace != DBNull.Value)
+                {
+                    return representation.nbPlaceMax - Convert.ToInt32(nbPlace);
+                }
+                else
+                {
+                    return representation.nbPlaceMax;
                 }
             }
             finally

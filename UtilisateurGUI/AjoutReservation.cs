@@ -18,6 +18,8 @@ namespace TheatreGUI
     public partial class AjoutReservation : Form
     {
         ErrorProvider errorProvider;
+
+         // Constructeur de la classe AjoutReservation
         public AjoutReservation()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace TheatreGUI
             cboRepresentation.SelectedIndexChanged += cboRepresentation_SelectedIndexChanged;
             txtPieceDeTheatre.ReadOnly = true;
         }
-
+        // Permet de remplir le combobox représentation
         private void RemplirComboBoxRepresentation()
         {
             List<RepresentationVue> listRepresentation = GestionRepresentations.GetRepresentationsVue();
@@ -36,7 +38,7 @@ namespace TheatreGUI
                 cboRepresentation.Items.Add($"{representation.Lieu} - {representation.Date} - {representation.Heure}");
             }
         }
-
+        // Permet de remplir le combobox client
         private void RemplirComboBoxClient()
         {
             List<Client> listClient = GestionReservations.GetClients();
@@ -47,6 +49,7 @@ namespace TheatreGUI
             }
         }
 
+        // Action qui s'effectue lorsqu'on sélectionne une représentation dans la combobox
         private void cboRepresentation_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboRepresentation.SelectedItem != null)
@@ -204,7 +207,7 @@ namespace TheatreGUI
             }
 
 
-            // Vérification du format de l'email
+            // Vérification du format de l'email avec l'aide d'une regex
             if (Regex.IsMatch(txtEmailClient.Text, regexEmail) == false && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtEmailClient, "Veuillez écrire l'email dans le bon format");
@@ -219,6 +222,7 @@ namespace TheatreGUI
             return hasError;
         }
 
+        // Permet de calculer le prix total de la réservation + de connaitre le prix par personne
         private void btnCalculer_Click(object sender, EventArgs e)
         {
             if (cboRepresentation.SelectedItem == null)
@@ -270,7 +274,7 @@ namespace TheatreGUI
             Utils.DisplayFormAtLoc(this, new TheatreGUI.GestionReservation());
         }
 
-        // Code du bouton ajouter
+        // Code du bouton ajouter permettant d'ajouter une réservaion et de vérifier si le client existe déjà et l'ajouter s'il n'existe pas
         private void btnAjouter_Click_1(object sender, EventArgs e)
         {
             if (checkIfEmpty() == true)
@@ -317,7 +321,7 @@ namespace TheatreGUI
                             return;
                         }
                     }
-
+                    // Si le client existe déjà, on récupère son id
                     if (clientId != -1)
                     {
                         txtEmailClient.ReadOnly = true;
@@ -375,7 +379,6 @@ namespace TheatreGUI
                 int idTheatre = GestionTheatres.GetTheatreIdByName(nomTheatre);
                 Theatre theatre = GestionTheatres.GetTheatreById(idTheatre);
 
-                Console.WriteLine(representation.id);
 
                 // Créer l'objet réservation
                 Reservation reservation = new Reservation(
@@ -384,11 +387,19 @@ namespace TheatreGUI
                     int.Parse(txtNbPlace.Text.Trim())
                 );
 
+                // Récupération de la réservation pour vérifier si elle existe déjà
                 Reservation test = GestionReservations.GetReservationById(client.id, representation.id);
                 if (test.Client != null || test.Representation != null)
                 {
                     MessageBox.Show("la reservation existe déjà", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return; 
+                }
+
+                int nbPlaceRestante = GestionReservations.GetNbplaceRestante(representation);
+                if (nbPlaceRestante < Int32.Parse(txtNbPlace.Text)  )
+                {
+                    MessageBox.Show("Le nombre de place demandé est supérieur au nombre de place disponible. \nIl en reste:" + nbPlaceRestante, "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
                 // Ajouter la réservation
@@ -404,6 +415,8 @@ namespace TheatreGUI
         {
             GestionReservations.GetClientByEmail(txtEmailClient.Text);
         }
+
+        // Fonction permettant de réinitialiser le formulaire après l'ajout d'une réservation
         private void ResetForm()
         {
             txtPieceDeTheatre.Text = string.Empty;
