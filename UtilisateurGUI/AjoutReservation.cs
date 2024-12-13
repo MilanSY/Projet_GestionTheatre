@@ -337,7 +337,7 @@ namespace TheatreGUI
                         return;
                     }
                 } else {
-                    client = GestionReservations.GetClientByEmail(cboClientEnregistrer.SelectedItem.ToString().Split('-')[0].Trim());
+                    client = GestionReservations.GetClientByEmail(cboClientEnregistrer.SelectedItem.ToString().Split('-')[3].Trim());
 
                     // On vérifie si le client existe déjà dans la base de données + on récupère l'id du client + on propose a l'utilisateur de créer le client
                     int clientId = GestionReservations.VerifierClient(client);
