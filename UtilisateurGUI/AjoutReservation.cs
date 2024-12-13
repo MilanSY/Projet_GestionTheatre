@@ -238,18 +238,19 @@ namespace UtilisateurGUI
                 return;
             }
 
-            int id = GestionRepresentations.GetIdTarifRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
-            Tarif tarif = GestionRepresentations.GetTarifById(id);
+            Representation uneRepr = GestionRepresentations.GetRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
 
-            if (tarif == null)
+            double tar_var = uneRepr.tarif.variation;
+
+            if (tar_var == null)
             {
                 MessageBox.Show("Veuillez renseigné correctement la pièce de théâtre lié à une représentation. Tarif non trouvé", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            double prixParPersonne = GestionTheatres.GetPrixPieceDeTheatre(id);
-            double tar_var = tarif.variation; 
-            double prixFinal = prixParPersonne + (prixParPersonne * tar_var / 100);
+            double prixParPersonne = uneRepr.theatre.prix;
+ 
+            double prixFinal = prixParPersonne + (prixParPersonne * (tar_var) / 100);
 
             if (!int.TryParse(txtNbPlace.Text.Trim(), out int nbPlaces))
             {
