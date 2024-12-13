@@ -18,5 +18,7 @@ namespace TheatreBO
             Client = client;
             NbPlace = nbPlace;
         }
+
+        public Reservation() { }
     }
 }

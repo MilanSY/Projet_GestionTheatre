@@ -22,5 +22,7 @@ namespace TheatreBO
             this.email = email;
             this.telephone = telephone;
         }
+
+        public Client() { }
     }
 }

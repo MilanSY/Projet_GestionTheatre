@@ -11,10 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TheatreBLL;
 using TheatreBO;
-using TheatreGUI;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
-namespace UtilisateurGUI
+namespace TheatreGUI
 {
     public partial class AjoutReservation : Form
     {

@@ -68,7 +68,7 @@ namespace TheatreGUI
                     );
 
                 GestionRepresentations.AjouterRepresentation(repr);
-                MessageBox.Show("Le théâtre a été ajouté avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("La représentation a été ajouté avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
