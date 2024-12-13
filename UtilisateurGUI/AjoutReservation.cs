@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace TheatreGUI
             InitializeComponent();
             errorProvider = new ErrorProvider();
             RemplirComboBoxRepresentation();
+            RemplirComboBoxClient();
             cboRepresentation.SelectedIndexChanged += cboRepresentation_SelectedIndexChanged;
             txtPieceDeTheatre.ReadOnly = true;
         }
@@ -32,6 +34,15 @@ namespace TheatreGUI
             foreach (RepresentationVue representation in listRepresentation)
             {
                 cboRepresentation.Items.Add($"{representation.Lieu} - {representation.Date} - {representation.Heure}");
+            }
+        }
+
+        private void RemplirComboBoxClient()
+        {
+            List<Client> listClient = GestionReservations.GetClients();
+            foreach (Client client in listClient)
+            {
+                cboClientEnregistrer.Items.Add($"{client.nom} - {client.prenom} - {client.telephone} - {client.email}");
             }
         }
 
@@ -83,9 +94,9 @@ namespace TheatreGUI
                 errorProvider.SetError(cboRepresentation, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtNbPlace.Text))
+            if (txtNbPlace.Text == "0" || string.IsNullOrWhiteSpace(txtNbPlace.Text))
             {
-                errorProvider.SetError(txtNbPlace, "Veuillez remplir ce champ");
+                errorProvider.SetError(txtNbPlace, "Le champ ne peut pas être égal à 0 ou vide");
                 hasError = true;
             }
             else
@@ -93,17 +104,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtNbPlace, "");
             }
 
-            if (txtNbPlace.Text == "0")
-            {
-                errorProvider.SetError(txtNbPlace, "Le champ ne peut pas être égal à 0");
-                hasError = true;
-            }
-            else
-            {
-                errorProvider.SetError(txtNbPlace, "");
-            }
-
-            if (string.IsNullOrWhiteSpace(txtNomClient.Text))
+            if (string.IsNullOrWhiteSpace(txtNomClient.Text) && cboClientEnregistrer.SelectedItem == null)
             {
                 errorProvider.SetError(txtNomClient, "Veuillez remplir ce champ");
                 hasError = true;
@@ -113,7 +114,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtNomClient, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtPrenomClient.Text))
+            if (string.IsNullOrWhiteSpace(txtPrenomClient.Text) && cboClientEnregistrer.SelectedItem == null)
             {
                 errorProvider.SetError(txtPrenomClient, "Veuillez remplir ce champ");
                 hasError = true;
@@ -123,7 +124,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtPrenomClient, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtEmailClient.Text))
+            if (string.IsNullOrWhiteSpace(txtEmailClient.Text) && cboClientEnregistrer.SelectedItem == null)
             {
                 errorProvider.SetError(txtEmailClient, "Veuillez remplir ce champ");
                 hasError = true;
@@ -133,7 +134,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtEmailClient, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtTelClient.Text))
+            if (string.IsNullOrWhiteSpace(txtTelClient.Text) && cboClientEnregistrer.SelectedItem == null)
             {
                 errorProvider.SetError(txtTelClient, "Veuillez remplir ce champ");
                 hasError = true;
@@ -161,7 +162,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtNbPlace, "");
             }
 
-            if (!int.TryParse(txtTelClient.Text.Trim(), out _))
+            if (!int.TryParse(txtTelClient.Text.Trim(), out _) && cboClientEnregistrer.SelectedItem == null)
             {
                 errorProvider.SetError(txtTelClient, "Ce champ autorise uniquement des chiffres");
                 hasError = true;
@@ -171,7 +172,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtTelClient, "");
             }
 
-            if (txtPieceDeTheatre.Text.Length > 100)
+            if (txtPieceDeTheatre.Text.Length > 100 && cboClientEnregistrer.SelectedItem == null)
             {
                 errorProvider.SetError(txtPieceDeTheatre, "Le nom ne doit pas dépasser 100 caractères.");
                 hasError = true;
@@ -181,7 +182,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtPieceDeTheatre, "");
             }
 
-            if (txtNomClient.Text.Any(char.IsDigit) == true)
+            if (txtNomClient.Text.Any(char.IsDigit) == true && cboClientEnregistrer.SelectedItem == null)
             {
                 errorProvider.SetError(txtNomClient, "Le nom ne doit pas contenir de chiffre");
                 hasError = true;
@@ -191,7 +192,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtNomClient, "");
             }
 
-            if (txtPrenomClient.Text.Any(char.IsDigit) == true)
+            if (txtPrenomClient.Text.Any(char.IsDigit) == true && cboClientEnregistrer.SelectedItem == null)
             {
                 errorProvider.SetError(txtPrenomClient, "Le prenom ne doit pas contenir de chiffre");
                 hasError = true;
@@ -201,26 +202,18 @@ namespace TheatreGUI
                 errorProvider.SetError(txtPrenomClient, "");
             }
 
-            if (GestionReservations.VerifierEmail(txtEmailClient.Text))
+
+            // Vérification du format de l'email
+            if (Regex.IsMatch(txtEmailClient.Text, regexEmail) == false && cboClientEnregistrer.SelectedItem == null)
             {
-                errorProvider.SetError(txtEmailClient, "L'email existe déjà, le client existe en base de donnée");
+                errorProvider.SetError(txtEmailClient, "Veuillez écrire l'email dans le bon format");
                 hasError = true;
             }
             else
             {
                 errorProvider.SetError(txtEmailClient, "");
             }
-
-            // Vérification du format de l'email
-            if (Regex.IsMatch(txtEmailClient.Text, regexEmail))
-            {
-                errorProvider.SetError(txtPrenomClient, "");
-            }
-            else
-            {
-                errorProvider.SetError(txtEmailClient, "Veuillez écrire l'email dans le bon format");
-                hasError = true;
-            }
+            
 
             return hasError;
         }
@@ -244,18 +237,19 @@ namespace TheatreGUI
                 return;
             }
 
-            int id = GestionRepresentations.GetIdTarifRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
-            Tarif tarif = GestionRepresentations.GetTarifById(id);
+            Representation uneRepr = GestionRepresentations.GetRepresentationByLieuDateHours(lieuRepresentation, dateRepresentation, heureRepresentation);
 
-            if (tarif == null)
+            double tar_var = uneRepr.tarif.variation;
+
+            if (tar_var == null)
             {
                 MessageBox.Show("Veuillez renseigné correctement la pièce de théâtre lié à une représentation. Tarif non trouvé", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            double prixParPersonne = GestionTheatres.GetPrixPieceDeTheatre(id);
-            double tar_var = tarif.variation; 
-            double prixFinal = prixParPersonne + (prixParPersonne * tar_var / 100);
+            double prixParPersonne = uneRepr.theatre.prix;
+ 
+            double prixFinal = prixParPersonne + (prixParPersonne * (tar_var) / 100);
 
             if (!int.TryParse(txtNbPlace.Text.Trim(), out int nbPlaces))
             {
@@ -284,21 +278,96 @@ namespace TheatreGUI
             }
             else if (checkIfFormatValid() == true)
             {
-                MessageBox.Show("Erreur, vérifier les erreurs en passant le curseur sur les icones clignotante","Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erreur, vérifier les erreurs en passant le curseur sur les icones clignotante", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                // Code pour ajouter ou vérifier si un client est dans la base de donnée
-                Client client = new Client(
-                    -1,
-                    txtNomClient.Text.Trim(),
-                    txtPrenomClient.Text.Trim(),
-                    txtEmailClient.Text.Trim(),
-                    txtTelClient.Text.Trim()
-                );
+                Client client;
+                if (cboClientEnregistrer.SelectedItem == null)
+                {
+                    client = new Client(
+                        -1,
+                        txtNomClient.Text.Trim(),
+                        txtPrenomClient.Text.Trim(),
+                        txtEmailClient.Text.Trim(),
+                        txtTelClient.Text.Trim()
+                    );
+                    // On vérifie si le client existe déjà dans la base de données + on récupère l'id du client + on propose a l'utilisateur de créer le client
+                    int clientId = GestionReservations.VerifierClient(client);
+                    if (clientId == -1)
+                    {
+                        DialogResult result = MessageBox.Show("Le client n'existe pas dans la base de données. Voulez-vous le créer ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes)
+                        {
+                            clientId = GestionReservations.AjouterClient(client);
+                            if (clientId != -1)
+                            {
+                                MessageBox.Show("Client créé avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                client.id = clientId;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Erreur lors de la création du client.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
 
-                // On vérifie si le client existe déjà dans la base de données
-                client.id = GestionReservations.AjouterOuVerifierClient(client);
+                    if (clientId != -1)
+                    {
+                        txtEmailClient.ReadOnly = true;
+                        txtNomClient.ReadOnly = true;
+                        txtPrenomClient.ReadOnly = true;
+                        txtTelClient.ReadOnly = true;
+
+                        cboClientEnregistrer.Items.Clear();
+                        Client unClient = GestionReservations.GetClientByEmail(txtEmailClient.Text);
+                        cboClientEnregistrer.Items.Add($"{unClient.nom} - {unClient.prenom} - {unClient.telephone} - {unClient.email}");
+                        cboClientEnregistrer.SelectedIndex = 0;
+                        return;
+                    }
+                    else
+                    {
+                        client.id = clientId;
+                    }
+                } else {
+                    client = new Client(
+                        -1,
+                        cboClientEnregistrer.SelectedItem.ToString().Split('-')[0].Trim(),
+                        cboClientEnregistrer.SelectedItem.ToString().Split('-')[1].Trim(),
+                        cboClientEnregistrer.SelectedItem.ToString().Split('-')[3].Trim(),
+                        cboClientEnregistrer.SelectedItem.ToString().Split('-')[2].Trim()
+                    );
+
+                    // On vérifie si le client existe déjà dans la base de données + on récupère l'id du client + on propose a l'utilisateur de créer le client
+                    int clientId = GestionReservations.VerifierClient(client);
+                    if (clientId == -1)
+                    {
+                        DialogResult result = MessageBox.Show("Le client n'existe pas dans la base de données. Voulez-vous le créer ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (result == DialogResult.Yes)
+                        {
+                            clientId = GestionReservations.AjouterClient(client);
+                            if (clientId != -1)
+                            {
+                                MessageBox.Show("Client créé avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                client.id = clientId;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Erreur lors de la création du client.", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+                }
 
                 // Récupérer les informations de la représentation sélectionnée
                 string selectedRepresentation = cboRepresentation.SelectedItem.ToString();
@@ -325,7 +394,34 @@ namespace TheatreGUI
 
                 // Message en cas de succès
                 MessageBox.Show("Réservation ajoutée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ResetForm();
             }
+        }
+
+        private void txtEmailClient_TextChanged(object sender, EventArgs e)
+        {
+            GestionReservations.GetClientByEmail(txtEmailClient.Text);
+        }
+        private void ResetForm()
+        {
+            txtPieceDeTheatre.Text = string.Empty;
+            cboRepresentation.SelectedIndex = -1;
+            txtNbPlace.Text = string.Empty;
+            txtNomClient.Text = string.Empty;
+            txtPrenomClient.Text = string.Empty;
+            txtEmailClient.Text = string.Empty;
+            txtTelClient.Text = string.Empty;
+            cboClientEnregistrer.Items.Clear();
+            cboClientEnregistrer.Text = string.Empty;
+            cboClientEnregistrer.SelectedIndex = -1;
+            lblPrixPersonneAffichage.Text = string.Empty;
+            lblPrixTotalAffichage.Text = string.Empty;
+            txtEmailClient.ReadOnly = false;
+            txtNomClient.ReadOnly = false;
+            txtPrenomClient.ReadOnly = false;
+            txtTelClient.ReadOnly = false;
+            RemplirComboBoxClient();
+            errorProvider.Clear();
         }
     }
 }

@@ -22,9 +22,14 @@ namespace TheatreBLL
             return ReservationDAO.AjouterReservation(reservation);
         }
 
-        public static int AjouterOuVerifierClient(Client client)
+        public static int AjouterClient(Client client)
         {
-            return ReservationDAO.AjouterOuVerifierClient(client);
+            return ReservationDAO.AjouterClient(client);
+        }
+
+        public static int VerifierClient(Client client)
+        {
+            return ReservationDAO.VerifierClient(client);
         }
 
         public static Client getClientById(int idCli)
@@ -60,6 +65,16 @@ namespace TheatreBLL
         public static bool SupprimerReservation(Reservation res)
         {
             return ReservationDAO.SupprimerReservation(res);
+        }
+      
+        public static List<Client> GetClients()
+        {
+            return ReservationDAO.GetClients();
+        }
+
+        public static Client GetClientByEmail(string email)
+        {
+            return ReservationDAO.GetClientByEmail(email);
         }
     }
 }

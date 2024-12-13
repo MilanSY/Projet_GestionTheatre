@@ -79,17 +79,29 @@ namespace TheatreDAL
         }
 
         // Vérifie la présence du client avec son adresse email dans la base de données
-        public static int AjouterOuVerifierClient(Client client)
+        public static int VerifierClient(Client client)
         {
             SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                string queryCheck = "SELECT cli_id FROM Client WHERE cli_email = @Email";
+                SqlCommand commandCheck = new SqlCommand(queryCheck, connection);
+                commandCheck.Parameters.AddWithValue("@Email", client.email);
+                connection.Open();
+                object result = commandCheck.ExecuteScalar();
+                return result != null ? (int)result : -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
 
-            string queryCheck = "SELECT cli_id FROM Client WHERE cli_email = @Email";
-            SqlCommand commandCheck = new SqlCommand(queryCheck, connection);
-            commandCheck.Parameters.AddWithValue("@email", client.email);
-            connection.Open();
-            object result = commandCheck.ExecuteScalar();
-
-            if (result == null)
+        // Ajoute un nouveau client dans la base de données
+        public static int AjouterClient(Client client)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
             {
                 string queryInsert = "INSERT INTO Client (cli_nom, cli_prenom, cli_email, cli_tel) VALUES (@Nom, @Prenom, @Email, @Telephone)";
                 SqlCommand commandInsert = new SqlCommand(queryInsert, connection);
@@ -97,25 +109,74 @@ namespace TheatreDAL
                 commandInsert.Parameters.AddWithValue("@Prenom", client.prenom);
                 commandInsert.Parameters.AddWithValue("@Email", client.email);
                 commandInsert.Parameters.AddWithValue("@Telephone", client.telephone);
+                connection.Open();
                 commandInsert.ExecuteNonQuery();
 
-                connection.Close();
-
-
-                queryCheck = "SELECT cli_id FROM Client WHERE cli_email = @Email";
-                commandCheck = new SqlCommand(queryCheck, connection);
-                commandCheck.Parameters.AddWithValue("@email", client.email);
-                connection.Open();
-                result = commandCheck.ExecuteScalar();
-
-                connection.Close();
-
+                string queryCheck = "SELECT cli_id FROM Client WHERE cli_email = @Email";
+                SqlCommand commandCheck = new SqlCommand(queryCheck, connection);
+                commandCheck.Parameters.AddWithValue("@Email", client.email);
+                object result = commandCheck.ExecuteScalar();
                 return (int)result;
             }
-            else
+            finally
             {
                 connection.Close();
-                return (int)result;
+            }
+        }
+
+        // Récupère les clients de la base de données
+        public static List<Client> GetClients()
+        {
+            List<Client> clients = new List<Client>();
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                string query = "SELECT * FROM Client";
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    string nom = reader.GetString(1);
+                    string prenom = reader.GetString(2);
+                    string email = reader.GetString(3);
+                    string telephone = reader.GetString(4);
+                    clients.Add(new Client(id, nom, prenom, email, telephone));
+                }
+                return clients;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        // Récupère le client en fonction de l'email renseigné
+        public static Client GetClientByEmail(string email)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                string query = "SELECT * FROM Client WHERE cli_email = @cli_email";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@cli_email", email);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                if (reader.Read())
+                {
+                    int id = reader.GetInt32(0);
+                    string nom = reader.GetString(1);
+                    string prenom = reader.GetString(2);
+                    string emailClient = reader.GetString(3);
+                    string telephone = reader.GetString(4);
+                    return new Client(id, nom, prenom, emailClient, telephone);
+                }
+                return null;
+            }
+            finally
+            {
+                connection.Close();
             }
         }
 

@@ -232,7 +232,6 @@ namespace TheatreDAL
                 WHERE p.pie_id = @id;"; 
 
             SqlCommand cmd = new SqlCommand(query, connection);
-
             cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
             SqlDataReader monReader = cmd.ExecuteReader();
 
@@ -247,6 +246,7 @@ namespace TheatreDAL
                 theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
                 auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
 
+                Console.WriteLine(prix);
                 // Création d'un objet Theatre
                 Theatre unTheatre = new Theatre(id, nom, prix, description, duree, compagnie, publicCateg, theme, auteur);
 
