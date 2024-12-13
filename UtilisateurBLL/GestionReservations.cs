@@ -54,12 +54,12 @@ namespace TheatreBLL
 
         public static bool SupprimerReservation(int idCli, int idRep)
         {
-            return SupprimerReservation( idCli, idRep);
+            return ReservationDAO.SupprimerReservation(idCli, idRep);
         }
 
         public static bool SupprimerReservation(Reservation res)
         {
-            return SupprimerReservation(res);
+            return ReservationDAO.SupprimerReservation(res);
         }
     }
 }
