@@ -56,9 +56,13 @@ namespace TheatreGUI
             checkIfEmpty();
             checkIfFormatValid();
 
-            if (checkIfEmpty() && checkIfFormatValid())
+            if (checkIfEmpty())
             {
                 MessageBox.Show("Veuillez remplir tous les champs obligatoires.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } 
+            else if (checkIfFormatValid())
+            {
+                MessageBox.Show("Veuillez remplir les champs avec des valeurs valides.", "Erreur de validation", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             else

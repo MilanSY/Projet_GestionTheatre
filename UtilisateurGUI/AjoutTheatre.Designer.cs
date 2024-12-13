@@ -46,16 +46,7 @@
             this.lblTitre = new System.Windows.Forms.Label();
             this.cboTheme = new System.Windows.Forms.ComboBox();
             this.cboPublic = new System.Windows.Forms.ComboBox();
-            this.lblErreurNom = new System.Windows.Forms.Label();
-            this.lblErreurDuree = new System.Windows.Forms.Label();
-            this.lblErreurCompagnie = new System.Windows.Forms.Label();
             this.cboCompagnie = new System.Windows.Forms.ComboBox();
-            this.lblErreurPrix = new System.Windows.Forms.Label();
-            this.lblErreurTheme = new System.Windows.Forms.Label();
-            this.lblErreurPublic = new System.Windows.Forms.Label();
-            this.lblErreurAuteur = new System.Windows.Forms.Label();
-            this.lblErreurDescription = new System.Windows.Forms.Label();
-            this.lblResultat = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.cboAuteur = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
@@ -216,42 +207,6 @@
             this.cboPublic.Size = new System.Drawing.Size(344, 21);
             this.cboPublic.TabIndex = 44;
             // 
-            // lblErreurNom
-            // 
-            this.lblErreurNom.AutoSize = true;
-            this.lblErreurNom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurNom.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurNom.Location = new System.Drawing.Point(27, 120);
-            this.lblErreurNom.Name = "lblErreurNom";
-            this.lblErreurNom.Size = new System.Drawing.Size(140, 17);
-            this.lblErreurNom.TabIndex = 45;
-            this.lblErreurNom.Text = "Le nom est incorecte";
-            this.lblErreurNom.Visible = false;
-            // 
-            // lblErreurDuree
-            // 
-            this.lblErreurDuree.AutoSize = true;
-            this.lblErreurDuree.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurDuree.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurDuree.Location = new System.Drawing.Point(27, 172);
-            this.lblErreurDuree.Name = "lblErreurDuree";
-            this.lblErreurDuree.Size = new System.Drawing.Size(150, 17);
-            this.lblErreurDuree.TabIndex = 46;
-            this.lblErreurDuree.Text = "Le durée est incorecte";
-            this.lblErreurDuree.Visible = false;
-            // 
-            // lblErreurCompagnie
-            // 
-            this.lblErreurCompagnie.AutoSize = true;
-            this.lblErreurCompagnie.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurCompagnie.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurCompagnie.Location = new System.Drawing.Point(27, 222);
-            this.lblErreurCompagnie.Name = "lblErreurCompagnie";
-            this.lblErreurCompagnie.Size = new System.Drawing.Size(182, 17);
-            this.lblErreurCompagnie.TabIndex = 47;
-            this.lblErreurCompagnie.Text = "La compagnie est incorecte";
-            this.lblErreurCompagnie.Visible = false;
-            // 
             // cboCompagnie
             // 
             this.cboCompagnie.FormattingEnabled = true;
@@ -259,78 +214,6 @@
             this.cboCompagnie.Name = "cboCompagnie";
             this.cboCompagnie.Size = new System.Drawing.Size(244, 21);
             this.cboCompagnie.TabIndex = 48;
-            // 
-            // lblErreurPrix
-            // 
-            this.lblErreurPrix.AutoSize = true;
-            this.lblErreurPrix.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurPrix.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurPrix.Location = new System.Drawing.Point(523, 120);
-            this.lblErreurPrix.Name = "lblErreurPrix";
-            this.lblErreurPrix.Size = new System.Drawing.Size(135, 17);
-            this.lblErreurPrix.TabIndex = 49;
-            this.lblErreurPrix.Text = "Le prix est incorecte";
-            this.lblErreurPrix.Visible = false;
-            // 
-            // lblErreurTheme
-            // 
-            this.lblErreurTheme.AutoSize = true;
-            this.lblErreurTheme.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurTheme.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurTheme.Location = new System.Drawing.Point(523, 172);
-            this.lblErreurTheme.Name = "lblErreurTheme";
-            this.lblErreurTheme.Size = new System.Drawing.Size(135, 17);
-            this.lblErreurTheme.TabIndex = 50;
-            this.lblErreurTheme.Text = "Le prix est incorecte";
-            this.lblErreurTheme.Visible = false;
-            // 
-            // lblErreurPublic
-            // 
-            this.lblErreurPublic.AutoSize = true;
-            this.lblErreurPublic.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurPublic.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurPublic.Location = new System.Drawing.Point(523, 220);
-            this.lblErreurPublic.Name = "lblErreurPublic";
-            this.lblErreurPublic.Size = new System.Drawing.Size(201, 17);
-            this.lblErreurPublic.TabIndex = 51;
-            this.lblErreurPublic.Text = "Le type de public est incorecte";
-            this.lblErreurPublic.Visible = false;
-            // 
-            // lblErreurAuteur
-            // 
-            this.lblErreurAuteur.AutoSize = true;
-            this.lblErreurAuteur.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurAuteur.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurAuteur.Location = new System.Drawing.Point(523, 276);
-            this.lblErreurAuteur.Name = "lblErreurAuteur";
-            this.lblErreurAuteur.Size = new System.Drawing.Size(145, 17);
-            this.lblErreurAuteur.TabIndex = 52;
-            this.lblErreurAuteur.Text = "L\'auteur est incorecte";
-            this.lblErreurAuteur.Visible = false;
-            // 
-            // lblErreurDescription
-            // 
-            this.lblErreurDescription.AutoSize = true;
-            this.lblErreurDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblErreurDescription.ForeColor = System.Drawing.Color.Red;
-            this.lblErreurDescription.Location = new System.Drawing.Point(32, 370);
-            this.lblErreurDescription.Name = "lblErreurDescription";
-            this.lblErreurDescription.Size = new System.Drawing.Size(145, 17);
-            this.lblErreurDescription.TabIndex = 53;
-            this.lblErreurDescription.Text = "L\'auteur est incorecte";
-            this.lblErreurDescription.Visible = false;
-            // 
-            // lblResultat
-            // 
-            this.lblResultat.AutoSize = true;
-            this.lblResultat.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.25F);
-            this.lblResultat.ForeColor = System.Drawing.Color.Red;
-            this.lblResultat.Location = new System.Drawing.Point(523, 350);
-            this.lblResultat.Name = "lblResultat";
-            this.lblResultat.Size = new System.Drawing.Size(60, 17);
-            this.lblResultat.TabIndex = 54;
-            this.lblResultat.Text = "Resultat";
-            this.lblResultat.Visible = false;
             // 
             // errorProvider1
             // 
@@ -349,10 +232,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 450);
-            this.Controls.Add(this.lblResultat);
             this.Controls.Add(this.txtDescription);
-            this.Controls.Add(this.lblErreurDescription);
-            this.Controls.Add(this.lblErreurAuteur);
             this.Controls.Add(this.cboAuteur);
             this.Controls.Add(this.cboTheme);
             this.Controls.Add(this.txtPrix);
@@ -360,12 +240,6 @@
             this.Controls.Add(this.txtDuree);
             this.Controls.Add(this.cboCompagnie);
             this.Controls.Add(this.cboPublic);
-            this.Controls.Add(this.lblErreurPublic);
-            this.Controls.Add(this.lblErreurTheme);
-            this.Controls.Add(this.lblErreurPrix);
-            this.Controls.Add(this.lblErreurCompagnie);
-            this.Controls.Add(this.lblErreurDuree);
-            this.Controls.Add(this.lblErreurNom);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnAjouter);
             this.Controls.Add(this.lblDescription);
@@ -405,16 +279,7 @@
         private System.Windows.Forms.Label lblTitre;
         private System.Windows.Forms.ComboBox cboTheme;
         private System.Windows.Forms.ComboBox cboPublic;
-        private System.Windows.Forms.Label lblErreurNom;
-        private System.Windows.Forms.Label lblErreurDuree;
-        private System.Windows.Forms.Label lblErreurCompagnie;
         private System.Windows.Forms.ComboBox cboCompagnie;
-        private System.Windows.Forms.Label lblErreurPrix;
-        private System.Windows.Forms.Label lblErreurTheme;
-        private System.Windows.Forms.Label lblErreurPublic;
-        private System.Windows.Forms.Label lblErreurAuteur;
-        private System.Windows.Forms.Label lblErreurDescription;
-        private System.Windows.Forms.Label lblResultat;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ComboBox cboAuteur;
     }
