@@ -52,6 +52,8 @@
             this.txtPieceDeTheatre = new System.Windows.Forms.TextBox();
             this.lblClientEnregistrer = new System.Windows.Forms.Label();
             this.cboClientEnregistrer = new System.Windows.Forms.ComboBox();
+            this.gpbClient = new System.Windows.Forms.GroupBox();
+            this.gpbClient.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitreForm
@@ -68,7 +70,7 @@
             // 
             this.lblClient.AutoSize = true;
             this.lblClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblClient.Location = new System.Drawing.Point(522, 174);
+            this.lblClient.Location = new System.Drawing.Point(60, 31);
             this.lblClient.Name = "lblClient";
             this.lblClient.Size = new System.Drawing.Size(113, 20);
             this.lblClient.TabIndex = 1;
@@ -98,7 +100,7 @@
             // 
             this.lblPrenomCLient.AutoSize = true;
             this.lblPrenomCLient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblPrenomCLient.Location = new System.Drawing.Point(500, 212);
+            this.lblPrenomCLient.Location = new System.Drawing.Point(38, 69);
             this.lblPrenomCLient.Name = "lblPrenomCLient";
             this.lblPrenomCLient.Size = new System.Drawing.Size(135, 20);
             this.lblPrenomCLient.TabIndex = 4;
@@ -108,7 +110,7 @@
             // 
             this.lblEmailClient.AutoSize = true;
             this.lblEmailClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblEmailClient.Location = new System.Drawing.Point(516, 253);
+            this.lblEmailClient.Location = new System.Drawing.Point(54, 110);
             this.lblEmailClient.Name = "lblEmailClient";
             this.lblEmailClient.Size = new System.Drawing.Size(119, 20);
             this.lblEmailClient.TabIndex = 5;
@@ -118,7 +120,7 @@
             // 
             this.lblTelClient.AutoSize = true;
             this.lblTelClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblTelClient.Location = new System.Drawing.Point(480, 294);
+            this.lblTelClient.Location = new System.Drawing.Point(18, 151);
             this.lblTelClient.Name = "lblTelClient";
             this.lblTelClient.Size = new System.Drawing.Size(155, 20);
             this.lblTelClient.TabIndex = 6;
@@ -141,21 +143,21 @@
             // 
             // txtNomClient
             // 
-            this.txtNomClient.Location = new System.Drawing.Point(641, 174);
+            this.txtNomClient.Location = new System.Drawing.Point(179, 31);
             this.txtNomClient.Name = "txtNomClient";
             this.txtNomClient.Size = new System.Drawing.Size(261, 20);
             this.txtNomClient.TabIndex = 9;
             // 
             // txtPrenomClient
             // 
-            this.txtPrenomClient.Location = new System.Drawing.Point(641, 212);
+            this.txtPrenomClient.Location = new System.Drawing.Point(179, 69);
             this.txtPrenomClient.Name = "txtPrenomClient";
             this.txtPrenomClient.Size = new System.Drawing.Size(261, 20);
             this.txtPrenomClient.TabIndex = 10;
             // 
             // txtEmailClient
             // 
-            this.txtEmailClient.Location = new System.Drawing.Point(641, 255);
+            this.txtEmailClient.Location = new System.Drawing.Point(179, 112);
             this.txtEmailClient.Name = "txtEmailClient";
             this.txtEmailClient.Size = new System.Drawing.Size(261, 20);
             this.txtEmailClient.TabIndex = 11;
@@ -163,7 +165,7 @@
             // 
             // txtTelClient
             // 
-            this.txtTelClient.Location = new System.Drawing.Point(641, 296);
+            this.txtTelClient.Location = new System.Drawing.Point(179, 153);
             this.txtTelClient.Name = "txtTelClient";
             this.txtTelClient.Size = new System.Drawing.Size(261, 20);
             this.txtTelClient.TabIndex = 12;
@@ -261,7 +263,7 @@
             // 
             this.lblClientEnregistrer.AutoSize = true;
             this.lblClientEnregistrer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblClientEnregistrer.Location = new System.Drawing.Point(430, 328);
+            this.lblClientEnregistrer.Location = new System.Drawing.Point(486, 177);
             this.lblClientEnregistrer.Name = "lblClientEnregistrer";
             this.lblClientEnregistrer.Size = new System.Drawing.Size(205, 20);
             this.lblClientEnregistrer.TabIndex = 23;
@@ -270,16 +272,34 @@
             // cboClientEnregistrer
             // 
             this.cboClientEnregistrer.FormattingEnabled = true;
-            this.cboClientEnregistrer.Location = new System.Drawing.Point(641, 330);
+            this.cboClientEnregistrer.Location = new System.Drawing.Point(697, 176);
             this.cboClientEnregistrer.Name = "cboClientEnregistrer";
             this.cboClientEnregistrer.Size = new System.Drawing.Size(260, 21);
             this.cboClientEnregistrer.TabIndex = 24;
+            // 
+            // gpbClient
+            // 
+            this.gpbClient.Controls.Add(this.lblClient);
+            this.gpbClient.Controls.Add(this.lblPrenomCLient);
+            this.gpbClient.Controls.Add(this.lblEmailClient);
+            this.gpbClient.Controls.Add(this.lblTelClient);
+            this.gpbClient.Controls.Add(this.txtNomClient);
+            this.gpbClient.Controls.Add(this.txtPrenomClient);
+            this.gpbClient.Controls.Add(this.txtEmailClient);
+            this.gpbClient.Controls.Add(this.txtTelClient);
+            this.gpbClient.Location = new System.Drawing.Point(491, 216);
+            this.gpbClient.Name = "gpbClient";
+            this.gpbClient.Size = new System.Drawing.Size(466, 189);
+            this.gpbClient.TabIndex = 25;
+            this.gpbClient.TabStop = false;
+            this.gpbClient.Text = "Nouveau Client";
             // 
             // AjoutReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 517);
+            this.ClientSize = new System.Drawing.Size(969, 517);
+            this.Controls.Add(this.gpbClient);
             this.Controls.Add(this.cboClientEnregistrer);
             this.Controls.Add(this.lblClientEnregistrer);
             this.Controls.Add(this.txtPieceDeTheatre);
@@ -291,21 +311,15 @@
             this.Controls.Add(this.lblPieceDeTheatre);
             this.Controls.Add(this.lblTarifTotal);
             this.Controls.Add(this.lblTarifPersonne);
-            this.Controls.Add(this.txtTelClient);
-            this.Controls.Add(this.txtEmailClient);
-            this.Controls.Add(this.txtPrenomClient);
-            this.Controls.Add(this.txtNomClient);
             this.Controls.Add(this.txtNbPlace);
             this.Controls.Add(this.cboRepresentation);
-            this.Controls.Add(this.lblTelClient);
-            this.Controls.Add(this.lblEmailClient);
-            this.Controls.Add(this.lblPrenomCLient);
             this.Controls.Add(this.lblRepresentation);
             this.Controls.Add(this.lblNbPlace);
-            this.Controls.Add(this.lblClient);
             this.Controls.Add(this.lblTitreForm);
             this.Name = "AjoutReservation";
             this.Text = "AjoutReservation";
+            this.gpbClient.ResumeLayout(false);
+            this.gpbClient.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -337,5 +351,6 @@
         private System.Windows.Forms.TextBox txtPieceDeTheatre;
         private System.Windows.Forms.Label lblClientEnregistrer;
         private System.Windows.Forms.ComboBox cboClientEnregistrer;
+        private System.Windows.Forms.GroupBox gpbClient;
     }
 }

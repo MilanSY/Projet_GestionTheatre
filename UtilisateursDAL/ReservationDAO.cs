@@ -309,7 +309,7 @@ namespace TheatreDAL
             return uneReservation;
         }
 
-            public static List<Reservation> GetReservations()
+        public static List<Reservation> GetReservations()
         {
             int nbPlace, idClient, idRepr;
             
@@ -359,9 +359,7 @@ namespace TheatreDAL
             List<ReservationVue> listVue = new List<ReservationVue>();
             foreach (Reservation reservation in listReservation)
             {
-                Console.WriteLine(reservation.Representation.id);
                 ac = new ReservationVue(reservation);
-                Console.WriteLine(ac.RepresentationText);
 
                 listVue.Add(new ReservationVue(reservation));
             }

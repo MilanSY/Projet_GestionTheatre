@@ -166,7 +166,6 @@ namespace TheatreGUI
             if (dgv.Columns[e.ColumnIndex].Name == "Modifier")
             {
                 int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
-                Console.WriteLine(id);
                 ModifierRepresentation modifier = new ModifierRepresentation(id);
                 Utils.DisplayFormAtLoc(this, modifier);
                 return;

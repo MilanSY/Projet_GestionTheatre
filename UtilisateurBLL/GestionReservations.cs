@@ -76,5 +76,10 @@ namespace TheatreBLL
         {
             return ReservationDAO.GetClientByEmail(email);
         }
+
+        public static Reservation GetReservationById(int idClient, int idRepr)
+        {
+            return ReservationDAO.GetReservationById(idClient, idRepr);
+        }
     }
 }

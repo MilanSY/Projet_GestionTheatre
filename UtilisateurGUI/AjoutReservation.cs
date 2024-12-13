@@ -40,9 +40,10 @@ namespace TheatreGUI
         private void RemplirComboBoxClient()
         {
             List<Client> listClient = GestionReservations.GetClients();
+            cboClientEnregistrer.Items.Add("");
             foreach (Client client in listClient)
             {
-                cboClientEnregistrer.Items.Add($"{client.nom} - {client.prenom} - {client.telephone} - {client.email}");
+                cboClientEnregistrer.Items.Add($"{client.email} - {client.nom} - {client.prenom} - {client.telephone}");
             }
         }
 
@@ -104,7 +105,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtNbPlace, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtNomClient.Text) && cboClientEnregistrer.SelectedItem == null)
+            if (string.IsNullOrWhiteSpace(txtNomClient.Text) && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtNomClient, "Veuillez remplir ce champ");
                 hasError = true;
@@ -114,7 +115,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtNomClient, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtPrenomClient.Text) && cboClientEnregistrer.SelectedItem == null)
+            if (string.IsNullOrWhiteSpace(txtPrenomClient.Text) && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtPrenomClient, "Veuillez remplir ce champ");
                 hasError = true;
@@ -124,7 +125,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtPrenomClient, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtEmailClient.Text) && cboClientEnregistrer.SelectedItem == null)
+            if (string.IsNullOrWhiteSpace(txtEmailClient.Text) && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtEmailClient, "Veuillez remplir ce champ");
                 hasError = true;
@@ -134,7 +135,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtEmailClient, "");
             }
 
-            if (string.IsNullOrWhiteSpace(txtTelClient.Text) && cboClientEnregistrer.SelectedItem == null)
+            if (string.IsNullOrWhiteSpace(txtTelClient.Text) && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtTelClient, "Veuillez remplir ce champ");
                 hasError = true;
@@ -162,7 +163,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtNbPlace, "");
             }
 
-            if (!int.TryParse(txtTelClient.Text.Trim(), out _) && cboClientEnregistrer.SelectedItem == null)
+            if (!int.TryParse(txtTelClient.Text.Trim(), out _) && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtTelClient, "Ce champ autorise uniquement des chiffres");
                 hasError = true;
@@ -172,7 +173,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtTelClient, "");
             }
 
-            if (txtPieceDeTheatre.Text.Length > 100 && cboClientEnregistrer.SelectedItem == null)
+            if (txtPieceDeTheatre.Text.Length > 100 && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtPieceDeTheatre, "Le nom ne doit pas dépasser 100 caractères.");
                 hasError = true;
@@ -182,7 +183,7 @@ namespace TheatreGUI
                 errorProvider.SetError(txtPieceDeTheatre, "");
             }
 
-            if (txtNomClient.Text.Any(char.IsDigit) == true && cboClientEnregistrer.SelectedItem == null)
+            if (txtNomClient.Text.Any(char.IsDigit) == true && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtNomClient, "Le nom ne doit pas contenir de chiffre");
                 hasError = true;
@@ -204,7 +205,7 @@ namespace TheatreGUI
 
 
             // Vérification du format de l'email
-            if (Regex.IsMatch(txtEmailClient.Text, regexEmail) == false && cboClientEnregistrer.SelectedItem == null)
+            if (Regex.IsMatch(txtEmailClient.Text, regexEmail) == false && (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == ""))
             {
                 errorProvider.SetError(txtEmailClient, "Veuillez écrire l'email dans le bon format");
                 hasError = true;
@@ -241,7 +242,7 @@ namespace TheatreGUI
 
             double tar_var = uneRepr.tarif.variation;
 
-            if (tar_var == null)
+            if (uneRepr == null)
             {
                 MessageBox.Show("Veuillez renseigné correctement la pièce de théâtre lié à une représentation. Tarif non trouvé", "Erreur", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -283,7 +284,7 @@ namespace TheatreGUI
             else
             {
                 Client client;
-                if (cboClientEnregistrer.SelectedItem == null)
+                if (cboClientEnregistrer.SelectedItem == null || cboClientEnregistrer.Text == "")
                 {
                     client = new Client(
                         -1,
@@ -328,24 +329,15 @@ namespace TheatreGUI
                         Client unClient = GestionReservations.GetClientByEmail(txtEmailClient.Text);
                         cboClientEnregistrer.Items.Add($"{unClient.nom} - {unClient.prenom} - {unClient.telephone} - {unClient.email}");
                         cboClientEnregistrer.SelectedIndex = 0;
+                        RemplirComboBoxClient();
                         return;
                     }
-                    else
-                    {
-                        client.id = clientId;
-                    }
                 } else {
-                    client = new Client(
-                        -1,
-                        cboClientEnregistrer.SelectedItem.ToString().Split('-')[0].Trim(),
-                        cboClientEnregistrer.SelectedItem.ToString().Split('-')[1].Trim(),
-                        cboClientEnregistrer.SelectedItem.ToString().Split('-')[3].Trim(),
-                        cboClientEnregistrer.SelectedItem.ToString().Split('-')[2].Trim()
-                    );
+                    client = GestionReservations.GetClientByEmail(cboClientEnregistrer.SelectedItem.ToString().Split('-')[0].Trim());
 
                     // On vérifie si le client existe déjà dans la base de données + on récupère l'id du client + on propose a l'utilisateur de créer le client
                     int clientId = GestionReservations.VerifierClient(client);
-                    if (clientId == -1)
+                    if (client == null)
                     {
                         DialogResult result = MessageBox.Show("Le client n'existe pas dans la base de données. Voulez-vous le créer ?", "Information", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (result == DialogResult.Yes)
@@ -355,6 +347,7 @@ namespace TheatreGUI
                             {
                                 MessageBox.Show("Client créé avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 client.id = clientId;
+                                client.email = txtEmailClient.Text;
                             }
                             else
                             {
@@ -382,12 +375,21 @@ namespace TheatreGUI
                 int idTheatre = GestionTheatres.GetTheatreIdByName(nomTheatre);
                 Theatre theatre = GestionTheatres.GetTheatreById(idTheatre);
 
+                Console.WriteLine(representation.id);
+
                 // Créer l'objet réservation
                 Reservation reservation = new Reservation(
                     representation,
                     client,
                     int.Parse(txtNbPlace.Text.Trim())
                 );
+
+                Reservation test = GestionReservations.GetReservationById(client.id, representation.id);
+                if (test.Client != null || test.Representation != null)
+                {
+                    MessageBox.Show("la reservation existe déjà", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; 
+                }
 
                 // Ajouter la réservation
                 GestionReservations.AjoutReservation(reservation);

@@ -101,11 +101,7 @@ namespace TheatreGUI
 
             if (dgv.Columns[e.ColumnIndex].Name == "Modifier")
             {
-                int id = (int)dgv.Rows[e.RowIndex].Cells[0].Value;
-                Console.WriteLine(id);
-                ModifierRepresentation modifier = new ModifierRepresentation(id);
-                Utils.DisplayFormAtLoc(this, modifier);
-                return;
+
             }
             else if (dgv.Columns[e.ColumnIndex].Name == "Supprimer")
             {
@@ -114,8 +110,6 @@ namespace TheatreGUI
                 string[] composentsRepr = vueRepr.Split(' ');
                 int idRepr = Int32.Parse(composentsRepr[0]);
                 int idClient = GestionReservations.getClientByEmail(emailClient).id;
-                Console.WriteLine(idClient);
-                Console.WriteLine(idRepr);
 
                 // Confirmation de suppression
                 DialogResult result = MessageBox.Show(
