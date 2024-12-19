@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 501);
+            this.ClientSize = new System.Drawing.Size(1125, 501);
             this.Controls.Add(this.lblTitleRepresentation);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnAjouter);

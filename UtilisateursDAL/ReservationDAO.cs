@@ -460,5 +460,34 @@ namespace TheatreDAL
                 connection.Close();
             }
         }
+
+        public static bool ModifierReservation(Reservation reservation)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                // Requête pour modifier une réservation
+                string query = "UPDATE Reservation SET res_nb_place = @res_nb_place WHERE res_cli = @res_cli AND res_rep = @res_rep";
+                SqlCommand command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@res_cli", reservation.Client.id);
+                command.Parameters.AddWithValue("@res_rep", reservation.Representation.id);
+                command.Parameters.AddWithValue("@res_nb_place", reservation.NbPlace);
+
+                connection.Open();
+                int result = command.ExecuteNonQuery();
+
+                // Si la requête a affecté des lignes, c'est que la mise à jour a réussi
+                return result > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }

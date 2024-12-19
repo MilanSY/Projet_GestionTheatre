@@ -101,7 +101,13 @@ namespace TheatreGUI
 
             if (dgv.Columns[e.ColumnIndex].Name == "Modifier")
             {
+                // Récupérer les informations de la réservation de la ligne sélectionnée
+                string emailClient = (string)dgv.Rows[e.RowIndex].Cells[0].Value;
+                string vueRepr = (string)dgv.Rows[e.RowIndex].Cells[1].Value;
+                string[] composentsRepr = vueRepr.Split(' '); // Supposons que l'ID de la représentation soit le premier élément
+                int idRepr = Int32.Parse(composentsRepr[0]);
 
+                Utils.DisplayFormAtLoc(this, new ModificationReservation(emailClient, idRepr));
             }
             else if (dgv.Columns[e.ColumnIndex].Name == "Supprimer")
             {
