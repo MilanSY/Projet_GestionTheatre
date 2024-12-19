@@ -101,6 +101,12 @@
     <Compile Include="GestionTheatre.Designer.cs">
       <DependentUpon>GestionTheatre.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModificationReservation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ModificationReservation.Designer.cs">
+      <DependentUpon>ModificationReservation.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModifierRepresentation.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GestionTheatre.resx">
       <DependentUpon>GestionTheatre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ModificationReservation.resx">
+      <DependentUpon>ModificationReservation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ModifierRepresentation.resx">
       <DependentUpon>ModifierRepresentation.cs</DependentUpon>
