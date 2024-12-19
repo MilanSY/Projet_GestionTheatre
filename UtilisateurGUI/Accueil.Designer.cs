@@ -89,6 +89,7 @@
             this.btngestionfesti.TabIndex = 4;
             this.btngestionfesti.Text = "Gestions des festivals";
             this.btngestionfesti.UseVisualStyleBackColor = true;
+            this.btngestionfesti.Click += new System.EventHandler(this.btngestionfesti_Click);
             // 
             // btnQuitter
             // 

@@ -60,5 +60,10 @@ namespace TheatreGUI
             // Afficher le formulaire ajoutRESERVATION
             Utils.DisplayFormAtLoc(this, new GestionReservation());
         }
+
+        private void btngestionfesti_Click(object sender, EventArgs e)
+        {
+            Utils.DisplayFormAtLoc(this, new GestionFestival());
+        }
     }
 }
