@@ -42,7 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestionFestival.cs" />
+    <Compile Include="GestionFestivals.cs" />
     <Compile Include="GestionTheatres.cs" />
     <Compile Include="GestionUtilisateur.cs" />
     <Compile Include="GestionRepresentations.cs" />
