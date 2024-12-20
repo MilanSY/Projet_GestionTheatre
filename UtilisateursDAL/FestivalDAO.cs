@@ -17,8 +17,8 @@ namespace TheatreDAL
         public static List<FestivalVue> GetFestivalVue()
         {
             string piece;
-            int nbRepresentations, nbSpectateursTotal;
-            float nbSpectateursMoyen, caRealise, caRealiseMoyen;
+
+            float nbRepresentations, nbSpectateursTotal, nbSpectateursMoyen, caRealise, caRealiseMoyen;
 
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -31,9 +31,7 @@ namespace TheatreDAL
                     p.pie_nom AS Piece,
                     COUNT(DISTINCT r.rep_id) AS NbRepresentations,
                     SUM(res.res_nb_place) AS NbSpectateursTotal,
-                    AVG(res.res_nb_place) AS NbSpectateursMoyen,
-                    SUM(res.res_nb_place * (p.pie_prix + (p.pie_prix * t.tar_var / 100))) AS CARealise,
-                    AVG(res.res_nb_place * (p.pie_prix + (p.pie_prix * t.tar_var / 100))) AS CARealiseMoyen
+                    SUM(res.res_nb_place * (p.pie_prix + (p.pie_prix * t.tar_var / 100))) AS CARealise
                 FROM 
                     Pieces p
                 LEFT JOIN 
@@ -53,27 +51,30 @@ namespace TheatreDAL
                 piece = monReader["Piece"]?.ToString() ?? string.Empty;
 
                 nbRepresentations = monReader["NbRepresentations"] != DBNull.Value
-                    ? Convert.ToInt32(monReader["NbRepresentations"])
+                    ? Convert.ToSingle(monReader["NbRepresentations"])
                     : 0;
 
                 nbSpectateursTotal = monReader["NbSpectateursTotal"] != DBNull.Value
-                    ? Convert.ToInt32(monReader["NbSpectateursTotal"])
+                    ? Convert.ToSingle(monReader["NbSpectateursTotal"])
                     : 0;
 
-                nbSpectateursMoyen = monReader["NbSpectateursMoyen"] != DBNull.Value
-                    ? Convert.ToSingle(monReader["NbSpectateursMoyen"])
+                nbSpectateursMoyen = nbRepresentations > 0
+                    ? nbSpectateursTotal / nbRepresentations
                     : 0;
+
+
+                Console.WriteLine(nbSpectateursMoyen + " = " + nbSpectateursTotal + " / " + nbRepresentations );
 
                 caRealise = monReader["CARealise"] != DBNull.Value
                     ? Convert.ToSingle(monReader["CARealise"])
                     : 0;
 
-                caRealiseMoyen = monReader["CARealiseMoyen"] != DBNull.Value
-                    ? Convert.ToSingle(monReader["CARealiseMoyen"])
+                caRealiseMoyen = nbRepresentations > 0
+                    ? caRealise / nbRepresentations
                     : 0;
 
 
-                FestivalVue festivalVue = new FestivalVue(piece, nbRepresentations, nbSpectateursTotal, nbSpectateursMoyen, caRealise, caRealiseMoyen);
+                FestivalVue festivalVue = new FestivalVue(piece, Convert.ToInt32(nbRepresentations), Convert.ToInt32(nbSpectateursTotal), nbSpectateursMoyen, caRealise, caRealiseMoyen);
 
                 listFestival.Add(festivalVue);
             }
@@ -89,8 +90,8 @@ namespace TheatreDAL
         public static List<FestivalVue> GetFestivalVue(string date1, string date2)
         {
             string piece;
-            int nbRepresentations, nbSpectateursTotal;
-            float nbSpectateursMoyen, caRealise, caRealiseMoyen;
+
+            float nbRepresentations, nbSpectateursTotal, nbSpectateursMoyen, caRealise, caRealiseMoyen;
 
             SqlConnection connection = new SqlConnection(connectionString);
 
@@ -103,9 +104,7 @@ namespace TheatreDAL
                     p.pie_nom AS Piece,
                     COUNT(DISTINCT r.rep_id) AS NbRepresentations,
                     SUM(res.res_nb_place) AS NbSpectateursTotal,
-                    AVG(res.res_nb_place) AS NbSpectateursMoyen,
-                    SUM(res.res_nb_place * (p.pie_prix + (p.pie_prix * t.tar_var / 100))) AS CARealise,
-                    AVG(res.res_nb_place * (p.pie_prix + (p.pie_prix * t.tar_var / 100))) AS CARealiseMoyen
+                    SUM(res.res_nb_place * (p.pie_prix + (p.pie_prix * t.tar_var / 100))) AS CARealise
                 FROM 
                     Pieces p
                 LEFT JOIN 
@@ -130,27 +129,30 @@ namespace TheatreDAL
                 piece = monReader["Piece"]?.ToString() ?? string.Empty;
 
                 nbRepresentations = monReader["NbRepresentations"] != DBNull.Value
-                    ? Convert.ToInt32(monReader["NbRepresentations"])
+                    ? Convert.ToSingle(monReader["NbRepresentations"])
                     : 0;
 
                 nbSpectateursTotal = monReader["NbSpectateursTotal"] != DBNull.Value
-                    ? Convert.ToInt32(monReader["NbSpectateursTotal"])
+                    ? Convert.ToSingle(monReader["NbSpectateursTotal"])
                     : 0;
 
-                nbSpectateursMoyen = monReader["NbSpectateursMoyen"] != DBNull.Value
-                    ? Convert.ToSingle(monReader["NbSpectateursMoyen"])
+                nbSpectateursMoyen = nbRepresentations > 0
+                    ? nbSpectateursTotal / nbRepresentations
                     : 0;
+
+
+                Console.WriteLine(nbSpectateursMoyen + " = " + nbSpectateursTotal + " / " + nbRepresentations);
 
                 caRealise = monReader["CARealise"] != DBNull.Value
                     ? Convert.ToSingle(monReader["CARealise"])
                     : 0;
 
-                caRealiseMoyen = monReader["CARealiseMoyen"] != DBNull.Value
-                    ? Convert.ToSingle(monReader["CARealiseMoyen"])
+                caRealiseMoyen = nbRepresentations > 0
+                    ? caRealise / nbRepresentations
                     : 0;
 
 
-                FestivalVue festivalVue = new FestivalVue(piece, nbRepresentations, nbSpectateursTotal, nbSpectateursMoyen, caRealise, caRealiseMoyen);
+                FestivalVue festivalVue = new FestivalVue(piece, Convert.ToInt32(nbRepresentations), Convert.ToInt32(nbSpectateursTotal), nbSpectateursMoyen, caRealise, caRealiseMoyen);
 
                 listFestival.Add(festivalVue);
             }

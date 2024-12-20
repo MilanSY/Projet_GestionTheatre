@@ -87,7 +87,7 @@
             this.btngestionfesti.Name = "btngestionfesti";
             this.btngestionfesti.Size = new System.Drawing.Size(187, 60);
             this.btngestionfesti.TabIndex = 4;
-            this.btngestionfesti.Text = "Gestions des festivals";
+            this.btngestionfesti.Text = "Synthèse";
             this.btngestionfesti.UseVisualStyleBackColor = true;
             this.btngestionfesti.Click += new System.EventHandler(this.btngestionfesti_Click);
             // 
