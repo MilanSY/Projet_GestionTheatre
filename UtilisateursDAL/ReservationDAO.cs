@@ -467,7 +467,7 @@ namespace TheatreDAL
             try
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("UPDATE Reservations SET RepresentationId = @RepresentationId, ClientId = @ClientId, NbPlace = @NbPlace WHERE Id = @Id", connection);
+                SqlCommand command = new SqlCommand("UPDATE Reservation SET res_rep = @RepresentationId WHERE res_cli = @ClientId AND res_nb_place = @NbPlace;", connection);
                 command.Parameters.AddWithValue("@RepresentationId", reservation.Representation.id);
                 command.Parameters.AddWithValue("@ClientId", reservation.Client.id);
                 command.Parameters.AddWithValue("@NbPlace", reservation.NbPlace);

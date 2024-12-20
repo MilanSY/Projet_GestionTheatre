@@ -100,9 +100,7 @@ namespace TheatreBLL
             // Appelé la méthode DAL pour effectuer la modification
             ReservationDAO.ModifierReservation(reservation);
             return true; // Assuming the modification is always successful
-        }
-
-        
+        }      
 
     }
 }

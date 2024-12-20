@@ -139,6 +139,8 @@ namespace TheatreGUI
                     Client = client,
                     NbPlace = nbPlaces
                 };
+
+                GestionReservations.ModifierReservation(reservation);
         
                 MessageBox.Show("La réservation a été modifiée avec succès.", "Succès", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
