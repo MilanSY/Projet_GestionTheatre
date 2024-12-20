@@ -72,7 +72,6 @@
             this.lblRepresentation.TabIndex = 3;
             this.lblRepresentation.Text = "Répresentation :";
             // 
-           
             // cboRepresentation
             // 
             this.cboRepresentation.FormattingEnabled = true;
@@ -88,12 +87,11 @@
             this.txtNbPlace.Size = new System.Drawing.Size(247, 20);
             this.txtNbPlace.TabIndex = 8;
             // 
-            
             // lblTarifPersonne
             // 
             this.lblTarifPersonne.AutoSize = true;
             this.lblTarifPersonne.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblTarifPersonne.Location = new System.Drawing.Point(395, 275);
+            this.lblTarifPersonne.Location = new System.Drawing.Point(66, 265);
             this.lblTarifPersonne.Name = "lblTarifPersonne";
             this.lblTarifPersonne.Size = new System.Drawing.Size(146, 20);
             this.lblTarifPersonne.TabIndex = 13;
@@ -103,7 +101,7 @@
             // 
             this.lblTarifTotal.AutoSize = true;
             this.lblTarifTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.lblTarifTotal.Location = new System.Drawing.Point(395, 307);
+            this.lblTarifTotal.Location = new System.Drawing.Point(66, 297);
             this.lblTarifTotal.Name = "lblTarifTotal";
             this.lblTarifTotal.Size = new System.Drawing.Size(83, 20);
             this.lblTarifTotal.TabIndex = 14;
@@ -128,6 +126,7 @@
             this.btnModifier.TabIndex = 17;
             this.btnModifier.Text = "Modifier";
             this.btnModifier.UseVisualStyleBackColor = true;
+            this.btnModifier.Click += new System.EventHandler(this.btnModifier_Click);
             // 
             // btnRetour
             // 
@@ -144,7 +143,7 @@
             // 
             this.lblPrixPersonneAffichage.AutoSize = true;
             this.lblPrixPersonneAffichage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.lblPrixPersonneAffichage.Location = new System.Drawing.Point(547, 273);
+            this.lblPrixPersonneAffichage.Location = new System.Drawing.Point(218, 263);
             this.lblPrixPersonneAffichage.Name = "lblPrixPersonneAffichage";
             this.lblPrixPersonneAffichage.Size = new System.Drawing.Size(56, 20);
             this.lblPrixPersonneAffichage.TabIndex = 19;
@@ -154,7 +153,7 @@
             // 
             this.lblPrixTotalAffichage.AutoSize = true;
             this.lblPrixTotalAffichage.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.lblPrixTotalAffichage.Location = new System.Drawing.Point(485, 307);
+            this.lblPrixTotalAffichage.Location = new System.Drawing.Point(156, 297);
             this.lblPrixTotalAffichage.Name = "lblPrixTotalAffichage";
             this.lblPrixTotalAffichage.Size = new System.Drawing.Size(56, 20);
             this.lblPrixTotalAffichage.TabIndex = 20;
@@ -162,12 +161,13 @@
             // 
             // btnCalculer
             // 
-            this.btnCalculer.Location = new System.Drawing.Point(399, 339);
+            this.btnCalculer.Location = new System.Drawing.Point(70, 329);
             this.btnCalculer.Name = "btnCalculer";
             this.btnCalculer.Size = new System.Drawing.Size(142, 29);
             this.btnCalculer.TabIndex = 21;
             this.btnCalculer.Text = "Calculer";
             this.btnCalculer.UseVisualStyleBackColor = true;
+            this.btnCalculer.Click += new System.EventHandler(this.btnCalculer_Click);
             // 
             // txtPieceDeTheatre
             // 

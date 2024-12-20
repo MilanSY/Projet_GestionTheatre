@@ -27,7 +27,7 @@ namespace TheatreGUI
             this.vue = new RepresentationVue(GestionRepresentations.GetRepresentationById(id));
             errorProvider = new ErrorProvider();
 
-            //remplissage des combo box
+            // remplissage des combo box
             List<TheatreVue> listTheatre = GestionTheatres.GetTheatres();
             foreach (TheatreVue theatre in listTheatre)
             {
@@ -43,14 +43,12 @@ namespace TheatreGUI
         private void ModifierRepresentation_Load(object sender, EventArgs e)
         {
             errorProvider.ContainerControl = this;
-
             txtLieu.Text = vue.Lieu;
             txtPlace.Text = vue.NbPlaceMax.ToString();
             txtHeure.Text = vue.Heure;
             cboPiece.Text = vue.Theatre;
             cboTarif.Text = vue.Tarif;
             dtpDate.Text = vue.Date;
-
         }
 
         private void btnRetour_Click(object sender, EventArgs e)

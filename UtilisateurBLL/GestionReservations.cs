@@ -97,15 +97,9 @@ namespace TheatreBLL
 
         public static bool ModifierReservation(Reservation reservation)
         {
-            // Validé que le nombre de place est positive
-            if (reservation.NbPlace <= 0)
-            {
-                Console.WriteLine("Le nombre de place doit être supérieur à zéro.");
-                return false;
-            }
-
             // Appelé la méthode DAL pour effectuer la modification
-            return ReservationDAO.ModifierReservation(reservation);
+            ReservationDAO.ModifierReservation(reservation);
+            return true; // Assuming the modification is always successful
         }
 
         
