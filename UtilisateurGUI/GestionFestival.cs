@@ -40,14 +40,14 @@ namespace TheatreGUI
             // Création d'une en-tête de colonne pour la colonne 3
             DataGridViewTextBoxColumn nbSpecTotalColumn = new DataGridViewTextBoxColumn();
             nbSpecTotalColumn.DataPropertyName = "NbSpectateursTotal";
-            nbSpecTotalColumn.HeaderText = "Nombre de spectateur total";
+            nbSpecTotalColumn.HeaderText = "Spectateur total";
             nbSpecTotalColumn.ReadOnly = true;
 
 
             // Création d'une en-tête de colonne pour la colonne 4
             DataGridViewTextBoxColumn nbSpecMoyenColumn = new DataGridViewTextBoxColumn();
             nbSpecMoyenColumn.DataPropertyName = "NbSpectateursMoyen";
-            nbSpecMoyenColumn.HeaderText = "Nombre de spectateur moyen";
+            nbSpecMoyenColumn.HeaderText = "Spectateur moyen";
             nbSpecMoyenColumn.ReadOnly = true;
 
             // Création d'une en-tête de colonne pour la colonne 5
@@ -59,7 +59,7 @@ namespace TheatreGUI
             // Création d'une en-tête de colonne pour la colonne 6
             DataGridViewTextBoxColumn caRealiseMoyenColumn = new DataGridViewTextBoxColumn();
             caRealiseMoyenColumn.DataPropertyName = "CARealiseMoyen";
-            caRealiseMoyenColumn.HeaderText = "CA Réalisé";
+            caRealiseMoyenColumn.HeaderText = "CA Réalisé moyen";
             caRealiseMoyenColumn.ReadOnly = true;
 
 
