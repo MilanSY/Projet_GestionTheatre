@@ -25,10 +25,18 @@
         private void InitializeComponent()
         {
             this.lblTitreForm = new System.Windows.Forms.Label();
+            this.lblClient = new System.Windows.Forms.Label();
             this.lblNbPlace = new System.Windows.Forms.Label();
             this.lblRepresentation = new System.Windows.Forms.Label();
+            this.lblPrenomClient = new System.Windows.Forms.Label();
+            this.lblEmailClient = new System.Windows.Forms.Label();
+            this.lblTelClient = new System.Windows.Forms.Label();
             this.cboRepresentation = new System.Windows.Forms.ComboBox();
             this.txtNbPlace = new System.Windows.Forms.TextBox();
+            this.txtNomClient = new System.Windows.Forms.TextBox();
+            this.txtPrenomClient = new System.Windows.Forms.TextBox();
+            this.txtEmailClient = new System.Windows.Forms.TextBox();
+            this.txtTelClient = new System.Windows.Forms.TextBox();
             this.lblTarifPersonne = new System.Windows.Forms.Label();
             this.lblTarifTotal = new System.Windows.Forms.Label();
             this.lblPieceDeTheatre = new System.Windows.Forms.Label();
@@ -40,6 +48,8 @@
             this.txtPieceDeTheatre = new System.Windows.Forms.TextBox();
             this.lblClientEnregistrer = new System.Windows.Forms.Label();
             this.cboClientEnregistrer = new System.Windows.Forms.ComboBox();
+            this.gpbClient = new System.Windows.Forms.GroupBox();
+            this.gpbClient.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTitreForm
@@ -72,6 +82,7 @@
             this.lblRepresentation.TabIndex = 3;
             this.lblRepresentation.Text = "Répresentation :";
             // 
+           
             // cboRepresentation
             // 
             this.cboRepresentation.FormattingEnabled = true;
@@ -87,6 +98,7 @@
             this.txtNbPlace.Size = new System.Drawing.Size(247, 20);
             this.txtNbPlace.TabIndex = 8;
             // 
+            
             // lblTarifPersonne
             // 
             this.lblTarifPersonne.AutoSize = true;
@@ -197,6 +209,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(969, 517);
+            this.Controls.Add(this.gpbClient);
             this.Controls.Add(this.cboClientEnregistrer);
             this.Controls.Add(this.lblClientEnregistrer);
             this.Controls.Add(this.txtPieceDeTheatre);
