@@ -177,9 +177,9 @@ namespace TheatreDAL
                         Int32.Parse(monReader["tarifId"].ToString()),
                         monReader["tarifNom"].ToString(),
                         int.Parse(monReader["tarifPrix"].ToString()));
-                Compagnie compagnie = monReader["compagnieId"] == DBNull.Value
-                    ? new Compagnie()
-                    : new Compagnie(Int32.Parse(monReader["compagnieId"].ToString()), monReader["compagnieNom"].ToString(), "", "");
+                //Compagnie compagnie = monReader["compagnieId"] == DBNull.Value
+                //    ? new Compagnie()
+                //    : new Compagnie(Int32.Parse(monReader["compagnieId"].ToString()), monReader["compagnieNom"].ToString(), "", "");
 
                 Publics publicCateg = monReader["publicId"] == DBNull.Value
                     ? new Publics()
@@ -194,14 +194,14 @@ namespace TheatreDAL
                     : new Auteur(Int32.Parse(monReader["auteurId"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
 
                 // Création de l'objet Theatre
-                theatre = new Theatre(pieceId, pieceNom, piecePrix, pieceDescription, pieceDuree, compagnie, publicCateg, theme, auteur);
+                //theatre = new Theatre(pieceId, pieceNom, piecePrix, pieceDescription, pieceDuree, compagnie, publicCateg, theme, auteur);
 
                 // Création de l'objet Representation
-                Representation representation = new Representation(id, heure, date, lieu, nbPlace, theatre, tarif);
+                //Representation representation = new Representation(id, heure, date, lieu, nbPlace, theatre, tarif);
 
                 connection.Close();
 
-                return representation;
+                //return representation;
             }
 
             connection.Close();
@@ -639,9 +639,9 @@ namespace TheatreDAL
                         Int32.Parse(monReader["tarifId"].ToString()),
                         monReader["tarifNom"].ToString(),
                         int.Parse(monReader["tarifPrix"].ToString()));
-                Compagnie compagnie = monReader["compagnieId"] == DBNull.Value
-                    ? new Compagnie()
-                    : new Compagnie(Int32.Parse(monReader["compagnieId"].ToString()), monReader["compagnieNom"].ToString(), "", "");
+                //Compagnie compagnie = monReader["compagnieId"] == DBNull.Value
+                //    ? new Compagnie()
+                //    : new Compagnie(Int32.Parse(monReader["compagnieId"].ToString()), monReader["compagnieNom"].ToString(), "", "");
 
                 Publics publicCateg = monReader["publicId"] == DBNull.Value
                     ? new Publics()
@@ -656,14 +656,14 @@ namespace TheatreDAL
                     : new Auteur(Int32.Parse(monReader["auteurId"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
 
                 // Création de l'objet Theatre
-                theatre = new Theatre(pieceId, pieceNom, piecePrix, pieceDescription, pieceDuree, compagnie, publicCateg, theme, auteur);
+                //theatre = new Theatre(pieceId, pieceNom, piecePrix, pieceDescription, pieceDuree, compagnie, publicCateg, theme, auteur);
 
                 // Création de l'objet Representation
-                Representation representation = new Representation(Int32.Parse(monReader["rep_id"].ToString()), heure, date, lieu, nbPlace, theatre, tarif);
+                //Representation representation = new Representation(Int32.Parse(monReader["rep_id"].ToString()), heure, date, lieu, nbPlace, theatre, tarif);
 
                 connection.Close();
 
-                return representation;
+                //return representation;
             }
 
             connection.Close();

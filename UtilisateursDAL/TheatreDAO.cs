@@ -82,6 +82,7 @@ namespace TheatreDAL
                     c.comp_nom AS compagnieNom,
                     c.comp_ville AS compagnieVille,
                     c.comp_directeur AS compagnieDirecteur,
+                    c.comp_dir_id AS compagnieDirId,
                     pu.pub_categ AS publicCateg, 
                     t.the_nom AS theme,
                     a.aut_prenom AS auteurPrenom,
@@ -103,7 +104,7 @@ namespace TheatreDAL
                 prix = float.Parse(monReader["pie_prix"].ToString());
                 description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
                 duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
-                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
+                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString(), TheatreDAO.GetDirecteurById(Int32.Parse(monReader["compagnieDirId"].ToString())));
                 publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
                 theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
                 auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
@@ -154,6 +155,7 @@ namespace TheatreDAL
                     c.comp_nom AS compagnieNom,
                     c.comp_ville AS compagnieVille,
                     c.comp_directeur AS compagnieDirecteur,
+                    c.comp_dir_id AS compagnieDirId,
                     pu.pub_categ AS publicCateg, 
                     t.the_nom AS theme,
                     a.aut_prenom AS auteurPrenom,
@@ -176,7 +178,7 @@ namespace TheatreDAL
                 prix = float.Parse(monReader["pie_prix"].ToString());
                 description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
                 duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
-                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
+                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString(), TheatreDAO.GetDirecteurById(Int32.Parse(monReader["compagnieDirId"].ToString())));
                 publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
                 theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
                 auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
@@ -220,6 +222,7 @@ namespace TheatreDAL
                     c.comp_nom AS compagnieNom,
                     c.comp_ville AS compagnieVille,
                     c.comp_directeur AS compagnieDirecteur,
+                    c.comp_dir_id AS compagnieDirId,
                     pu.pub_categ AS publicCateg, 
                     t.the_nom AS theme,
                     a.aut_prenom AS auteurPrenom,
@@ -241,7 +244,7 @@ namespace TheatreDAL
                 prix = float.Parse(monReader["pie_prix"].ToString());
                 description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
                 duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
-                compagnie = monReader["pie_comp"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
+                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString(), TheatreDAO.GetDirecteurById(Int32.Parse(monReader["compagnieDirId"].ToString())));
                 publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
                 theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
                 auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());
@@ -442,7 +445,7 @@ namespace TheatreDAL
 
         public static List<Compagnie> GetCompagnies()
         {
-            int id;
+            int id, dir;
             string nom;
             string ville;
             string directeur;
@@ -465,7 +468,8 @@ namespace TheatreDAL
                 nom = monReader["comp_nom"].ToString();
                 ville = monReader["comp_ville"].ToString();
                 directeur = monReader["comp_directeur"].ToString();
-                Compagnie uneCompagnie = new Compagnie(id, nom, ville, directeur);
+                dir = Int32.Parse(monReader["comp_dir_id"].ToString());
+                Compagnie uneCompagnie = new Compagnie(id, nom, ville, directeur, TheatreDAO.GetDirecteurById(dir));
 
                 // Ajout à la liste
                 listCompagnie.Add(uneCompagnie);
@@ -475,6 +479,107 @@ namespace TheatreDAL
             connection.Close();
 
             return listCompagnie;
+        }
+
+
+        public static List<Directeur> GetDirecteurs()
+        {
+            int id;
+            string nom;
+            List<Directeur> listDirecteur = new List<Directeur>();
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            string query = "SELECT * FROM Directeurs";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+            // Remplissage de la liste
+            while (monReader.Read())
+            {
+
+                id = Int32.Parse(monReader["dir_id"].ToString());
+                nom = monReader["dir_nom"].ToString();
+                Directeur unDirecteur = new Directeur(id, nom);
+
+                // Ajout à la liste 
+                listDirecteur.Add(unDirecteur);
+            }
+            // Fermeture de la connexion
+            connection.Close();
+            return listDirecteur;
+        }
+
+        public static Directeur GetDirecteurById(int id)
+        {
+            string nom;
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            string query = "SELECT * FROM Directeurs WHERE dir_id = @id";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = id });
+            SqlDataReader monReader = cmd.ExecuteReader();
+            if (monReader.Read())
+            {
+                nom = monReader["dir_nom"].ToString();
+                Directeur unDirecteur = new Directeur(id, nom);
+                connection.Close();
+                return unDirecteur;
+            }
+            connection.Close();
+            return null;
+        }
+
+        public static Directeur GetDirecteurByName(string nom)
+        {
+            int id;
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            string query = "SELECT * FROM Directeurs WHERE dir_nom = @nom";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.Add(new SqlParameter("@nom", System.Data.SqlDbType.NVarChar) { Value = nom });
+            SqlDataReader monReader = cmd.ExecuteReader();
+            if (monReader.Read())
+            {
+                id = Int32.Parse(monReader["dir_id"].ToString());
+                Directeur unDirecteur = new Directeur(id, nom);
+                connection.Close();
+                return unDirecteur;
+            }
+            connection.Close();
+            return null;
+        }
+
+        public static Compagnie GetCompanyByDirecteurId(int dirId)
+        {
+            int id;
+            string nom;
+            string ville;
+            string directeur;
+            string connectionString = ConnexionBD.GetConnexionBD().GetchaineConnexion();
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            string query = "SELECT * FROM Compagnies WHERE comp_dir_id = @id";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.Parameters.Add(new SqlParameter("@id", System.Data.SqlDbType.Int) { Value = dirId });
+            SqlDataReader monReader = cmd.ExecuteReader();
+
+            // Remplissage de la liste
+            if (monReader.Read())
+            {
+
+                id = Int32.Parse(monReader["comp_id"].ToString());
+                nom = monReader["comp_nom"].ToString();
+                ville = monReader["comp_ville"].ToString();
+                directeur = monReader["comp_directeur"].ToString();
+                Compagnie uneCompagnie = new Compagnie(id, nom, ville, directeur, TheatreDAO.GetDirecteurById(dirId));
+
+                return uneCompagnie;
+            }
+
+            return null;
         }
 
         public static int GetCompagnieIdByName(string nom)
@@ -628,6 +733,7 @@ namespace TheatreDAL
                     c.comp_nom AS compagnieNom,
                     c.comp_ville AS compagnieVille,
                     c.comp_directeur AS compagnieDirecteur,
+                    c.comp_dir_id AS compagnieDirId,
                     pu.pub_categ AS publicCateg, 
                     t.the_nom AS theme,
                     a.aut_prenom AS auteurPrenom,
@@ -656,7 +762,7 @@ namespace TheatreDAL
                 prix = float.Parse(monReader["pie_prix"].ToString());
                 description = monReader["pie_descrip"] == DBNull.Value ? default(string) : monReader["pie_descrip"].ToString();
                 duree = monReader["pie_duree"] == DBNull.Value ? (int?)null : Int32.Parse(monReader["pie_duree"].ToString());
-                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString());
+                compagnie = monReader["compagnieNom"] == DBNull.Value ? new Compagnie() : new Compagnie(Int32.Parse(monReader["pie_comp"].ToString()), monReader["compagnieNom"].ToString(), monReader["compagnieVille"].ToString(), monReader["compagnieDirecteur"].ToString(), TheatreDAO.GetDirecteurById(Int32.Parse(monReader["compagnieDirId"].ToString())));
                 publicCateg = monReader["publicCateg"] == DBNull.Value ? new Publics() : new Publics(Int32.Parse(monReader["pie_pub"].ToString()), monReader["publicCateg"].ToString());
                 theme = monReader["theme"] == DBNull.Value ? new Theme() : new Theme(Int32.Parse(monReader["pie_the"].ToString()), monReader["theme"].ToString());
                 auteur = (monReader["auteurPrenom"] == DBNull.Value && monReader["auteurNom"] == DBNull.Value) ? new Auteur() : new Auteur(Int32.Parse(monReader["pie_aut"].ToString()), monReader["auteurNom"].ToString(), monReader["auteurPrenom"].ToString());

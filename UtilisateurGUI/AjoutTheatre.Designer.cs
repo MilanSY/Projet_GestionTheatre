@@ -1,4 +1,6 @@
-﻿namespace TheatreGUI
+﻿using System;
+
+namespace TheatreGUI
 {
     partial class AjoutTheatre
     {
@@ -46,9 +48,12 @@
             this.lblTitre = new System.Windows.Forms.Label();
             this.cboTheme = new System.Windows.Forms.ComboBox();
             this.cboPublic = new System.Windows.Forms.ComboBox();
-            this.cboCompagnie = new System.Windows.Forms.ComboBox();
+            this.cboDirecteur = new System.Windows.Forms.ComboBox();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.cboAuteur = new System.Windows.Forms.ComboBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.labelCompagnie = new System.Windows.Forms.Label();
+            this.tbxCompanie = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -117,9 +122,9 @@
             this.lblCompagnie.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
             this.lblCompagnie.Location = new System.Drawing.Point(26, 198);
             this.lblCompagnie.Name = "lblCompagnie";
-            this.lblCompagnie.Size = new System.Drawing.Size(207, 24);
+            this.lblCompagnie.Size = new System.Drawing.Size(167, 24);
             this.lblCompagnie.TabIndex = 30;
-            this.lblCompagnie.Text = "Nom de la compagnie :";
+            this.lblCompagnie.Text = "Nom du directeur :";
             // 
             // lblTheme
             // 
@@ -184,7 +189,7 @@
             // 
             // lblTitre
             // 
-            this.lblTitre.Font = new System.Drawing.Font("Arial Narrow", 27.75F);
+            this.lblTitre.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F);
             this.lblTitre.Location = new System.Drawing.Point(331, 9);
             this.lblTitre.Name = "lblTitre";
             this.lblTitre.Size = new System.Drawing.Size(405, 43);
@@ -207,13 +212,15 @@
             this.cboPublic.Size = new System.Drawing.Size(344, 21);
             this.cboPublic.TabIndex = 44;
             // 
-            // cboCompagnie
+            // cboDirecteur
             // 
-            this.cboCompagnie.FormattingEnabled = true;
-            this.cboCompagnie.Location = new System.Drawing.Point(239, 201);
-            this.cboCompagnie.Name = "cboCompagnie";
-            this.cboCompagnie.Size = new System.Drawing.Size(244, 21);
-            this.cboCompagnie.TabIndex = 48;
+            this.cboDirecteur.FormattingEnabled = true;
+            this.cboDirecteur.Location = new System.Drawing.Point(199, 201);
+            this.cboDirecteur.Name = "cboDirecteur";
+            this.cboDirecteur.Size = new System.Drawing.Size(284, 21);
+            this.cboDirecteur.TabIndex = 48;
+            cboDirecteur.SelectedIndexChanged += CboDirecteur_SelectedIndexChanged;
+
             // 
             // errorProvider1
             // 
@@ -227,18 +234,43 @@
             this.cboAuteur.Size = new System.Drawing.Size(336, 21);
             this.cboAuteur.TabIndex = 42;
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // labelCompagnie
+            // 
+            this.labelCompagnie.AutoSize = true;
+            this.labelCompagnie.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F);
+            this.labelCompagnie.Location = new System.Drawing.Point(522, 320);
+            this.labelCompagnie.Name = "labelCompagnie";
+            this.labelCompagnie.Size = new System.Drawing.Size(118, 24);
+            this.labelCompagnie.TabIndex = 51;
+            this.labelCompagnie.Text = "Compagnie :";
+            // 
+            // tbxCompanie
+            // 
+            this.tbxCompanie.Location = new System.Drawing.Point(526, 347);
+            this.tbxCompanie.Name = "tbxCompanie";
+            this.tbxCompanie.ReadOnly = true;
+            this.tbxCompanie.Size = new System.Drawing.Size(249, 20);
+            this.tbxCompanie.TabIndex = 50;
+            // 
             // AjoutTheatre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 450);
+            this.Controls.Add(this.labelCompagnie);
+            this.Controls.Add(this.tbxCompanie);
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.cboAuteur);
             this.Controls.Add(this.cboTheme);
             this.Controls.Add(this.txtPrix);
             this.Controls.Add(this.txtNom);
             this.Controls.Add(this.txtDuree);
-            this.Controls.Add(this.cboCompagnie);
+            this.Controls.Add(this.cboDirecteur);
             this.Controls.Add(this.cboPublic);
             this.Controls.Add(this.btnRetour);
             this.Controls.Add(this.btnAjouter);
@@ -260,6 +292,8 @@
 
         }
 
+        
+
         #endregion
 
         private System.Windows.Forms.Button btnRetour;
@@ -279,8 +313,11 @@
         private System.Windows.Forms.Label lblTitre;
         private System.Windows.Forms.ComboBox cboTheme;
         private System.Windows.Forms.ComboBox cboPublic;
-        private System.Windows.Forms.ComboBox cboCompagnie;
+        private System.Windows.Forms.ComboBox cboDirecteur;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.ComboBox cboAuteur;
+        private System.Windows.Forms.Label labelCompagnie;
+        private System.Windows.Forms.TextBox tbxCompanie;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }

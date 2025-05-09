@@ -12,13 +12,15 @@ namespace TheatreBO
         public string nom { get; set; }
         public string ville { get; set; }
         public string directeur { get; set; }
+        public Directeur Directeur { get; set; }
 
-        public Compagnie(int id, string nom, string ville, string directeur)
+        public Compagnie(int id, string nom, string ville, string directeur, Directeur Directeur)
         {
             this.id = id;
             this.nom = nom;
             this.ville = ville;
             this.directeur = directeur;
+            this.Directeur = Directeur;
         }
         public Compagnie() { }
 

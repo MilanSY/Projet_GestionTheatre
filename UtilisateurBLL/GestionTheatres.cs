@@ -49,6 +49,21 @@ namespace TheatreBLL
             return TheatreDAO.GetCompagnies();
         }
 
+        public static List<Directeur> GetDirecteurs()
+        {
+            return TheatreDAO.GetDirecteurs();
+        }
+
+        public static Directeur GetDirecteurByName(string name)
+        {
+            return TheatreDAO.GetDirecteurByName(name);
+        }
+
+        public static Compagnie GetCompanyByDirecteurId(int id)
+        {
+            return TheatreDAO.GetCompanyByDirecteurId(id);
+        }
+
         public static List<Auteur> GetAuteurs()
         {
             return TheatreDAO.GetAuteurs();

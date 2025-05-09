@@ -44,10 +44,10 @@ namespace TheatreGUI
             {
                 cboPublic.Items.Add(pub.categ);
             }
-            List<Compagnie> listCompagnie = GestionTheatres.GetCompagnies();
-            foreach (Compagnie comp in listCompagnie)
+            List<Directeur> listDir = GestionTheatres.GetDirecteurs();
+            foreach (Directeur dir in listDir)
             {
-                cboCompagnie.Items.Add(comp.nom);
+                cboDirecteur.Items.Add(dir.nom);
             }
         }
 
@@ -68,15 +68,18 @@ namespace TheatreGUI
             else
             {
                 string[] auteur = cboAuteur.Text.Split(' ');
+                Directeur directeur = GestionTheatres.GetDirecteurByName(cboDirecteur.Text.Trim());
+                Compagnie compagnie = GestionTheatres.GetCompanyByDirecteurId(directeur.id);
 
-                // Introduire la modification dans la base de données
+                // Introduire la modification dans la base de
+                // données
                 Theatre theatre = new Theatre(
                     -1,
                     txtNom.Text.Trim(),
                     float.Parse(txtPrix.Text.Trim()),
                     txtDescription.Text.Trim(),
                     int.TryParse(txtDuree.Text.Trim(), out int duree) ? (int?)duree : null,
-                    new Compagnie { nom = cboCompagnie.Text.Trim() },
+                    compagnie,
                     new Publics { categ = cboPublic.Text.Trim() },
                     new Theme { nom = cboTheme.Text.Trim() },
                     new Auteur { nom = auteur[0], prenom = auteur[1] }
@@ -133,14 +136,14 @@ namespace TheatreGUI
                 errorProvider.SetError(cboTheme, "");
             }
 
-            if (string.IsNullOrWhiteSpace(cboCompagnie.Text))
+            if (string.IsNullOrWhiteSpace(cboDirecteur.Text))
             {
-                errorProvider.SetError(cboCompagnie, "Veuillez remplir ce champ");
+                errorProvider.SetError(cboDirecteur, "Veuillez remplir ce champ");
                 hasError = true;
             }
             else
             {
-                errorProvider.SetError(cboCompagnie, "");
+                errorProvider.SetError(cboDirecteur, "");
             }
 
             if (string.IsNullOrWhiteSpace(cboPublic.Text))
@@ -224,6 +227,12 @@ namespace TheatreGUI
         private void btnRetour_Click(object sender, EventArgs e)
         {
             Utils.DisplayFormAtLoc(this, new GestionTheatre());
+        }
+        private void CboDirecteur_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Directeur directeur = GestionTheatres.GetDirecteurByName(cboDirecteur.Text.Trim());
+            Compagnie compagnie = GestionTheatres.GetCompanyByDirecteurId(directeur.id);
+            tbxCompanie.Text = compagnie.nom;
         }
 
     }
